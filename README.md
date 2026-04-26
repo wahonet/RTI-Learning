@@ -25,6 +25,8 @@ flowchart LR
 - [07-software-workflow.md](07-software-workflow.md)：后续软件系统、数据结构和处理工作流规划。
 - [08-frontier-technologies.md](08-frontier-technologies.md)：现代光度立体、Neural RTI、偏振、多光谱、3D融合和AI线图等前沿路线。
 - [09-hardware-purchase-list.md](09-hardware-purchase-list.md)：RTI/微痕扫描硬件购买清单，按低、中、高预算规划。
+- [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：IIML、形相学、图像志标注、知识图谱和声频化实验的开发参考。
+- [iiml-jsonld.schema.json](iiml-jsonld.schema.json)：IIML JSON-LD工作草案的机器校验Schema。
 
 ## 资料文件夹
 
