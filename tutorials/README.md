@@ -28,6 +28,9 @@
 8. [07-practical-technology-roadmap.md](07-practical-technology-roadmap.md)
    - 把论文结论转成我们的微痕扫描实验路线。
 
+9. [08-chinese-first-learning-route.md](08-chinese-first-learning-route.md)
+   - 英文资料的中文化学习办法、术语表和 6 个月路线。
+
 ## 学习方式
 
 - 先读教程，再读对应论文。
