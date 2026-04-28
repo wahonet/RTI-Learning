@@ -1,74 +1,74 @@
 # RTI Learning
 
-这个仓库是我整理 RTI、光度立体、三维采集、数字拓片和汉画像石结构化资料的地方。最开始只是想把 RTI 学明白，后来发现碑刻、画像石、浅浮雕、微痕成像这些问题其实都绕不开同一件事：怎样把文物表面那些很浅、很细、肉眼不稳定可见的信息采下来，并且能让别人复核。
+本仓库用于整理 RTI、光度立体、三维采集、数字拓片、碑刻识读和汉画像石结构化相关资料。重点是文物表面浅刻、低浮雕、风化纹理、榜题和图像内容的采集、处理、标注与结构化。
 
-目前仓库里有两条线：
+仓库分为两部分：
 
-- 一条是基础学习：RTI 是什么，怎么拍，怎么处理，常用软件有哪些。
-- 一条是应用问题：碑刻文字为什么普通照片后期救不回来，汉画像石图像怎样做标注、检索和结构化。
+- 基础学习：RTI 原理、采集方法、处理工具、论文和硬件方案。
+- 应用案例：碑刻照片采集复盘、汉画像石结构化、YOLO 目标检测入门。
 
-## 最近整理
+## 合并记录
 
-2026-04-28，我把原来 `relics-align2` 里的碑刻和汉画像石资料合并到了这里。合并后的案例放在：
+2026-04-28，原 `relics-align2` 项目中的碑刻和汉画像石资料已合并到本仓库。案例目录为：
 
 [case-studies/stele-clarity-2026-04-27](case-studies/stele-clarity-2026-04-27)
 
-旧项目里有一些原始碑刻照片和处理输出图，因为带经纬度水印，体积也比较大，我没有放进 GitHub。仓库里主要保留文字资料、链接索引、脚本和复现实验说明。
+原始碑刻照片和处理输出图没有纳入 GitHub。原因是原图带经纬度水印，文件体积也较大。仓库中保留文档、来源索引、脚本和复现实验说明。
 
-## 我现在的学习顺序
+## 学习顺序
 
-如果从零开始，我会按这个顺序读：
+1. [01-theory.md](01-theory.md)
+   先了解 RTI、PTM、HSH、光度立体、法线图等基础概念。
 
-1. 先看 [01-theory.md](01-theory.md)
-   目标不是记公式，而是分清 RTI、PTM、HSH、光度立体、法线图这些词。
+2. [02-cultural-heritage-cases.md](02-cultural-heritage-cases.md)
+   了解 RTI 在碑刻、墓碑、陶器、浅浮雕等文化遗产案例中的用途。
 
-2. 再看 [02-cultural-heritage-cases.md](02-cultural-heritage-cases.md)
-   先知道这些技术在碑刻、墓碑、陶器、浅浮雕上到底解决什么问题。
+3. [03-toolchain-and-datasets.md](03-toolchain-and-datasets.md)
+   熟悉 RTIViewer、RTIBuilder、OpenLIME、relight 等工具和公开数据。
 
-3. 接着看 [03-toolchain-and-datasets.md](03-toolchain-and-datasets.md)
-   把 RTIViewer、RTIBuilder、OpenLIME、relight 这些工具先跑通。
+4. [06-capture-sop.md](06-capture-sop.md) 与 [09-hardware-purchase-list.md](09-hardware-purchase-list.md)
+   对应现场采集准备，包括相机、光源、三脚架、反光球、比例尺和文件命名。
 
-4. 然后看 [06-capture-sop.md](06-capture-sop.md) 和 [09-hardware-purchase-list.md](09-hardware-purchase-list.md)
-   这里对应实际采集：相机、灯、三脚架、反光球、比例尺、文件命名。
+5. [04-han-stone-reliefs.md](04-han-stone-reliefs.md) 与 [05-microtrace-reproduction.md](05-microtrace-reproduction.md)
+   面向汉画像石、碑刻、拓片恢复、数字拓片和微痕成像。
 
-5. 如果研究对象是汉画像石和碑刻，再看 [04-han-stone-reliefs.md](04-han-stone-reliefs.md)、[05-microtrace-reproduction.md](05-microtrace-reproduction.md) 和案例目录。
-
-6. 想继续做数据结构和 AI 辅助，再看 [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md) 和 [iiml-jsonld.schema.json](iiml-jsonld.schema.json)。
+6. [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md) 与 [iiml-jsonld.schema.json](iiml-jsonld.schema.json)
+   面向图像标注、知识图谱、结构化数据和 AI 辅助识读。
 
 ## 文档目录
 
-- [01-theory.md](01-theory.md)：RTI、PTM、HSH、RBF、光度立体、法线图等基础概念。
-- [02-cultural-heritage-cases.md](02-cultural-heritage-cases.md)：文化遗产里的 RTI 和浅刻表面案例。
-- [03-toolchain-and-datasets.md](03-toolchain-and-datasets.md)：工具链、公开数据和复现入口。
-- [04-han-stone-reliefs.md](04-han-stone-reliefs.md)：汉画像石、拓片、中文石刻和 2.5D 浅刻资料。
-- [05-microtrace-reproduction.md](05-microtrace-reproduction.md)：微痕成像、数字拓片、CHIM/IIML 和 AI 识读。
-- [06-capture-sop.md](06-capture-sop.md)：面向碑刻和画像石的采集规范草稿。
-- [07-software-workflow.md](07-software-workflow.md)：后续软件、数据结构和处理流程设想。
-- [08-frontier-technologies.md](08-frontier-technologies.md)：前沿技术资料，先当资料库，不急着全部学完。
+- [01-theory.md](01-theory.md)：RTI、PTM、HSH、RBF、光度立体、法线图。
+- [02-cultural-heritage-cases.md](02-cultural-heritage-cases.md)：文化遗产案例。
+- [03-toolchain-and-datasets.md](03-toolchain-and-datasets.md)：工具链和公开数据。
+- [04-han-stone-reliefs.md](04-han-stone-reliefs.md)：汉画像石、拓片和中文石刻资料。
+- [05-microtrace-reproduction.md](05-microtrace-reproduction.md)：微痕成像、数字拓片和 AI 识读。
+- [06-capture-sop.md](06-capture-sop.md)：碑刻和画像石采集规范草稿。
+- [07-software-workflow.md](07-software-workflow.md)：软件流程和数据结构设想。
+- [08-frontier-technologies.md](08-frontier-technologies.md)：前沿技术资料。
 - [09-hardware-purchase-list.md](09-hardware-purchase-list.md)：采集设备清单。
-- [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：图像标注、知识图谱、JSON-LD 和 AI 辅助识读。
-- [11-merged-project-map.md](11-merged-project-map.md)：两个项目合并后的结构说明。
+- [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：图像标注、知识图谱和 JSON-LD。
+- [11-merged-project-map.md](11-merged-project-map.md)：项目合并说明。
 
-## 案例
+## 案例目录
 
-- [case-studies/stele-clarity-2026-04-27](case-studies/stele-clarity-2026-04-27)：从几张碑刻照片出发，整理了单张照片增强失败、重新采集、RTI/三维路线、汉画像石结构化和 YOLO 学习路线。
+- [case-studies/stele-clarity-2026-04-27](case-studies/stele-clarity-2026-04-27)：碑刻照片采集复盘、重新采集路线、汉画像石结构化和 YOLO 学习路线。
 
-## 英文资料怎么处理
+## 英文资料处理
 
-这个领域很多资料是英文的。我现在的办法不是硬啃全文，而是先做中文化处理：
+英文资料按以下顺序处理：
 
-1. 先翻译标题、摘要、图注和结论。
-2. 把关键词做成中英文对照表。
-3. 只精读和采集、流程、参数、案例有关的部分。
-4. 读完一篇就写一页中文笔记：它解决什么问题、用了什么设备、我能不能照着做。
+1. 标题、摘要、图注、结论先翻译。
+2. 设备、采集流程、软件参数、数据格式优先整理。
+3. 关键词建立中英文对照表。
+4. 每篇资料形成一页中文摘要，包括研究对象、方法、设备、流程、可借鉴内容和未理解问题。
 
-具体学习和翻译安排放在：
+详细路线见：
 
 [tutorials/08-chinese-first-learning-route.md](tutorials/08-chinese-first-learning-route.md)
 
-## 目前的原则
+## 数据原则
 
-- 原始数据要保留，不要只留处理后的图。
-- 每一步处理都要记参数，不然以后复查不了。
-- AI 结果只能当候选，不能当定稿。
-- 公开数据前要先处理 GPS、馆藏限制和版权问题。
+- 保留原始数据，不只保存处理图。
+- 记录采集条件和处理参数。
+- AI 结果作为候选，不作为最终释读。
+- 公开数据前处理 GPS、馆藏限制和版权问题。

@@ -1,4 +1,4 @@
-# RTI中文教程目录
+﻿# RTI中文教程目录
 
 这个文件夹存放中文学习教程、阅读顺序和阶段任务。论文原文在 `../papers`。
 
@@ -26,7 +26,7 @@
    - 核心RTI和前沿论文的通俗解读，按“问题、方法、启发、复现”来读。
 
 8. [07-practical-technology-roadmap.md](07-practical-technology-roadmap.md)
-   - 把论文结论转成我们的微痕扫描实验路线。
+   - 把论文结论转成微痕扫描实验路线。
 
 9. [08-chinese-first-learning-route.md](08-chinese-first-learning-route.md)
    - 英文资料的中文化学习办法、术语表和 6 个月路线。
