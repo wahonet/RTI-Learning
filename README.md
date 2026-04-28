@@ -6,6 +6,7 @@
 
 - 基础学习：RTI 原理、采集方法、处理工具、论文和硬件方案。
 - 应用案例：碑刻照片采集复盘、汉画像石结构化、YOLO 目标检测入门。
+- 前沿调研：2024-2026 年 RTI/PTM、光度立体、Neural RTI、自动线图、YOLO/SAM 标注和图像学知识库资料。
 
 ## 合并记录
 
@@ -48,6 +49,10 @@
 - [09-hardware-purchase-list.md](09-hardware-purchase-list.md)：采集设备清单。
 - [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：图像标注、知识图谱和 JSON-LD。
 - [11-merged-project-map.md](11-merged-project-map.md)：项目合并说明。
+- [12-technology-survey-2026.md](12-technology-survey-2026.md)：2024-2026 年 RTI/PTM、汉画像石、YOLO、线图生成和图像学本体调研。
+- [papers/notes](papers/notes)：新增论文阅读笔记。
+- [repositories](repositories)：GitHub 工具仓库快照和复现入口。
+- [research-inventory-2026.csv](research-inventory-2026.csv)：本轮新增论文、仓库、下载状态和阅读笔记清单。
 
 ## 案例目录
 

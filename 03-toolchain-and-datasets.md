@@ -82,6 +82,11 @@
 - WebGL渲染能力。
 - 标注和测量扩展可能性。
 
+补充：
+- OpenLIME已在文献中用于RTI、BRDF、多光谱、神经可重光照图像和考古标注。
+- 本轮通过代理克隆大仓库未成功，后续需要单独补充源码快照。
+- 当前先把OpenLIME作为Web发布和IIML标注承载的重点方向。
+
 ## 公开数据集
 
 ### CHI Fish Fossil Sample
@@ -198,6 +203,21 @@ dataset_id/
 | RTIViewer | 查看RTI | 经典增强模式 | 较老 | 对照 |
 | RTIBuilder | 传统处理 | 文档完整 | 老旧 | 参考 |
 | OpenLIME | Web查看 | 现代Web发布 | 集成成本待评估 | 优先 |
+
+## 新增GitHub仓库记录
+
+仓库索引见：`repositories/README.md`
+
+已下载：
+- `repositories/github/NeuralRTI`：Keras版NeuralRTI，用于神经RTI学习和未来实验。
+
+待补充：
+- Relight / RelightLab。
+- OpenLIME。
+- ImageJ Photometric Stereo Tools。
+- `near_ps`近场点光源光度立体。
+- `Beyond-Relighting` RTI特征聚类。
+- `Ceramatic2.0`考古绘图自动化。
 
 ## 本阶段交付物
 

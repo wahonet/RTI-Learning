@@ -23,6 +23,8 @@
 
 资料：[3D Digital Modeling as a Sustainable Conservation and Revitalization Path for Han Dynasty Stone Reliefs](https://www.mdpi.com/2071-1050/15/16/12487)
 
+阅读笔记：`papers/notes/34_3D_Digital_Modeling_Han_Stone_Reliefs_2023.md`
+
 关注点：
 - 汉画像石数字化保护与活化工作流。
 - 三维扫描、数据处理、建模、展示和再利用。
@@ -140,6 +142,40 @@
 - 研究线图。
 - 局部微痕标注。
 - 图像纹样分割结果。
+
+## 新增资料：汉画像石YOLO人物检测
+
+资料：[Human figure detection in Han portrait stone images via enhanced YOLO-v5](https://www.nature.com/articles/s40494-024-01232-2)
+
+阅读笔记：`papers/notes/23_Han_Portrait_Stone_YOLOv5_2024.md`
+
+关注点：
+- 直接面向汉画像石图像目标检测。
+- 数据集包含伏羲女娲和乐舞人物两类。
+- 增强YOLOv5使用SPD-Conv、Coordinate Attention、DIoU NMS和Alpha-IoU Loss。
+- 复杂石材背景和图像元素相似性是主要难点。
+
+对本项目启发：
+- 第一版标注可从少量高价值类别开始，不必一次覆盖全部图像学体系。
+- YOLO框只作为粗定位，后续还需要SAM/人工多边形、线段标注和IIML语义关系。
+- 原图、RTI增强图、拓片、线图应分别作为资源版本保存。
+
+## 新增资料：自动线图与数字拓片
+
+资料：
+- [Relic2Contour, 2025](https://www.nature.com/articles/s40494-025-01606-0)
+- [Automated generation of archeological line drawings from sculpture point cloud, 2025](https://www.nature.com/articles/s40494-025-01678-y)
+- [Generating archaeological line drawings from limited reference images, 2026](https://www.nature.com/articles/s40494-026-02526-3)
+
+阅读笔记：
+- `papers/notes/24_Relic2Contour_2025.md`
+- `papers/notes/25_Archaeological_Line_Drawings_Point_Cloud_2025.md`
+- `papers/notes/33_Archaeological_Line_Drawings_Limited_References_2026.md`
+
+结论：
+- 二维AI线图、点云几何特征线和扩散模型小样本线图生成可以并行研究。
+- 汉画像石最终需要的是“可追溯的研究线图”，不是不可解释的美术化线稿。
+- 自动线图必须保留候选状态和人工审核记录。
 
 ## 本阶段交付物
 
