@@ -1,0 +1,11 @@
+id,name,type,url,license_or_rights,access_status,intended_use,notes
+D01,CHI Fish Fossil RTI Sample,RTI sample,https://culturalheritageimaging.org/What_We_Offer/Downloads/Process/,CHI example files,tracked,RTIBuilder/RelightLab first reproduction,Download 1000px first
+D02,VAT 15829 RTI Dataset,cuneiform RTI,https://datastore.uni-muenster.de/records/gmcn0-sac84,check repository license,tracked,shallow inscription RTI comparison,Good for cuneiform and low relief marks
+D03,VAT 18242 RTI Dataset,cuneiform RTI,https://datastore.uni-muenster.de/records/5n84d-0eg89,check repository license,tracked,large RTI performance test,Defer until storage workflow is stable
+D04,DiLiGenT-Pi,photometric stereo dataset,https://photometricstereo.github.io/,check dataset license,tracked,near-planar photometric stereo benchmark,Useful for validating normal and height recovery
+D05,Antikythera Mechanism PTMs,PTM dataset,http://archive.nyu.edu/handle/2451/44439,Open Database License / Database Contents License,tracked,PTM inscription and fragment study,Large PTM files; do not commit
+D06,河南汉画像石图像数据库,Han stone relief database,http://www.henanhanhua.com/,check site terms,tracked,iconography vocabulary and metadata reference,Do not bulk download before rights review
+D07,漢代石刻畫象拓本數位典藏,Han rubbing database,http://rub.ihp.sinica.edu.tw/~hanrelief/h/,check site terms,tracked,rubbing and line drawing comparison,Use as reference source
+D08,Wikimedia Commons Reliefs of Han Dynasty,open image collection,https://commons.wikimedia.org/wiki/Category:Reliefs_of_the_Han_Dynasty,per-file license,tracked,YOLO/SAM small public sample,Need per-image attribution
+D09,Chinese Iconography Thesaurus,CIT ontology and image archive,https://chineseiconography.org/,check terms,tracked,vocabulary mapping and iconography reference,Use for controlled vocabulary mapping
+D10,Project Mirador IIIF samples,IIIF examples,https://projectmirador.org/,open source project samples,tracked,IIIF viewer and annotation testing,Use for viewer learning

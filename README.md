@@ -7,6 +7,7 @@
 - 基础学习：RTI 原理、采集方法、处理工具、论文和硬件方案。
 - 应用案例：碑刻照片采集复盘、汉画像石结构化、YOLO 目标检测入门。
 - 前沿调研：2024-2026 年 RTI/PTM、光度立体、Neural RTI、自动线图、YOLO/SAM 标注和图像学知识库资料。
+- 工程落地：数据集规范、实验模板、词表草案、软件栈和从采集到发布的数据架构。
 
 ## 合并记录
 
@@ -50,9 +51,16 @@
 - [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：图像标注、知识图谱和 JSON-LD。
 - [11-merged-project-map.md](11-merged-project-map.md)：项目合并说明。
 - [12-technology-survey-2026.md](12-technology-survey-2026.md)：2024-2026 年 RTI/PTM、汉画像石、YOLO、线图生成和图像学本体调研。
+- [13-software-stack-and-architecture.md](13-software-stack-and-architecture.md)：采集、数据管理、处理计算、标注解释、发布展示和知识库的软件栈蓝图。
+- [14-validation-and-risk-checklist.md](14-validation-and-risk-checklist.md)：RTI、光度立体、数字拓片、AI线图和标注结果的验证与风险清单。
+- [tools-evaluation-2026.md](tools-evaluation-2026.md)：RTI、3D、标注、发布和数据管理工具选型评估。
+- [annotation-guidelines.md](annotation-guidelines.md)：汉画像石YOLO/SAM/IIML标注操作指南。
 - [learning-roadmap.html](learning-roadmap.html)：可浏览的RTI/PTM与汉画像石学习路线图，含论文、仓库、硬件和实验计划。
 - [learning-roadmap.md](learning-roadmap.md)：学习路线入口说明。
 - [missing-materials-2026.md](missing-materials-2026.md)：缺失PDF、仓库、数据集和硬件资料补齐清单。
+- [datasets/README.md](datasets/README.md)：数据集、外部资源、元数据和大文件管理规范。
+- [experiments/README.md](experiments/README.md)：RTI、光度立体、YOLO/SAM/IIML实验记录模板。
+- [vocabularies/han-stone-relief-vocabulary.md](vocabularies/han-stone-relief-vocabulary.md)：汉画像石标注词表草案。
 - [papers/notes](papers/notes)：新增论文阅读笔记。
 - [repositories](repositories)：GitHub 工具仓库快照和复现入口。
 - [research-inventory-2026.csv](research-inventory-2026.csv)：本轮新增论文、仓库、下载状态和阅读笔记清单。
@@ -81,3 +89,4 @@
 - 记录采集条件和处理参数。
 - AI 结果作为候选，不作为最终释读。
 - 公开数据前处理 GPS、馆藏限制和版权问题。
+- 大型原始图、训练集、模型权重和第三方馆藏图片不直接提交到 Git；用索引、元数据、DVC/NAS或外部存储管理。

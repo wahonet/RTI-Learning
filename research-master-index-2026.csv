@@ -64,3 +64,18 @@ H02,hardware,hardware,high,16-32 LED fixed light matrix,,hardware,photometric st
 H03,hardware,hardware,medium,Arduino controlled 45 LED dome,2020,paper,RTI dome,"45 LED、70cm半球、Arduino MEGA控制，成熟低成本RTI dome论文方案",,https://link.springer.com/article/10.1007/s42452-020-03343-4,tracked,转入硬件设计
 H04,hardware,hardware,medium,Easy to build RTI system,2022,paper,RTI dome,"约50 LED、Arduino、3D打印半球，给出STL和代码链接",,https://pmc.ncbi.nlm.nih.gov/articles/PMC9139674/,tracked,参考小型dome
 H05,hardware,hardware,medium,VCG ISTI RTI dome,,hardware,professional dome,"1m可拆半球、116 LED、5600K、5分钟采集，适合科研级参考",,https://vcg.isti.cnr.it/rti/acquisition.php,tracked,作为高预算目标
+R18,repo,3d,high,COLMAP,2014-2026,repository,SfM MVS,"通用Structure-from-Motion和Multi-View Stereo工具，用于整体3D模型、相机位姿和RTI局部配准",,https://github.com/colmap/colmap,tracked_not_downloaded,下载Release并测试小样本
+R19,repo,3d,high,Meshroom / AliceVision,2015-2026,repository,photogrammetry,"开源节点式摄影测量框架，2025版本包含Photometric Stereo和Multi-View Photometric Stereo方向",,https://github.com/alicevision/meshroom,tracked_not_downloaded,下载Release并测试对象建模
+R20,repo,3d,medium,CloudCompare,2012-2026,repository,point cloud,"点云和三角网格处理工具，可用于点云比较、裁剪、配准和距离分析",,https://github.com/CloudCompare/CloudCompare,tracked_not_downloaded,用于3D结果质检
+R21,repo,3d,medium,MeshLab,,software,mesh processing,"开源三维网格处理工具，用于清理、简化、重建、纹理和格式转换",,https://www.meshlab.net/,tracked_not_downloaded,用于3D后处理
+R22,repo,3d_web,medium,Potree,2015-2026,repository,point cloud web viewer,"WebGL大型点云查看器，适合点云发布和浏览",,https://github.com/potree/potree,tracked_not_downloaded,用于大型点云Web展示
+R23,repo,3d_web,medium,3DHOP,,framework,3D heritage web,"面向文化遗产高分辨率3D模型的Web展示框架",,https://3dhop.net/,tracked,用于3D模型发布调研
+R24,repo,annotation,high,Ultralytics YOLO and SAM auto annotate,2023-2026,repository,YOLO SAM,"提供YOLO检测、SAM/SAM2分割和auto_annotate自动生成分割标签",,https://github.com/ultralytics/ultralytics,tracked_not_downloaded,用于YOLO/SAM预标注实验
+R25,repo,iiif,medium,Mirador,2014-2026,repository,IIIF viewer,"IIIF多图像比较查看器，支持图像和注释展示",,https://github.com/IIIF/mirador,tracked_not_downloaded,用于IIIF展示调研
+R26,repo,iiif,medium,Universal Viewer,2015-2026,repository,IIIF universal viewer,"IIIF和多媒体查看器，可展示图像、3D、PDF、音视频",,https://github.com/UniversalViewer/universalviewer,tracked_not_downloaded,用于发布方案评估
+R27,repo,annotation,medium,Annotorious OpenSeadragon plugin,,repository,high-res image annotation,"OpenSeadragon高分辨率图像标注插件，支持W3C Web Annotation",,https://github.com/annotorious/annotorious-openseadragon,tracked_not_downloaded,用于IIML前端原型
+R28,repo,data,high,DVC,2017-2026,repository,data versioning,"大数据和ML实验版本管理，适合RAW、训练集、模型权重不进Git但可追溯",,https://github.com/dataversioncontrol/dvc,tracked_not_downloaded,评估本地大数据管理
+M01,method,workflow,high,Software stack and architecture blueprint,2026,local_doc,architecture,"采集、数据管理、处理、标注、发布和知识库软件栈总蓝图",13-software-stack-and-architecture.md,,local_doc,持续更新
+M02,method,validation,high,Validation and risk checklist,2026,local_doc,quality control,"约束RTI增强、光度立体、数字拓片、AI线图和标注结果可信度",14-validation-and-risk-checklist.md,,local_doc,用于每次实验验收
+M03,method,annotation,high,Han stone relief annotation guidelines,2026,local_doc,annotation,"YOLO/SAM/IIML标注类别、流程、审核和数据划分指南",annotation-guidelines.md,,local_doc,用于第一批标注
+M04,method,tools,high,Tools evaluation 2026,2026,local_doc,tool selection,"RTI、3D、标注、发布和数据管理工具选型评估",tools-evaluation-2026.md,,local_doc,用于安装优先级

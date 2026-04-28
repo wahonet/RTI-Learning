@@ -110,3 +110,51 @@
 链接：[https://github.com/recogito/annotorious](https://github.com/recogito/annotorious)
 
 用途：Web图像标注组件，支持IIIF/OpenSeadragon生态，可作为后续IIML标注前端的参考。
+
+### `colmap/colmap`
+
+链接：[https://github.com/colmap/colmap](https://github.com/colmap/colmap)
+
+用途：Structure-from-Motion和Multi-View Stereo工具，用于整体三维模型、相机位姿估计、正射图生成和局部RTI配准。
+
+### `alicevision/meshroom`
+
+链接：[https://github.com/alicevision/meshroom](https://github.com/alicevision/meshroom)
+
+用途：开源节点式摄影测量和三维重建框架。适合非代码方式搭建3D重建流程，也可评估Photometric Stereo节点。
+
+### `CloudCompare/CloudCompare`
+
+链接：[https://github.com/CloudCompare/CloudCompare](https://github.com/CloudCompare/CloudCompare)
+
+用途：点云和网格质检、裁剪、配准、距离分析。适合比较RTI/光度立体结果与3D扫描结果。
+
+### `potree/potree`
+
+链接：[https://github.com/potree/potree](https://github.com/potree/potree)
+
+用途：WebGL大型点云浏览器，用于公开展示或内部浏览汉画像石点云数据。
+
+### `IIIF/mirador`
+
+链接：[https://github.com/IIIF/mirador](https://github.com/IIIF/mirador)
+
+用途：IIIF多图像比较查看器，适合比较原图、拓片、RTI增强图、线图和不同馆藏图像。
+
+### `UniversalViewer/universalviewer`
+
+链接：[https://github.com/UniversalViewer/universalviewer](https://github.com/UniversalViewer/universalviewer)
+
+用途：IIIF和多媒体查看器，可展示图像、3D、PDF、音视频，适合未来研究包发布评估。
+
+### `ultralytics/ultralytics`
+
+链接：[https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
+
+用途：YOLO训练、推理和SAM自动标注入口。其`auto_annotate`流程可用YOLO检测框驱动SAM生成分割标签。
+
+### `dataversioncontrol/dvc`
+
+链接：[https://github.com/dataversioncontrol/dvc](https://github.com/dataversioncontrol/dvc)
+
+用途：大数据、训练集、模型和实验输出版本管理。适合解决RAW图像和模型权重不进Git但仍可追溯的问题。

@@ -10,6 +10,12 @@
 - `papers/README.md`：本地PDF和论文阅读笔记索引。
 - `repositories/README.md`：GitHub仓库快照和待下载仓库索引。
 - `09-hardware-purchase-list.md`：详细硬件采购清单。
+- `13-software-stack-and-architecture.md`：采集、数据管理、处理、标注、发布和知识库软件栈。
+- `datasets/README.md`：数据集目录、元数据和大文件管理规范。
+- `experiments/README.md`：实验复现记录模板。
+- `vocabularies/han-stone-relief-vocabulary.md`：汉画像石YOLO/SAM/IIML词表草案。
+- `tools-evaluation-2026.md`：工具选型评分和优先级。
+- `annotation-guidelines.md`：YOLO/SAM/IIML标注操作指南。
 
 ## 最重要的学习主线
 
@@ -37,6 +43,8 @@ RTI/PTM基础
 - `capture.json`、`lights.csv`、原始RAW和处理输出目录规范。
 - 至少一个法线图、虚拟斜光图和数字拓片初稿。
 - YOLO/SAM/IIML小闭环样例。
+- 一个可复用实验目录，包含输入、命令、观察、输出和问题记录。
+- 一个汉画像石第一版词表，包含YOLO类别、场景类别、微痕类别和解释层级。
 
 ## 硬件建议
 
@@ -54,3 +62,5 @@ RTI/PTM基础
 - OpenLIME源码和2025论文PDF。
 - AnyLabeling/CVAT/Label Studio至少一个本地标注工具。
 - 河南汉画像石数据库和史语所拓本典藏的字段、版权和引用规则。
+- COLMAP或Meshroom至少一个3D重建工具。
+- DVC或等价方案用于本地大数据和模型权重版本管理。

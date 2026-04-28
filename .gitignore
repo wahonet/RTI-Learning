@@ -1,5 +1,21 @@
 external/
 
+# Local datasets and experiment outputs. Keep large RAW/JPEG/TIFF sequences,
+# generated RTI outputs, model weights, and third-party images out of Git.
+datasets/local/*
+!datasets/local/README.md
+datasets/external/*
+!datasets/external/README.md
+experiments/*/raw/
+experiments/*/processed/
+experiments/*/outputs/
+.dvc/cache/
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+
 # Local case-study data. Keep raw photos and generated outputs local by default;
 # many files contain GPS overlays or are too large/noisy for the public repo.
 case-studies/stele-clarity-2026-04-27/inputs/*

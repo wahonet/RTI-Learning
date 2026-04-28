@@ -4,6 +4,8 @@
 
 在RTI理论学习、工具链复现和微痕专题实验之后，逐步开发一套面向汉画像石、碑刻和浅刻文物的采集、处理、增强、标注和发布工作流。软件开发应从最小闭环开始，不一开始追求完整商业系统。
 
+更完整的软件栈与数据架构见 `13-software-stack-and-architecture.md`。数据集规范见 `datasets/README.md`，实验记录模板见 `experiments/README.md`。
+
 ## 最小闭环
 
 第一版软件只需要完成以下闭环：
@@ -218,6 +220,13 @@ Web发布：
 - 多人协作标注。
 - AI辅助分割和识读。
 - 汉画像石纹样检索。
+
+补充工具优先级：
+- 处理后端优先评估RelightLab/Relight CLI。
+- 3D整体建模优先评估COLMAP或Meshroom。
+- 标注工具优先评估AnyLabeling和CVAT。
+- Web发布优先评估OpenLIME、IIIF和Annotorious。
+- 大数据版本管理优先评估DVC或NAS索引方案。
 
 ## 本阶段交付物
 
