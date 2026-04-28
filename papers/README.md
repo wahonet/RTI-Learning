@@ -2,6 +2,12 @@
 
 本文件夹存放RTI、PTM、H-RTI、光度立体、文化遗产应用、汉画像石和微痕相关的公开PDF资料。阅读顺序见 `../tutorials/00-reading-plan.md`。
 
+总学习路线见：
+
+- `../learning-roadmap.html`
+- `../learning-roadmap.md`
+- `../research-master-index-2026.csv`
+
 ## 必读资料
 
 1. `01_CHI_RTI_Highlight_Capture_Guide.pdf`
@@ -126,6 +132,7 @@
 ## 暂未直接下载但需要继续跟踪
 
 - Malzbender et al. 2001, `Polynomial Texture Maps`：经典PTM论文，在线文本可读，后续继续寻找稳定PDF源。
+- Malzbender et al. 2001, `Polynomial Texture Map (.ptm) File Format`：PTM格式规范，后续补PDF。
 - Earl et al., `Archaeological applications of polynomial texture mapping`：CORE源不稳定，后续继续补充。
 - `Application of Reflectance Transformation Imaging to Experimental Archaeology Studies`：MDPI页面可读，PDF下载被站点拦截，后续可手动补。
 - `3D Digital Modeling as a Sustainable Conservation and Revitalization Path for Han Dynasty Stone Reliefs`：MDPI页面可读，PDF下载被站点拦截，后续可手动补。

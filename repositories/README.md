@@ -2,6 +2,11 @@
 
 本目录用于保存与RTI/PTM、光度立体、神经重光照、文物线图、考古标注和AI检测相关的开源仓库快照或复现入口。
 
+总索引见：
+
+- `../research-master-index-2026.csv`
+- `../learning-roadmap.html`
+
 ## 本地已下载
 
 ### `github/NeuralRTI`
@@ -63,3 +68,45 @@
 链接：[https://github.com/akhawaja2014/Beyond-Relighting](https://github.com/akhawaja2014/Beyond-Relighting)
 
 用途：2026年RTI + 深度学习聚类纺织品碎片论文的代码仓库。对本项目“RTI不只是可视化，也可作为AI特征输入”很重要。
+
+### `BeebBenjamin/RTIPy`
+
+链接：[https://github.com/BeebBenjamin/RTIPy](https://github.com/BeebBenjamin/RTIPy)
+
+用途：Python + Arduino便携微型RTI dome方案，含3D打印、LED控制和相机触发思路。适合低成本硬件设计参考。
+
+### `leszekmp/artid`
+
+链接：[https://github.com/leszekmp/artid](https://github.com/leszekmp/artid)
+
+用途：Affordable Reflectance Transformation Imaging Dome，约600美元级别自动RTI dome方案，适合学习硬件结构和控制流程。
+
+### `nichlock/rti`
+
+链接：[https://github.com/nichlock/rti](https://github.com/nichlock/rti)
+
+用途：开源RTI硬件和软件实现，包含Arduino Mega shield、三色LED矩阵和GUI控制界面。
+
+### `cvat-ai/cvat`
+
+链接：[https://github.com/cvat-ai/cvat](https://github.com/cvat-ai/cvat)
+
+用途：工业级图像/视频标注平台，支持YOLO、COCO、Ultralytics格式、分割和SAM自动标注。适合正式汉画像石标注项目。
+
+### `HumanSignal/label-studio`
+
+链接：[https://github.com/HumanSignal/label-studio](https://github.com/HumanSignal/label-studio)
+
+用途：多类型数据标注平台，适合把图像标注、文本、研究说明和模型预标注接入统一流程。
+
+### `vietanhdev/anylabeling`
+
+链接：[https://github.com/vietanhdev/anylabeling](https://github.com/vietanhdev/anylabeling)
+
+用途：本地AI辅助标注工具，支持YOLOv8、SAM、SAM2、SAM2.1、SAM3和MobileSAM。适合个人快速制作YOLO/SAM小数据集。
+
+### `recogito/annotorious`
+
+链接：[https://github.com/recogito/annotorious](https://github.com/recogito/annotorious)
+
+用途：Web图像标注组件，支持IIIF/OpenSeadragon生态，可作为后续IIML标注前端的参考。

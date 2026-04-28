@@ -50,9 +50,13 @@
 - [10-iiml-knowledge-base.md](10-iiml-knowledge-base.md)：图像标注、知识图谱和 JSON-LD。
 - [11-merged-project-map.md](11-merged-project-map.md)：项目合并说明。
 - [12-technology-survey-2026.md](12-technology-survey-2026.md)：2024-2026 年 RTI/PTM、汉画像石、YOLO、线图生成和图像学本体调研。
+- [learning-roadmap.html](learning-roadmap.html)：可浏览的RTI/PTM与汉画像石学习路线图，含论文、仓库、硬件和实验计划。
+- [learning-roadmap.md](learning-roadmap.md)：学习路线入口说明。
+- [missing-materials-2026.md](missing-materials-2026.md)：缺失PDF、仓库、数据集和硬件资料补齐清单。
 - [papers/notes](papers/notes)：新增论文阅读笔记。
 - [repositories](repositories)：GitHub 工具仓库快照和复现入口。
 - [research-inventory-2026.csv](research-inventory-2026.csv)：本轮新增论文、仓库、下载状态和阅读笔记清单。
+- [research-master-index-2026.csv](research-master-index-2026.csv)：目前为止的论文、仓库、数据集、硬件总索引。
 
 ## 案例目录
 

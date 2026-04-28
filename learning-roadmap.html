@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTI/PTM 与汉画像石数字研究学习路线</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --panel: #fffdf8;
+      --ink: #1f2933;
+      --muted: #65717f;
+      --line: #d9d2c7;
+      --accent: #8a4b2a;
+      --accent-2: #315f72;
+      --soft: #efe7da;
+      --good: #2f6b4f;
+      --warn: #9a6a16;
+      --bad: #9b3d32;
+      --code: #ece3d3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.6fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero, .card, .wide-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .hero {
+      padding: 34px;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .stat {
+      padding: 16px;
+      background: var(--soft);
+      border-radius: 10px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 244, 238, 0.96);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      margin-bottom: 30px;
+    }
+
+    nav .links {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    h2 {
+      margin: 42px 0 16px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 920px;
+      margin-top: -6px;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card, .wide-card {
+      padding: 18px;
+    }
+
+    .wide-card {
+      margin-bottom: 16px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 6px 6px 0;
+      white-space: nowrap;
+    }
+
+    .tag.high {
+      color: var(--good);
+      border-color: rgba(47, 107, 79, 0.35);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      border-color: rgba(154, 106, 22, 0.35);
+    }
+
+    .tag.bad {
+      color: var(--bad);
+      border-color: rgba(155, 61, 50, 0.35);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .phase-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .phase h3 {
+      margin-top: 0;
+    }
+
+    .phase ul, .card ul, .wide-card ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .phase li, .card li, .wide-card li {
+      margin: 4px 0;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .flow div {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      min-height: 110px;
+    }
+
+    .flow strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      display: block;
+    }
+
+    thead, tbody, tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      color: var(--accent);
+      background: var(--soft);
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    code {
+      background: var(--code);
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--panel);
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 10px;
+    }
+
+    .checklist {
+      columns: 2;
+      column-gap: 32px;
+    }
+
+    footer {
+      margin: 48px 0 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      header, .grid-2, .grid-3, .phase, .flow {
+        grid-template-columns: 1fr;
+      }
+      .checklist {
+        columns: 1;
+      }
+      .shell {
+        padding: 18px;
+      }
+      nav .links {
+        padding: 0 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="links">
+      <a href="#overview">总览</a>
+      <a href="#knowledge">基础知识</a>
+      <a href="#roadmap">学习路线</a>
+      <a href="#papers">论文顺序</a>
+      <a href="#tools">仓库与工具</a>
+      <a href="#datasets">数据集</a>
+      <a href="#hardware">硬件选型</a>
+      <a href="#experiments">实验计划</a>
+      <a href="#gaps">缺失清单</a>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <header id="overview">
+      <section class="hero">
+        <h1>RTI/PTM 与汉画像石数字研究学习路线</h1>
+        <p>
+          这是一份面向个人学习和后续实验复现的总路线图。目标不是只学会RTIViewer里拖动光源，而是建立从多光照采集、RTI/PTM/HSH/RBF、光度立体、3D融合、数字拓片、YOLO/SAM标注，到IIML/图像学知识库的完整技术栈。
+        </p>
+      </section>
+      <aside class="summary card">
+        <div class="stat"><strong>7</strong><span>学习阶段：基础、案例、汉画像石、光度立体、前沿、AI标注、知识库</span></div>
+        <div class="stat"><strong>34+</strong><span>核心论文和资料条目，含经典PTM、RTI、光度立体和2024-2026新论文</span></div>
+        <div class="stat"><strong>17+</strong><span>仓库与工具入口：Relight、OpenLIME、NeuralRTI、CVAT、AnyLabeling等</span></div>
+        <div class="stat"><strong>3档</strong><span>硬件路线：低预算H-RTI、中预算固定光源矩阵、高预算科研平台</span></div>
+      </aside>
+    </header>
+
+    <section>
+      <h2>核心技术闭环</h2>
+      <p class="section-lead">所有学习和采购都围绕这条闭环展开。最重要的原则是保留原始多光照图像MLIC，后续所有新算法都可以从MLIC再出发。</p>
+      <div class="flow">
+        <div><strong>采集</strong>RAW照片、多方向光照、反光球、灰卡、比例尺、采集元数据。</div>
+        <div><strong>拟合</strong>PTM、HSH、RBF、Relight格式、法线图、平均图、增强图。</div>
+        <div><strong>重建</strong>光度立体法线/高度、SfM整体模型、V-RTI、局部RTI配准。</div>
+        <div><strong>转译</strong>数字拓片、研究线图、点云特征线、AI候选轮廓。</div>
+        <div><strong>结构化</strong>YOLO/SAM标注、IIML、图像学关系、知识图谱和Web发布。</div>
+      </div>
+      <div class="callout">
+        第一阶段不要追求所有前沿技术同时落地。最稳妥的路线是：H-RTI跑通、固定光源矩阵、光度立体基线、小样本YOLO/SAM/IIML，再进入NeuralRTI、多光谱、偏振和扩散线图。
+      </div>
+    </section>
+
+    <section id="knowledge">
+      <h2>需要储备的基础知识</h2>
+      <p class="section-lead">这部分决定你能不能判断结果是否可信。RTI项目失败通常不是软件不会用，而是摄影、光照、标定、数据管理和文物解释层没有打通。</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>摄影与采集</h3>
+          <ul>
+            <li>手动曝光、手动对焦、RAW、白平衡、景深、微距。</li>
+            <li>相机固定、对象固定、镜头畸变、快门震动控制。</li>
+            <li>灰卡、色卡、比例尺、反光球、文件命名。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>光照与物理</h3>
+          <ul>
+            <li>入射光方向、掠射光、漫反射、镜面反射、阴影。</li>
+            <li>PTM/HSH/RBF如何拟合光照函数。</li>
+            <li>光度立体如何从亮度恢复法线和高度。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>数学与图像处理</h3>
+          <ul>
+            <li>向量、法线、坐标系、矩阵、最小二乘。</li>
+            <li>图像增强、边缘检测、曲率、法线积分。</li>
+            <li>误差评估、标定、对照实验。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3D与空间数据</h3>
+          <ul>
+            <li>SfM/MVS、点云、网格、正射图、纹理映射。</li>
+            <li>局部RTI如何配准到整体3D模型。</li>
+            <li>IIIF、DeepZoom、瓦片和大图浏览。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>AI标注与训练</h3>
+          <ul>
+            <li>YOLO bbox、分割mask、多边形、COCO/YOLO格式。</li>
+            <li>SAM点/框提示、自动预标注、人工审核。</li>
+            <li>小样本、数据增强、训练/验证/测试划分。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>文博与图像学</h3>
+          <ul>
+            <li>汉画像石题材、构图、雕刻技法、拓片传统。</li>
+            <li>前图像、图像志、图像学解释层级。</li>
+            <li>证据链、研究者意见、版权与馆藏限制。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <h2>七阶段学习路线</h2>
+      <div class="timeline">
+        <div class="phase">
+          <div><div class="phase-num">Phase 1</div><span class="tag high">2-3天</span></div>
+          <div>
+            <h3>RTI/PTM基础</h3>
+            <p>先理解RTI、PTM、H-RTI、HSH、反光球、光照方向和多光照图像集合MLIC。</p>
+            <ul>
+              <li>读：CHI术语表、H-RTI采集指南、Earl 2011系统综述、Malzbender 2001 PTM。</li>
+              <li>做：画出采集到查看流程图；建立中英术语表。</li>
+              <li>验收：能解释PTM和RTI的关系，知道为什么相机和对象必须固定。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 2</div><span class="tag high">4-7天</span></div>
+          <div>
+            <h3>文化遗产案例</h3>
+            <p>学习墓碑、楔形文字、岩画、硬币、安提凯希拉机械、碑铭学等案例，判断RTI适用边界。</p>
+            <ul>
+              <li>读：Mudge 2006、Palma 2010、Gravestone RTI、Epigraphy RTI、Archaeological PTM。</li>
+              <li>做：整理“对象类型 -> RTI价值 -> 局限”对照表。</li>
+              <li>验收：能判断哪些问题是采集问题，哪些是后处理问题。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 3</div><span class="tag high">1-2周</span></div>
+          <div>
+            <h3>汉画像石与拓片</h3>
+            <p>进入本项目核心对象：汉画像石、画像砖、碑刻、墓志、甲骨和浅刻文物。</p>
+            <ul>
+              <li>读：拓片恢复浮雕、汉画像石3D建模、河南汉画像石数据库、史语所拓本典藏。</li>
+              <li>做：建立汉画像石对象类型、雕刻技法、输出类型和标注类别草案。</li>
+              <li>验收：能说明“原石照片、拓片、RTI、3D模型、线图”各自解决什么问题。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 4</div><span class="tag high">2-4周</span></div>
+          <div>
+            <h3>工具链与第一批实验</h3>
+            <p>用公开样例和自采小样本跑通RelightLab/RTIViewer/OpenLIME，建立可复现实验记录。</p>
+            <ul>
+              <li>数据：CHI Fish Fossil、VAT楔形文字、硬币、刻痕板、石片。</li>
+              <li>工具：RelightLab、RTIViewer、OpenLIME、ImageJ PS Tools。</li>
+              <li>输出：RTI、增强图、法线图、虚拟掠射光、实验日志。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 5</div><span class="tag warn">1-2月</span></div>
+          <div>
+            <h3>固定光源矩阵与光度立体</h3>
+            <p>这是最值得投入的中期主线。目标是从“能看清”进入“可复现、可比较、可生成法线/高度”。</p>
+            <ul>
+              <li>搭建16-32路LED矩阵，记录灯位和拍摄参数。</li>
+              <li>读DiLiGenT-Pi、绘画光度立体、RTI profilometry。</li>
+              <li>做刻痕标定板实验，比较RTI增强、法线图、高度图和人工线图。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 6</div><span class="tag warn">1-2月</span></div>
+          <div>
+            <h3>AI标注、线图和IIML</h3>
+            <p>把图像增强结果变成可检索、可训练、可解释的数据。</p>
+            <ul>
+              <li>YOLO先做伏羲女娲、乐舞人物、车马、神兽、建筑构件、铭文。</li>
+              <li>SAM/AnyLabeling/CVAT生成候选多边形，人工审核。</li>
+              <li>IIML保存资源版本、几何、语义、证据、置信度和研究者。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-num">Phase 7</div><span class="tag warn">长期</span></div>
+          <div>
+            <h3>前沿探索与平台化</h3>
+            <p>在基础数据稳定后，再探索NeuralRTI、DisK-NeuralRTI、多光谱、偏振、RTI特征聚类和扩散线图。</p>
+            <ul>
+              <li>NeuralRTI：先跑本地示例，再比较PTM/HSH/RBF/神经重光照。</li>
+              <li>多光谱/偏振：先用低成本NIR/UV/偏振片做小样本。</li>
+              <li>Web平台：OpenLIME + IIIF + Annotorious/IIML。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="papers">
+      <h2>论文阅读顺序</h2>
+      <p class="section-lead">不建议按年份读。应按“能否支撑下一步实验”排序。</p>
+      <table>
+        <thead>
+          <tr><th>顺序</th><th>资料</th><th>为什么读</th><th>本地位置/状态</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>CHI RTI Glossary / Capture Guide</td><td>建立术语和采集动作</td><td><code>papers/16...</code> <code>papers/01...</code></td></tr>
+          <tr><td>2</td><td>Malzbender 2001 Polynomial Texture Maps</td><td>PTM源头，理解每像素光照函数</td><td>待下载PDF，已列入主索引</td></tr>
+          <tr><td>3</td><td>Earl 2011 / Earl 2010 Archaeological PTM</td><td>从系统和考古应用理解RTI</td><td><code>papers/02...</code>；Earl 2010待补PDF</td></tr>
+          <tr><td>4</td><td>Mudge 2006 / Palma 2010 / RTIViewer Guide</td><td>掌握H-RTI和增强显示</td><td>已下载</td></tr>
+          <tr><td>5</td><td>Gravestone / Epigraphy RTI / Antikythera PTM</td><td>进入文字、碑刻和浅刻案例</td><td>墓碑和碑铭已下载；Antikythera为外部数据集</td></tr>
+          <tr><td>6</td><td>汉画像拓片恢复 / 汉画像石3D建模</td><td>连接汉画像石传统研究和数字技术</td><td>拓片PDF已下载；3D建模有笔记待补PDF</td></tr>
+          <tr><td>7</td><td>光度立体、DiLiGenT-Pi、RTI Profilometry</td><td>进入法线/高度/定量验证</td><td>部分已下载，部分有笔记待补PDF</td></tr>
+          <tr><td>8</td><td>NeuralRTI / DisK-NeuralRTI / OpenLIME 2025</td><td>理解前沿重光照和Web发布</td><td>NeuralRTI仓库已下载，OpenLIME待下载</td></tr>
+          <tr><td>9</td><td>Han YOLO / Relic2Contour / 点云线图 / 扩散线图</td><td>进入标注、线图和AI辅助释读</td><td>已有阅读笔记，PDF待补</td></tr>
+          <tr><td>10</td><td>ICON Ontology / CIT</td><td>建立图像学和IIML语义层</td><td>已有ICON笔记；CIT为外部数据库</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="tools">
+      <h2>仓库与工具选择</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>必须优先掌握</h3>
+          <p><span class="tag high">RelightLab</span><span class="tag high">RTIViewer</span><span class="tag high">OpenLIME</span></p>
+          <ul>
+            <li><strong>RelightLab/Relight CLI</strong>：新主工具，生成RTI、法线图、Web格式。</li>
+            <li><strong>RTIViewer</strong>：经典查看器，用来理解增强模式。</li>
+            <li><strong>OpenLIME</strong>：未来Web发布、标注和多层数据展示方向。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>算法实验工具</h3>
+          <p><span class="tag">NeuralRTI</span><span class="tag">ImageJ PS</span><span class="tag">near_ps</span></p>
+          <ul>
+            <li><strong>NeuralRTI</strong>：本地已下载，用于神经重光照学习。</li>
+            <li><strong>ImageJ Photometric Stereo Tools</strong>：适合文物表面法线/高度实验。</li>
+            <li><strong>near_ps</strong>：近场LED点光源光度立体，适合自建灯阵。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>标注和训练工具</h3>
+          <p><span class="tag high">AnyLabeling</span><span class="tag high">CVAT</span><span class="tag">Label Studio</span></p>
+          <ul>
+            <li><strong>AnyLabeling</strong>：最适合个人本地快速试用，支持YOLO、SAM、SAM2/3。</li>
+            <li><strong>CVAT</strong>：正式项目/多人协作更强，格式支持全面。</li>
+            <li><strong>Label Studio</strong>：适合把标注接入后端和模型预标注。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>自研Web原型</h3>
+          <p><span class="tag">IIIF</span><span class="tag">Annotorious</span><span class="tag">IIML</span></p>
+          <ul>
+            <li>IIIF/DeepZoom解决大图和多版本资源发布。</li>
+            <li>Annotorious适合Web图像标注和OpenSeadragon集成。</li>
+            <li>IIML负责图像元素、几何、语义、证据链和知识图谱导出。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="datasets">
+      <h2>公开数据与汉画像石资源</h2>
+      <table>
+        <thead><tr><th>资源</th><th>用途</th><th>建议</th></tr></thead>
+        <tbody>
+          <tr><td>CHI Fish Fossil RTI sample</td><td>第一次跑通RTI处理</td><td>先下载1000px版本，避免文件太大。</td></tr>
+          <tr><td>VAT 15829 / VAT 18242</td><td>楔形文字浅刻RTI增强</td><td>优先VAT 15829，小数据先观察刻痕。</td></tr>
+          <tr><td>DiLiGenT-Pi</td><td>近似平面光度立体基准</td><td>用于对标自采刻痕板法线/高度效果。</td></tr>
+          <tr><td>Antikythera PTM</td><td>铭文、碎片和PTM开放数据</td><td>文件大，不建议全部下载，先记录数据结构。</td></tr>
+          <tr><td>河南汉画像石图像数据库</td><td>原石照片、拓片、出土地、题材、尺寸、技法</td><td>作为汉画像石图像学和标注类别来源，注意版权。</td></tr>
+          <tr><td>史语所汉代石刻画像拓本典藏</td><td>汉代石刻画像拓本</td><td>用于拓片与数字线图对照。</td></tr>
+          <tr><td>Wikimedia Han reliefs</td><td>开放图像小样本</td><td>适合YOLO/SAM试验，但质量和题名需人工核验。</td></tr>
+          <tr><td>CIT中国图像志索引典</td><td>中文图像学词表</td><td>映射到IIML本地词表，补足ICONCLASS不足。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="hardware">
+      <h2>硬件选型与购买路线</h2>
+      <p class="section-lead">硬件不要一步到顶。先用低预算包证明流程，再建设固定光源矩阵。真正影响结果的是稳定、光源方向、标定和元数据，而不是只买更贵相机。</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>低预算：学习验证型</h3>
+          <p><span class="tag high">3000-10000元</span></p>
+          <ul>
+            <li>已有相机或高质量手机。</li>
+            <li>稳定三脚架、快门线、手持LED。</li>
+            <li>黑色反光球、灰卡、色卡、比例尺。</li>
+            <li>移动SSD和记录模板。</li>
+          </ul>
+          <p class="muted">目标：跑通H-RTI、RelightLab/RTIBuilder、RTIViewer，输出增强图。</p>
+        </div>
+        <div class="card">
+          <h3>中预算：固定矩阵型</h3>
+          <p><span class="tag high">30000-80000元</span></p>
+          <ul>
+            <li>RAW相机、微距镜头、翻拍架/重型三脚架。</li>
+            <li>16-32路高显色LED和控制器。</li>
+            <li>灯位标定、ArUco/棋盘格、刻痕标定板。</li>
+            <li>32GB以上内存电脑和2TB以上SSD。</li>
+          </ul>
+          <p class="muted">目标：固定灯位、逐灯拍摄、光度立体、法线图、数字拓片初稿。</p>
+        </div>
+        <div class="card">
+          <h3>高预算：科研平台型</h3>
+          <p><span class="tag warn">150000元以上</span></p>
+          <ul>
+            <li>4500万-6000万像素相机或中画幅。</li>
+            <li>48-96路可编程LED半球。</li>
+            <li>偏振、多光谱、结构光/激光扫描。</li>
+            <li>NAS、工作站、暗室或移动采集架。</li>
+          </ul>
+          <p class="muted">目标：RTI、光度立体、BRDF、多光谱、偏振、3D融合和Web交付。</p>
+        </div>
+      </div>
+      <div class="wide-card">
+        <h3>推荐下单顺序</h3>
+        <ol>
+          <li>先买标定和稳定件：反光球、灰卡、色卡、比例尺、三脚架/翻拍架。</li>
+          <li>补微距能力：微距镜头或近摄方案。</li>
+          <li>搭建16路LED固定矩阵，先不要追求96路。</li>
+          <li>加入控制器和自动拍摄脚本，记录每次灯位和曝光。</li>
+          <li>实验稳定后再扩展到偏振、多光谱、3D扫描和NAS。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <h2>近期实验计划</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>实验A：官方样例闭环</h3>
+          <ul>
+            <li>下载CHI Fish Fossil 1000px样例。</li>
+            <li>RelightLab输出PTM/HSH/RBF和法线图。</li>
+            <li>RTIViewer/OpenLIME查看增强模式。</li>
+            <li>写实验日志：照片数、光照方向、输出格式、观察结果。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>实验B：自采刻痕板</h3>
+          <ul>
+            <li>用硬币、石片、手工刻痕板采集20-50张。</li>
+            <li>输出增强图、法线图、虚拟斜光图。</li>
+            <li>记录哪些角度能突出线刻，哪些产生伪影。</li>
+            <li>形成第一版采集SOP。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>实验C：固定光源矩阵</h3>
+          <ul>
+            <li>16路LED，固定灯位，自动逐灯拍摄。</li>
+            <li>保存lights.csv、capture.json和RAW。</li>
+            <li>用光度立体估计法线/高度。</li>
+            <li>和H-RTI手持光源结果对照。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>实验D：YOLO/SAM/IIML小闭环</h3>
+          <ul>
+            <li>选20-50张汉画像石公开图像。</li>
+            <li>标注伏羲女娲、乐舞人物、车马、神兽等。</li>
+            <li>用AnyLabeling或CVAT做bbox和polygon。</li>
+            <li>导出YOLO/COCO，再转IIML JSON-LD。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="gaps">
+      <h2>缺失资料与后续补齐清单</h2>
+      <p class="section-lead">这些不是失败项，而是下一轮资料补全任务。PDF下载失败时不要保留损坏文件，只记录网页、DOI和阅读笔记。</p>
+      <div class="checklist wide-card">
+        <ul>
+          <li>下载Malzbender 2001 PTM论文和PTM格式规范。</li>
+          <li>下载Earl 2010 Archaeological PTM PDF并做中文笔记。</li>
+          <li>补齐Han YOLO、Relic2Contour、点云线图、2026扩散线图PDF。</li>
+          <li>下载RelightLab 2026 Release或源码。</li>
+          <li>下载OpenLIME源码和2025论文PDF。</li>
+          <li>下载ImageJ Photometric Stereo Tools、near_ps、photometric_stereo。</li>
+          <li>下载AnyLabeling、CVAT或Label Studio中至少一个本地可运行工具。</li>
+          <li>整理河南汉画像石数据库字段和可引用规则。</li>
+          <li>整理史语所拓本典藏图像使用限制。</li>
+          <li>建立汉画像石本地词表并映射CIT/ICON/Wikidata。</li>
+          <li>制作第一块刻痕标定板。</li>
+          <li>建立`datasets/`目录规范，但不要把大图直接塞进Git。</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      本页面对应资料索引：<code>research-master-index-2026.csv</code>、<code>research-inventory-2026.csv</code>、<code>papers/README.md</code>、<code>repositories/README.md</code>、<code>09-hardware-purchase-list.md</code>。
+    </footer>
+  </main>
+</body>
+</html>
