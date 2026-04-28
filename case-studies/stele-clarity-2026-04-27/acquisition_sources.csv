@@ -1,0 +1,26 @@
+category,title,year,url,value
+RTI guide,RTI Guide to Highlight Image Capture - Cultural Heritage Imaging,2013,https://forums.culturalheritageimaging.org/topic/260-version-20-%E2%80%94-guide-to-highlight-image-capture-major-update/,多光照 RTI 采集实操指南；相机、光源、反光球、序列
+RTI field practice,The Application of Reflectance Transformation Imaging in Historical Archaeology,2018,https://link.springer.com/article/10.1007/s41636-018-0107-x,墓碑、器物、涂鸦等场景；说明 RTI 对细线和浅刻有效
+RTI graffiti,Application of RTI to ancient graffiti from Herculaneum,2018,https://www.sciencedirect.com/science/article/abs/pii/S2352409X16308136,古涂鸦案例；可远程复核和协作读字
+RTI overview,Reflectance Transformation Imaging chapter,2018,https://www.cambridge.org/core/books/digital-techniques-for-documenting-and-preserving-cultural-heritage/reflectance-transformation-imaging/7136BDF9246EF9DFB70A9A52E73BF973,解释 RTI 如何增强表面纹理和铭文可读性
+RTI software,relight GitHub,2020,https://github.com/cnr-isti-vclab/relight,创建和查看 RTI 的开源库
+RTI viewer,OpenLIME GitHub,2025,https://github.com/cnr-isti-vclab/openlime,Web 端 RTI/多光谱/多层高分辨图像查看与标注
+Photometric stereo,Photometric Stereo for Archeological Inscriptions,2002,https://vgl.ict.usc.edu/Research/Inscriptions/,直接面向考古铭文的多光照法线/形状恢复示例
+Photometric stereo,Streamlined Photometric Stereo Framework for Cultural Heritage,2015,https://compphotolab.northwestern.edu/project/a-streamlined-photometric-stereo-framework-for-cultural-heritage/,photometric stereo 与摄影测量融合，提高表面细节恢复
+Photometric stereo,PhotometricStereo dataset and papers hub,2026,https://photometricstereo.github.io/,光度立体资料、数据集和论文入口
+Photogrammetry guide,Photogrammetric Applications for Cultural Heritage - Historic England,2017,https://historicengland.org.uk/images-books/publications/photogrammetric-applications-for-cultural-heritage/,文化遗产摄影测量入门与规范
+Photogrammetry book,Photogrammetry for Archaeological Objects: A Manual,2024,https://sydneyuniversitypress.com/products/9781761540431,面向考古物件的摄影测量手册
+Photogrammetry software,COLMAP GitHub,2026,https://github.com/colmap/colmap,经典开源 SfM/MVS 软件；图形界面和命令行
+Photogrammetry software,Meshroom GitHub,2025,https://github.com/alicevision/meshroom,节点式开源 3D 重建流程；含 photometric stereo 节点
+Point cloud processing,CloudCompare GitHub,2026,https://github.com/CloudCompare/CloudCompare,点云和三角网格处理、配准、比较、测量
+Mesh processing,MeshLab GitHub,2025,https://github.com/cnr-isti-vclab/meshlab,网格清理、法线、曲率、渲染和格式转换
+3D cultural heritage,3D Recording Documentation and Management of Cultural Heritage,2014,https://www.whittlespublishing.com/3D_Recording_Documentation_and_Management_of_Cultural_Heritage,三维记录、管理和文化遗产数字化框架
+3D scanning guide,3D Scanning for Cultural Heritage Conservation - Factum Foundation,2025,https://www.factum-arte.com/resources/files/fa/reports_manuals/3d_Scan_Guide.pdf,文化遗产三维扫描快速指南
+3D analysis,GigaMesh publications,2025,https://gigamesh.eu/publications/,考古 3D 网格分析、楔形文字/刻痕提取等研究入口
+3D analysis,GigaMesh GitLab,2025,https://gitlab.com/tacume/GigaMesh,开源 3D 表面分析软件
+Digital rubbing,Digital stone rubbing from 3D models,2019,https://www.sciencedirect.com/science/article/pii/S1296207418304254,从 3D 模型生成数字拓片，增强铭文细节感知
+Digital rubbing,Research on extraction of inscription rubbings information based on 3D fine models,2025,https://www.nature.com/articles/s40494-025-01610-4,中文石刻 3D 精细模型数字拓片；非接触、可测量
+Low-cost 3D,Developing a low cost 3D imaging solution for inscribed stone surface analysis,2015,https://www.sciencedirect.com/science/article/pii/S0305440314003045,低成本 DSLR 摄影测量与激光扫描比较；AO 帮助识别刻字和风化
+3D web publishing,3DHOP,2026,https://www.3dhop.net/,面向文化遗产的 Web 3D 展示框架
+Point cloud web publishing,Potree GitHub,2023,https://github.com/potree/potree,大规模点云 WebGL 查看器
+Open access textbook,Digital Techniques for Documenting and Preserving Cultural Heritage,2017,https://tile.loc.gov/storage-services/master/gdc/gdcebookspublic/20/21/75/85/75/2021758575/2021758575.pdf,开放 PDF；涵盖 3D、RTI、摄影测量、结构光、多光谱等

@@ -1,0 +1,28 @@
+category,title,year,url,why_it_matters
+Stone inscription binarization,Unveiling Text in Challenging Stone Inscriptions: A Character-Context-Aware Patching Strategy for Binarization,2026,https://arxiv.org/abs/2601.03609,直接针对困难石刻图像的二值化与字符上下文切片策略
+Stone inscription binarization,ihdia/shilalekhya-binarization GitHub,2026,https://github.com/ihdia/shilalekhya-binarization,论文官方仓库；含 U-Net、训练、推理、数据切片脚本
+Chinese inscription restoration,Reproducing the Past: A Dataset for Benchmarking Inscription Restoration,2024,https://openreview.net/forum?id=EIhApjnzP5,中文碑刻拓片修复 benchmark；全局/局部扩散与领域知识
+Chinese inscription restoration,blackprotoss/CIRI GitHub,2024,https://github.com/blackprotoss/CIRI,CIRI 数据集申请与论文索引
+Chinese ancient character restoration,Towards Automated Chinese Ancient Character Restoration: DiffACR,2024,https://ojs.aaai.org/index.php/AAAI/article/view/28090,中文古代单字扩散修复；ARMCD 数据集
+Chinese ancient character restoration,lhl322001/DiffACR GitHub,2024,https://github.com/lhl322001/DiffACR,DiffACR 官方实现和数据说明
+Chinese inscription AI restoration,Chinese inscription restoration based on artificial intelligent models,2025,https://www.nature.com/articles/s40494-025-01900-x,NLP+CV 联合做中文碑刻缺字/残字修复
+Ancient character detection,Ancient character detection based on fine-grained density map,2025,https://www.nature.com/articles/s40494-025-01791-y,复杂噪声、小字符定位；适合逐字切分前置步骤
+Ancient Chinese OCR,HUNet: hierarchical universal network for multi-type ancient Chinese character recognition,2025,https://www.nature.com/articles/s40494-025-01813-9,多类型古汉字识别；含 MTACCR 数据集
+Ancient Chinese OCR,1602353775/HUNet GitHub,2025,https://github.com/1602353775/HUNet,HUNet 训练/ONNX 推理和数据申请说明
+Ancient Chinese OCR,AttGraph disentangling confusable ancient Chinese characters,2026,https://www.nature.com/articles/s40494-026-01710-1,易混古汉字识别与部件关联思路
+Ancient Chinese OCR,wtq123-git/AttGraph GitHub,2026,https://github.com/wtq123-git/AttGraph,AttGraph 代码和 MACR 数据/权重链接
+Document restoration,DocEnTr: An End-to-End Document Image Enhancement Transformer,2022,https://arxiv.org/abs/2201.10252,Transformer 文档增强/二值化；可作为非碑刻基线
+Document restoration,dali92002/DocEnTR GitHub,2022,https://github.com/dali92002/DocEnTR,DocEnTr 官方实现和预训练模型说明
+Document restoration,DocRes: A Generalist Model Toward Unifying Document Image Restoration Tasks,2024,https://arxiv.org/abs/2405.04408,统一去畸变、去阴影、增强、去模糊、二值化
+Document restoration,ZZZHANG-jx/DocRes GitHub,2024,https://github.com/ZZZHANG-jx/DocRes,DocRes 官方实现
+RTI acquisition,RTIViewer GitHub mirror,2015,https://github.com/bakulf/RTIViewer,RTI 文件查看工具；文化遗产常用
+RTI acquisition,cnr-isti-vclab/relight GitHub,2020,https://github.com/cnr-isti-vclab/relight,创建和可视化 RTI 的开源库
+RTI/multilayer viewer,cnr-isti-vclab/openlime GitHub,2025,https://github.com/cnr-isti-vclab/openlime,Web 端 RTI/多光谱/多层图像查看和标注
+Rock art enhancement,DStretch official site,2026,https://www.dstretch.com/,去相关拉伸增强岩画；可借鉴到颜色/材料差异明显的碑面
+OCR structure,PaddleOCR GitHub,2026,https://github.com/PaddlePaddle/PaddleOCR,图片/PDF 转 JSON/Markdown；支持 100+ 语言和 PP-OCRv5/PP-StructureV3
+OCR structure,PaddleOCR PP-StructureV3 docs,2026,https://www.paddleocr.ai/latest/en/version3.x/pipeline_usage/PP-StructureV3.html,版面分析、OCR、阅读顺序、Markdown/JSON/Word 输出与微调入口
+Text-level restoration,Ithaca: Restoring and attributing ancient texts using deep neural networks,2022,https://www.nature.com/articles/s41586-022-04448-z,铭文文本级恢复、年代/地域归属和人机协作范式
+Text-level restoration,google-deepmind/ithaca GitHub,2022,https://github.com/google-deepmind/ithaca,Ithaca 官方代码
+Agentic restoration,EpiAgent: An Agent-Centric System for Ancient Inscription Restoration,2026,https://arxiv.org/abs/2604.09367,CVPR 2026；LLM planner 协调多模态和修复工具
+Agentic restoration,blackprotoss/EpiAgent GitHub,2026,https://github.com/blackprotoss/EpiAgent,EpiAgent 仓库；截至 2026-04-27 基本为占位
+Historical document benchmark,MCHDoc: Multi-Carrier Chinese Historical Documents,2026,https://palm.seu.edu.cn/hxue/publications/MCHDoc%20A%20Comprehensive%20Benchmark%20for%20Reading%20Multi-Carrier%20Chinese%20Historical%20Documents.pdf,含碑刻等六类中文历史载体；支持识读和 LLM 后校正 benchmark

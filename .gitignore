@@ -1,1 +1,11 @@
 external/
+
+# Local case-study data. Keep raw photos and generated outputs local by default;
+# many files contain GPS overlays or are too large/noisy for the public repo.
+case-studies/stele-clarity-2026-04-27/inputs/*
+!case-studies/stele-clarity-2026-04-27/inputs/README.md
+case-studies/stele-clarity-2026-04-27/outputs/*
+!case-studies/stele-clarity-2026-04-27/outputs/README.md
+
+__pycache__/
+*.pyc

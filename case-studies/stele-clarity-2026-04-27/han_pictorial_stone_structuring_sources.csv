@@ -1,0 +1,19 @@
+category,title,year,url,value
+Han object detection,Human figure detection in Han portrait stone images via enhanced YOLO-v5,2024,https://www.nature.com/articles/s40494-024-01232-2,直接面向汉画像石人物检测；讨论复杂背景、小目标、密集目标和人工标注数据集
+Han 3D digitization,3D Digital Modeling as a Sustainable Conservation and Revitalization Path for the Cultural Heritage of Han Dynasty Stone Reliefs,2023,https://www.mdpi.com/2071-1050/15/16/12487,南阳/武梁祠画像石 3D 建模工作流；强调表面线条、深度、尺寸和展示利用
+Han iconography,Tomb Rituals in Han Dynasty Pictorial Stone Reliefs: Depictions of Historical Figures,2026,https://www.mdpi.com/2077-1444/17/4/470,图像题材、墓葬仪式、历史人物和超越/升仙语境分析
+Han image theme,Exploration and Research of Music Image in Anhui Han Stone Sculpture,2023,https://www.maajournal.com/index.php/maa/article/view/1138,乐舞/音乐图像的题材分析；适合作为主题词表样例
+Han digital archive,徐州汉画像石数字博物馆的建设与构思,2021,https://m.fx361.com/news/2021/0308/18453599.html,讨论徐州汉画像石资料零散和数据库/数字博物馆建设需求
+Han digital archive,徐州：数字化保护 让2000年前汉画像石“活”起来,2022,https://jsnews.jschina.com.cn/xz/a/202206/t20220606_3013363.shtml,报道汉画像石数字化资料库建设；提到百万字资料库
+Han digital archive,国家版本馆与徐州合作推动汉画像石数字化活化利用,2025,https://paper.people.com.cn/rmrb/pc/content/202511/12/content_30114448.html,徐州汉画像石数字化成果入藏和共享利用趋势
+Cultural heritage KG,Using knowledge graphs and deep learning algorithms to enhance digital cultural heritage management,2023,https://www.nature.com/articles/s40494-023-01042-y,知识图谱+深度学习管理文化遗产数据的通用参考
+Image annotation standard,Annotating Cultural Heritage via IIIF,2021,https://training.iiif.io/annotations/,IIIF + Web Annotation 图像区域标注入门
+Image interoperability,IIIF official site,2026,https://iiif.io/,文化遗产高清图像发布、Manifest、标注、互操作标准
+Iconography standard,Iconclass,2026,https://iconclass.org/,艺术史图像题材分类方法，可借鉴建立汉画像石题材词表
+CIDOC CRM,CIDOC CRM recommendation for museums,2026,https://cidoc-crm.org/recommendation-for-museums,博物馆/文化遗产语义建模基础
+Scene graph,Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations,2016,https://arxiv.org/abs/1602.07332,图像对象-关系-属性结构化的经典数据集与思路
+Scene graph,Scene Graph Representation and Learning,2019,https://cs.stanford.edu/people/ranjaykrishna/sgrl/index.html,场景图用于图像检索、问答、描述和关系建模
+Iconographic KG,IICONGRAPH: improved Iconographic and Iconological Statements in Knowledge Graphs,2024,https://arxiv.org/abs/2402.00048,图像志/图像学陈述进入知识图谱的参考
+Annotation tool,VGG Image Annotator,2026,https://robots.ox.ac.uk/~vgg/software/via/,轻量本地图像标注工具；适合小团队起步
+Annotation tool,Label Studio,2026,https://labelstud.io/,开源数据标注平台，支持图像框、多边形、多模态和人机协同
+Annotation tool,CVAT,2026,https://www.cvat.ai/,开源计算机视觉标注工具，适合目标检测/分割数据集
