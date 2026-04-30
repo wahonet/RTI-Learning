@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05 梯度、法线和高度图</title>
+  <style>
+:root { --bg:#f6f1e9; --paper:#fffdf8; --ink:#26231f; --muted:#6b645d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f1e7da; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--accent2); text-underline-offset:3px; }
+main { max-width:1060px; margin:0 auto; padding:28px 18px 60px; }
+.hero { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:18px; }
+h1 { font-size:34px; line-height:1.15; margin:0 0 10px; letter-spacing:0; }
+h2 { color:var(--accent2); font-size:22px; margin:26px 0 10px; letter-spacing:0; }
+h3 { color:#4d5f9f; font-size:17px; margin:0 0 5px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.card,.section,.formula { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.badge { display:inline-block; border:1px solid var(--line); border-radius:5px; padding:2px 8px; color:var(--muted); background:var(--soft); font-size:13px; margin-right:6px; }
+.formula { background:#fff6e5; border-color:#e5d4ab; }
+code { background:#f3eadc; padding:1px 4px; border-radius:4px; }
+nav { display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
+nav a { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:7px 10px; text-decoration:none; color:var(--ink); }
+@media (max-width:640px){ main{padding:20px 14px 42px;} nav{flex-direction:column;} }
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p><span class="badge">多元微积分</span><span class="badge">中文数学基础</span></p>
+      <h1>05 梯度、法线和高度图</h1>
+      <p>高度图可以看成 z=h(x,y)。梯度描述这个表面往 x 和 y 方向怎么倾斜，法线和梯度紧密相关。</p>
+      <p><a href="index.html">返回数学课索引</a> · <a href="../README.md">数学资料说明</a></p>
+    </header>
+    <section class="section"><h3>高度图是什么</h3><p>高度图把每个像素对应一个高度值。灰度越亮可以代表越高，越暗代表越低，具体取决于编码。</p></section><section class="section"><h3>偏导是什么</h3><p>偏导描述函数沿某一个方向变化多快。∂h/∂x 是横向坡度，∂h/∂y 是纵向坡度。</p></section><section class="section"><h3>梯度是什么</h3><p>梯度把两个方向的坡度合在一起，告诉你表面往哪里升得最快。</p></section><section class="section"><h3>法线和梯度</h3><p>如果知道表面坡度，就能算表面法线；反过来，如果知道法线，也可以尝试积分恢复高度。</p></section><section class="section"><h3>为什么积分有风险</h3><p>从局部方向恢复整体高度会累积误差。RTI 法线积分出来的高度图不能直接当真值，必须验证。</p></section>
+    <section class="formula">
+      <h2>公式怎么读</h2>
+      <p><code>z = h(x, y),  gradient = (∂h/∂x, ∂h/∂y)</code></p>
+      <p>读成：高度 z 是位置 x,y 的函数；梯度描述这个高度函数在两个方向上的坡度。</p>
+    </section>
+    <nav><a href="04-matrices-photometric-stereo.html">上一课</a><a href="index.html">索引</a><a href="06-loss-optimization-ai.html">下一课</a></nav>
+  </main>
+</body>
+</html>

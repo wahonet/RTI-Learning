@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>08 读论文公式的四步法</title>
+  <style>
+:root { --bg:#f6f1e9; --paper:#fffdf8; --ink:#26231f; --muted:#6b645d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f1e7da; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--accent2); text-underline-offset:3px; }
+main { max-width:1060px; margin:0 auto; padding:28px 18px 60px; }
+.hero { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:18px; }
+h1 { font-size:34px; line-height:1.15; margin:0 0 10px; letter-spacing:0; }
+h2 { color:var(--accent2); font-size:22px; margin:26px 0 10px; letter-spacing:0; }
+h3 { color:#4d5f9f; font-size:17px; margin:0 0 5px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.card,.section,.formula { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.badge { display:inline-block; border:1px solid var(--line); border-radius:5px; padding:2px 8px; color:var(--muted); background:var(--soft); font-size:13px; margin-right:6px; }
+.formula { background:#fff6e5; border-color:#e5d4ab; }
+code { background:#f3eadc; padding:1px 4px; border-radius:4px; }
+nav { display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
+nav a { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:7px 10px; text-decoration:none; color:var(--ink); }
+@media (max-width:640px){ main{padding:20px 14px 42px;} nav{flex-direction:column;} }
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p><span class="badge">论文阅读方法</span><span class="badge">中文数学基础</span></p>
+      <h1>08 读论文公式的四步法</h1>
+      <p>看到公式不要慌。先找输入、未知量、误差、输出。大多数RTI和AI论文公式都能这样拆。</p>
+      <p><a href="index.html">返回数学课索引</a> · <a href="../README.md">数学资料说明</a></p>
+    </header>
+    <section class="section"><h3>第一步：找输入</h3><p>输入可能是照片、光照方向、像素坐标、点云、文本提示、已有线图。</p></section><section class="section"><h3>第二步：找未知量</h3><p>未知量可能是 PTM 系数、表面法线、高度、神经网络参数、目标框。</p></section><section class="section"><h3>第三步：找误差</h3><p>论文会定义预测和真实之间的差。看懂误差，就看懂模型在努力优化什么。</p></section><section class="section"><h3>第四步：找输出</h3><p>输出可能是 RTI 文件、法线图、高度图、线图、聚类结果或标注候选。</p></section><section class="section"><h3>别被符号吓住</h3><p>同一个概念不同论文符号可能不同。你要先翻译成中文动作，再回头看符号。</p></section>
+    <section class="formula">
+      <h2>公式怎么读</h2>
+      <p><code>input -&gt; model -&gt; output -&gt; error -&gt; update</code></p>
+      <p>把复杂公式先读成流程图，这是最稳的入门方式。</p>
+    </section>
+    <nav><a href="07-calculus-roadmap.html">上一课</a><a href="index.html">索引</a><span></span></nav>
+  </main>
+</body>
+</html>

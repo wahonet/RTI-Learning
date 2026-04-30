@@ -13,8 +13,8 @@
 ### 1. 校准光度立体
 
 先读：
-- `../papers/18_DiLiGenT_Pi_Photometric_Stereo_Near_Planar_Rich_Details_ICCV2023.pdf`
-- `../papers/09_Photometric_Stereo_3D_Reconstruction_Artworks.pdf`
+- `../papers/reading/04-photometric-stereo/18-DiLiGenT_Pi_Photometric_Stereo/18-DiLiGenT_Pi_Photometric_Stereo.pdf`
+- `../papers/reading/04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf`
 
 要理解：
 - 为什么“近似平面 + 丰富细节”正好对应碑刻、甲骨、汉画像石。
@@ -29,7 +29,7 @@
 ### 2. MLIC和BRDF/法线优化
 
 先读：
-- `../papers/19_BRDF_Monotonicity_Shading_Normals_MLIC_GCH2024.pdf`
+- `../papers/reading/05-frontier-reflectance-imaging/19-BRDF_Monotonicity_Shading_Normals/19-BRDF_Monotonicity_Shading_Normals.pdf`
 
 要理解：
 - MLIC就是多光照图像集合，是传统RTI、光度立体、BRDF估计的共同数据底座。
@@ -43,7 +43,7 @@
 ### 3. 多光谱/高光谱RTI
 
 先读：
-- `../papers/22_Multispectral_RTI_Integrated_Angular_Spectral_Reflectance.pdf`
+- `../papers/reading/05-frontier-reflectance-imaging/22-Multispectral_RTI_Framework/22-Multispectral_RTI_Framework.pdf`
 
 要理解：
 - RTI主要看几何纹理，多光谱看材料和波段差异。
@@ -57,8 +57,8 @@
 ### 4. 偏振成像
 
 先读：
-- `../papers/20_Shape_From_Polarization_Cultural_Heritage_2024.pdf`
-- `../papers/21_Polarization_UNet_Surface_Normal_2024.pdf`
+- `../papers/reading/05-frontier-reflectance-imaging/20-Shape_From_Polarization_Heritage/20-Shape_From_Polarization_Heritage.pdf`
+- `../papers/reading/05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal.pdf`
 
 要理解：
 - 偏振信息能帮助估计表面法线。

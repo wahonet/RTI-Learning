@@ -126,9 +126,9 @@
 ## 7. 本课阅读任务
 
 阅读：
-- `../papers/01_CHI_RTI_Highlight_Capture_Guide.pdf`
-- `../papers/17_Tutorial_Installing_RTIViewer_RTIBuilder.pdf`
-- `../papers/15_CHI_RTIViewer_User_Guide_v1_1.pdf`
+- `../papers/reading/01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.pdf`
+- `../papers/reading/01-rti-ptm-foundations/17-Installing_RTIViewer_RTIBuilder/17-Installing_RTIViewer_RTIBuilder.pdf`
+- `../papers/reading/01-rti-ptm-foundations/15-CHI_RTIViewer_User_Guide/15-CHI_RTIViewer_User_Guide.pdf`
 
 实践准备：
 - 找一个硬币或刻字物体。

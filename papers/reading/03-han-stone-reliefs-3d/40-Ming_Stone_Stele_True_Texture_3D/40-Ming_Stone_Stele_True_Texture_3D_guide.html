@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>明代石碑高精度真实纹理三维建模应用 精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; overflow:auto; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../39-Han_Dynasty_Stone_Images_3D_Vision/39-Han_Dynasty_Stone_Images_3D_Vision_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../../07-hardware-rti-systems/41-Arduino_Controlled_RTI_45_LED_Dome/41-Arduino_Controlled_RTI_45_LED_Dome_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文来源入口</div>
+        <h1>明代石碑高精度真实纹理三维建模应用</h1>
+        <span class="badge">40</span><span class="badge">中文石碑三维建模</span><span class="badge">2021</span>
+      </div>
+      <div class="source-box">
+        <h2>原文入口 / PDF待补</h2>
+        <p>本条目可读取网页摘要、关键词和中英文题名，暂未归档 PDF。来源页标题为“明代石碑高精度真实纹理三维建模应用”。</p>
+        <ul>
+          <li><a href="http://tb.chinasmp.com/CN/10.13474/j.cnki.11-2246.2021.0184">测绘通报论文页</a></li>
+          <li>DOI：10.13474/j.cnki.11-2246.2021.0184</li>
+          <li>主索引条目：P15</li>
+        </ul>
+        <h2>关键词</h2>
+        <p>三维激光扫描、高精度、三维建模、纹理映射。英文关键词对应 3D laser scanning、high-precision、3D modeling、texture mapping。</p>
+      </div>
+      <p class="note">说明：本页依据公开来源页做中文学习导读，后续拿到全文再扩展为逐页版。</p>
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>40 · 明代石碑高精度真实纹理三维建模</h1>
+      <p>这篇不是 RTI 论文，但非常适合补项目的“整体三维采集”路线：它关注石碑这类中尺度文物的高精度几何和真实纹理，而 RTI 更关注浅表面细节的重打光阅读。</p>
+
+      <div class="para">
+        <p class="where">标题段 · 真实纹理三维建模</p>
+        <p>“真实纹理”说明作者不仅要几何模型，还要把照片纹理准确贴回三维表面。对碑刻/画像石来说，几何决定尺度和形体，纹理决定文字、图案、风化痕迹和颜色信息。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第1层 · 解决精细化文物三维测绘难题</p>
+        <p>公开摘要的出发点是：精细文物建模很难同时保证精度、完整性和纹理真实。你可以把它理解为三类误差：几何漏扫、纹理错位、细节不够。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第2层 · 手持式高精度三维激光扫描</p>
+        <p>手持扫描适合有一定体量、无法搬动的对象。和固定相机 RTI 相比，它更强调空间点云和表面网格；和近景摄影测量相比，它直接测量几何，对弱纹理或重复纹理对象可能更稳。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第3层 · 三角测量、激光测量、近景摄影测量、自定位</p>
+        <p>这几个词可以拆开读：三角测量用角度关系求位置；激光测量提供距离/点云；近景摄影测量提供纹理和辅助几何；自定位解决扫描仪移动时“我在哪里”的问题。它们合起来构成可移动扫描系统。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第4层 · 复杂纹理和复杂雕刻</p>
+        <p>石碑和画像石的难点不是“有没有形状”，而是细节层级很多：整体碑身、边框、浅刻线、风化凹坑、拓片痕迹、颜料或污渍。三维扫描负责大尺度和中尺度，RTI/光度立体负责浅表面阅读。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第5层 · 技术流程总结</p>
+        <p>这篇对本项目最有用的不是某个单一算法，而是流程意识：采集前规划、扫描路径、纹理拍摄、点云拼接、网格生成、纹理映射、精度检查、成果归档。后续实验目录应该按这个流程留字段。</p>
+      </div>
+
+      <div class="math">
+        <p><strong>数学补课：</strong><a href="../../../../math-foundations/html/04-matrices-photometric-stereo.html">矩阵和三维重建</a>，再看 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、坐标和方向</a>。</p>
+        <p>这里的数学核心是坐标系、点云、刚体变换、配准和误差。不要一开始就钻公式，先弄清“扫描仪坐标、对象坐标、相机坐标”之间怎么转换。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul>
+          <li>把它作为石碑/画像石“整体三维建模”的参考，和局部 RTI 互补。</li>
+          <li>数据规范中应区分 mesh、texture、RTI、normal map、digital rubbing。</li>
+          <li>采集验证应同时记录几何精度、纹理清晰度、刻线可读性。</li>
+        </ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul>
+        <li>在 `datasets/` 里设计一个石碑三维模型元数据模板。</li>
+        <li>把 RTI 局部区域和三维模型坐标关联起来。</li>
+        <li>给“真实纹理”制定检查项：是否错位、是否过曝、是否遮挡、是否能回溯到原照片。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

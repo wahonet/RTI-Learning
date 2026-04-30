@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF 精确联动阅读器</title>
+  <style>
+:root { --bg:#d8d2c8; --paper:#fffdf8; --ink:#24211d; --line:#d7cbbd; --accent:#9b3f2c; --green:#246b61; --blue:#2f5f8f; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.68; }
+a { color:var(--green); text-underline-offset:3px; }
+.topbar { position:sticky; top:0; z-index:20; display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; padding:10px 18px; background:rgba(216,210,200,.94); border-bottom:1px solid rgba(0,0,0,.08); backdrop-filter:blur(8px); }
+.topbar a,.topbar button,.topbar select { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.topbar .center { text-align:center; }
+.topbar .right { text-align:right; }
+.reader { width:min(1880px, calc(100vw - 28px)); margin:14px auto 24px; display:grid; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); gap:12px; align-items:start; }
+.pane { background:var(--paper); border:1px solid var(--line); border-radius:8px; box-shadow:0 14px 38px rgba(0,0,0,.14); overflow:hidden; }
+.left { position:sticky; top:64px; height:calc(100vh - 82px); display:grid; grid-template-rows:auto 1fr auto; }
+.head { padding:14px 18px 12px; border-bottom:1px solid var(--line); background:#fffaf1; }
+.label { color:var(--accent); font-weight:800; font-size:13px; }
+h1 { margin:4px 0 8px; font-size:24px; line-height:1.2; letter-spacing:0; }
+p { margin:0 0 10px; }
+.note { color:#6b645d; font-size:13px; }
+.stage { position:relative; min-height:0; overflow:auto; background:#2f2f2f; display:flex; align-items:flex-start; justify-content:center; padding:18px; }
+.page-wrap { position:relative; flex:0 0 auto; background:white; box-shadow:0 8px 24px rgba(0,0,0,.32); }
+canvas { display:block; }
+.overlay { position:absolute; inset:0; pointer-events:none; z-index:3; }
+.hotspot { position:absolute; border:2px solid transparent; border-radius:4px; background:rgba(255,213,79,0); transition:background .14s ease,border-color .14s ease,box-shadow .14s ease; pointer-events:auto; cursor:pointer; }
+.hotspot.active,.hotspot:hover { border-color:rgba(155,63,44,.9); background:rgba(255,213,79,.28); box-shadow:0 0 0 9999px rgba(0,0,0,.06); }
+.tools { display:flex; flex-wrap:wrap; gap:8px; padding:10px 14px; border-top:1px solid var(--line); background:#fffaf1; }
+.tools button { border:1px solid var(--line); border-radius:5px; padding:5px 9px; background:white; font:inherit; }
+.right { max-height:calc(100vh - 82px); overflow:auto; padding:18px 22px 34px; }
+.sentence { border:1px solid var(--line); border-radius:8px; padding:11px 13px; margin:9px 0; background:#fffaf1; transition:background .14s ease,border-color .14s ease,box-shadow .14s ease; }
+.sentence.active,.sentence:hover { background:#fff2c8; border-color:#c7833a; box-shadow:0 6px 18px rgba(120,74,28,.12); }
+.sentence .tag { font-weight:800; color:var(--blue); margin-bottom:5px; }
+.sentence .text { color:#4b443d; font-size:14px; }
+.translation { margin-top:7px; color:#1f4f47; font-weight:650; }
+.empty { border:1px dashed var(--line); background:#fffaf1; border-radius:8px; padding:12px 14px; }
+@media screen and (max-width:1160px) { .reader{grid-template-columns:1fr;} .left{position:relative; top:0; height:76vh;} .right{max-height:none;} .topbar{grid-template-columns:1fr;} .topbar .center,.topbar .right{text-align:left;} }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div><a href="index.html">返回论文索引</a></div>
+    <div class="center">
+      <button id="prevPage">上一页</button>
+      <select id="pageSelect"></select>
+      <button id="nextPage">下一页</button>
+    </div>
+    <div class="right"><a id="pdfLink" target="_blank">打开 PDF</a></div>
+  </nav>
+  <main class="reader">
+    <section class="pane left">
+      <div class="head">
+        <div class="label">左侧 · PDF.js 坐标高亮层</div>
+        <h1 id="title">PDF 精确联动阅读器</h1>
+        <p class="note">鼠标放到右侧句子，左侧 PDF 对应句子会高亮；鼠标放到左侧高亮句，右侧句子会滚动并高亮。</p>
+      </div>
+      <div class="stage" id="stage">
+        <div class="page-wrap" id="pageWrap">
+          <canvas id="pdfCanvas"></canvas>
+          <div class="overlay" id="overlay"></div>
+        </div>
+      </div>
+      <div class="tools">
+        <button id="fitWidth">适合宽度</button>
+        <button id="zoomIn">放大</button>
+        <button id="zoomOut">缩小</button>
+      </div>
+    </section>
+    <section class="pane right" id="rightPane">
+      <div class="label">右侧 · 句子定位与译读</div>
+      <h1 id="rightTitle">正在载入...</h1>
+      <div id="sentences" class="empty">正在从 PDF 抽取文字坐标...</div>
+    </section>
+  </main>
+  <script type="module">
+import * as pdfjsLib from './vendor/pdfjs/pdf.mjs';
+pdfjsLib.GlobalWorkerOptions.workerSrc = './vendor/pdfjs/pdf.worker.mjs';
+
+const params = new URLSearchParams(location.search);
+const pdfUrl = params.get('pdf') || '02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.pdf';
+const title = params.get('title') || 'PDF 精确联动阅读器';
+const dataUrl = params.get('data');
+const back = params.get('back');
+document.getElementById('title').textContent = title;
+document.getElementById('rightTitle').textContent = title;
+document.getElementById('pdfLink').href = pdfUrl;
+if (back) document.querySelector('.topbar a').href = back;
+
+let doc, pageNo = +(params.get('page') || 1), scale = 1.75;
+let currentSentences = [];
+let guideData = null;
+
+function setActive(id, shouldScroll=false) {
+  document.querySelectorAll('[data-target]').forEach(el => el.classList.toggle('active', el.dataset.target === id));
+  if (shouldScroll) {
+    const card = document.querySelector('.sentence[data-target="' + id + '"]');
+    if (card) card.scrollIntoView({ block:'center', behavior:'smooth' });
+  }
+}
+
+function wireSync(root=document) {
+  root.querySelectorAll('[data-target]').forEach(el => {
+    if (el.dataset.ready) return;
+    el.dataset.ready = '1';
+    const id = el.dataset.target;
+    const fromPdf = el.classList.contains('hotspot');
+    el.addEventListener('mouseenter', () => setActive(id, fromPdf));
+    el.addEventListener('focus', () => setActive(id, fromPdf));
+    el.addEventListener('click', () => setActive(id, true));
+  });
+}
+
+function sentenceRanges(text) {
+  const ranges = [];
+  const re = /[^.!?。！？]+[.!?。！？]/g;
+  let match;
+  while ((match = re.exec(text))) ranges.push({ start: match.index, end: re.lastIndex, text: match[0].trim() });
+  return ranges;
+}
+
+function rectsForRange(charBoxes, start, end) {
+  const rects = [];
+  for (const box of charBoxes) {
+    const a = Math.max(start, box.start), b = Math.min(end, box.end);
+    if (a >= b) continue;
+    const ratioA = (a - box.start) / Math.max(1, box.end - box.start);
+    const ratioB = (b - box.start) / Math.max(1, box.end - box.start);
+    rects.push({ x: box.x + box.w * ratioA, y: box.y - box.h, w: box.w * (ratioB - ratioA), h: box.h * 1.35 });
+  }
+  return rects;
+}
+
+function addHotspots(rects, id, overlay) {
+  for (const r of rects) {
+    const el = document.createElement('div');
+    el.className = 'hotspot';
+    el.dataset.target = id;
+    el.style.left = `${r.x * scale}px`;
+    el.style.top = `${r.y * scale}px`;
+    el.style.width = `${Math.max(8, r.w * scale)}px`;
+    el.style.height = `${Math.max(10, r.h * scale)}px`;
+    overlay.appendChild(el);
+  }
+}
+
+function fallbackTranslation(page, index) {
+  return `译读待补：第 ${page} 页第 ${index + 1} 句。请先用左侧高亮定位原文；后续会为这一句补直译、顺译、词组拆解和项目解释。`;
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+}
+
+function renderGuideCardsForPage(page, boxes) {
+  const cards = (guideData?.cards || []).filter(card => Number(card.page) === page);
+  if (!cards.length) return false;
+  const sentencesEl = document.getElementById('sentences');
+  sentencesEl.className = '';
+  sentencesEl.innerHTML = cards.map(card => {
+    const id = escapeHtml(card.id);
+    return `<section class="sentence" tabindex="0" data-target="${id}">
+      <div class="tag">${escapeHtml(card.tag || `第 ${page} 页译读`)}</div>
+      ${card.literal ? `<div class="text"><strong>定位：</strong>${escapeHtml(card.literal)}</div>` : ''}
+      ${card.natural ? `<div class="translation"><strong>中文导读：</strong>${escapeHtml(card.natural)}</div>` : ''}
+      ${card.note ? `<div class="text"><strong>词组/概念：</strong>${escapeHtml(card.note)}</div>` : ''}
+    </section>`;
+  }).join('');
+  const fullModel = makeModelFromBoxes(boxes);
+  for (const card of cards) {
+    const start = Math.max(1, Number(card.start || 1));
+    const end = Math.max(start, Number(card.end || start));
+    const rangeStart = fullModel.ranges[start - 1]?.start ?? 0;
+    const rangeEnd = fullModel.ranges[end - 1]?.end ?? fullModel.text.length;
+    addHotspots(rectsForRange(fullModel.charBoxes, rangeStart, rangeEnd), card.id, document.getElementById('overlay'));
+  }
+  return true;
+}
+
+function makeModelFromBoxes(boxes) {
+  let text = '';
+  const charBoxes = [];
+  for (const box of boxes) {
+    const addSpace = text && !/[\s(]$/.test(text) && !/^[,.;:)]/.test(box.text);
+    if (addSpace) text += ' ';
+    const start = text.length;
+    text += box.text;
+    charBoxes.push({ ...box, start, end:text.length });
+  }
+  return { text, charBoxes, ranges: sentenceRanges(text) };
+}
+
+async function renderPage() {
+  const page = await doc.getPage(pageNo);
+  const stage = document.getElementById('stage');
+  const baseViewport = page.getViewport({ scale: 1 });
+  const viewport = page.getViewport({ scale });
+  const canvas = document.getElementById('pdfCanvas');
+  const overlay = document.getElementById('overlay');
+  const wrap = document.getElementById('pageWrap');
+  canvas.width = Math.floor(viewport.width);
+  canvas.height = Math.floor(viewport.height);
+  canvas.style.width = `${canvas.width}px`;
+  canvas.style.height = `${canvas.height}px`;
+  wrap.style.width = canvas.style.width;
+  wrap.style.height = canvas.style.height;
+  overlay.style.width = canvas.style.width;
+  overlay.style.height = canvas.style.height;
+  overlay.innerHTML = '';
+  await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+  const textContent = await page.getTextContent();
+  const boxes = [];
+  for (const item of textContent.items) {
+    if (!item.str.trim()) continue;
+    const tx = pdfjsLib.Util.transform(baseViewport.transform, item.transform);
+    boxes.push({ text:item.str, x:tx[4], y:tx[5], w:item.width, h:item.height || 10 });
+  }
+  if (renderGuideCardsForPage(pageNo, boxes)) {
+    document.getElementById('pageSelect').value = pageNo;
+    wireSync();
+    return;
+  }
+  const model = makeModelFromBoxes(boxes);
+  currentSentences = model.ranges.slice(0, 80);
+  const sentencesEl = document.getElementById('sentences');
+  sentencesEl.className = '';
+  sentencesEl.innerHTML = currentSentences.map((s, i) => {
+    const id = `p${pageNo}-s${i + 1}`;
+    const escaped = escapeHtml(s.text);
+    const translation = fallbackTranslation(pageNo, i);
+    return `<section class="sentence" tabindex="0" data-target="${id}"><div class="tag">第 ${pageNo} 页 · 第 ${i + 1} 句</div><div class="text">${escaped}</div><div class="translation">${translation}</div></section>`;
+  }).join('') || '<div class="empty">本页未抽取到可用文本，可能是扫描图像页。</div>';
+  currentSentences.forEach((s, i) => addHotspots(rectsForRange(model.charBoxes, s.start, s.end), `p${pageNo}-s${i + 1}`, overlay));
+  document.getElementById('pageSelect').value = pageNo;
+  wireSync();
+}
+
+async function init() {
+  if (dataUrl) {
+    try {
+      guideData = await fetch(dataUrl, { cache: 'no-store' }).then(response => {
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+        return response.json();
+      });
+      if (guideData.title) {
+        document.getElementById('title').textContent = guideData.title;
+        document.getElementById('rightTitle').textContent = guideData.title;
+      }
+    } catch (error) {
+      console.warn('guide data load failed', error);
+    }
+  }
+  doc = await pdfjsLib.getDocument(pdfUrl).promise;
+  const pageSelect = document.getElementById('pageSelect');
+  pageSelect.innerHTML = Array.from({ length: doc.numPages }, (_, i) => `<option value="${i + 1}">第 ${i + 1} / ${doc.numPages} 页</option>`).join('');
+  pageSelect.addEventListener('change', () => { pageNo = +pageSelect.value; renderPage(); });
+  document.getElementById('prevPage').onclick = () => { if (pageNo > 1) { pageNo--; renderPage(); } };
+  document.getElementById('nextPage').onclick = () => { if (pageNo < doc.numPages) { pageNo++; renderPage(); } };
+  document.getElementById('fitWidth').onclick = async () => {
+    const page = await doc.getPage(pageNo);
+    const vp = page.getViewport({ scale:1 });
+    scale = Math.max(1, Math.min(3, (document.getElementById('stage').clientWidth - 46) / vp.width));
+    renderPage();
+  };
+  document.getElementById('zoomIn').onclick = () => { scale = Math.min(3.5, scale + .2); renderPage(); };
+  document.getElementById('zoomOut').onclick = () => { scale = Math.max(.8, scale - .2); renderPage(); };
+  document.getElementById('fitWidth').click();
+}
+
+init().catch(err => {
+  document.getElementById('sentences').textContent = 'PDF 联动阅读器载入失败：' + err.message;
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photometric Stereo Techniques for the 3D Reconstruction of Paintings and Drawings Through the Measurement of Custom-Built Repro Stands 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../../02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <a href="../../interactive-reader.html?pdf=04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf&title=Photometric%20Stereo%20Techniques%20for%20the%203D%20Reconstruction%20of%20Paintings%20and%20Drawings&back=04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks_guide.html&data=04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.json">精确联动阅读</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../../03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>Photometric Stereo Techniques for the 3D Reconstruction of Paintings and Drawings Through the Measurement of Custom-Built Repro Stands</h1>
+        <span class="badge">09</span><span class="badge">光度立体</span><span class="badge">2025</span>
+      </div>
+      
+      <object class="pdf-frame" data="09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <div class="source-box">
+          <p>当前浏览器无法内嵌 PDF，请通过下方入口打开原文。</p>
+          <ul><li><a href="09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf">PDF</a></li></ul>
+        </div>
+      </object>
+      <p class="note">左侧嵌入本地 PDF；右侧按段落组中文讲解，不复制论文长段原文。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>Photometric Stereo Techniques for the 3D Reconstruction of Paintings and Drawings Through the Measurement of Custom-Built Repro Stands</h1>
+      <p>这篇强调光度立体的关键不只是多拍几盏灯，而是精确测量相机、灯位和采集平面，才能稳定恢复法线和三维形状。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>光度立体</strong>，核心问题是“绘画、纸本和浅表面文物有细微起伏，普通摄影测量难以恢复。光度立体能估计像素级表面方向，但灯位误差、阴影、非朗伯反射和积分误差会影响结果。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>绘画、纸本和浅表面文物有细微起伏，普通摄影测量难以恢复。光度立体能估计像素级表面方向，但灯位误差、阴影、非朗伯反射和积分误差会影响结果。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>构建水平/垂直 repro stand，固定相机、对象和多个光源。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>测量 LED、相机传感器和对象平面的几何关系，用于光源标定。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>采集多光照照片，估计法线图，再通过法线积分生成三维网格或高度图。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 4</p><p>用图像处理和离群值控制减轻阴影、高光和非朗伯表面的影响。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · photometric stereo</p><p>光度立体。用同一视角、不同光照下的亮度变化估计表面法线。</p></div><div class="para"><p class="where">核心概念 · Lambertian assumption</p><p>朗伯假设：表面亮度只与入射光和法线夹角有关，不考虑镜面高光。真实文物常常不完全满足。</p></div><div class="para"><p class="where">核心概念 · 法线图</p><p>每个像素的表面方向图。它比普通灰度图更接近几何信息，是数字拓片和虚拟斜光的基础。</p></div><div class="para"><p class="where">核心概念 · 法线积分</p><p>把局部方向整合成高度或深度。积分会积累误差，尤其低频形状容易漂移。</p></div><div class="para"><p class="where">核心概念 · repro stand</p><p>翻拍架/复制架。这里不仅是支架，而是可测量、可复现的采集几何系统。</p></div><div class="para"><p class="where">核心概念 · 灯位标定</p><p>记录每个 LED 相对对象的位置和方向。灯位错了，法线估计就会系统性偏差。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> · <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积、夹角和斜光</a> · <a href="../../../../math-foundations/html/03-least-squares-fitting.html">最小二乘和拟合</a> · <a href="../../../../math-foundations/html/05-gradient-normal-height.html">梯度、法线和高度图</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>把项目从 H-RTI 入门推进到固定光源矩阵和法线/高度输出。</li><li>直接指导 16/32 路 LED 灯阵、`lights.csv` 和标定流程设计。</li><li>为微痕、刻痕板、数字拓片建立更可测量的技术路线。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>设计本项目固定光源矩阵 `lights.csv` 字段。</li><li>做硬币/刻痕板 8、16、32 灯对比实验。</li><li>在 `docs/05-validation-indexes/14-validation-and-risk-checklist.md` 中加入光度立体标定误差检查。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

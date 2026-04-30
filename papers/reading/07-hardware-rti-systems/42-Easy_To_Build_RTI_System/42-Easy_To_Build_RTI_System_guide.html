@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>An Easy To Build RTI System 精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../41-Arduino_Controlled_RTI_45_LED_Dome/41-Arduino_Controlled_RTI_45_LED_Dome_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <a href="../../interactive-reader.html?pdf=07-hardware-rti-systems/42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System.pdf&title=An%20Easy%20To%20Build%20Reflectance%20Transformation%20Imaging%20System&back=07-hardware-rti-systems/42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System_guide.html&data=07-hardware-rti-systems/42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System.json">精确联动阅读</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../../01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide_guide.html">回到第一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文PDF</div>
+        <h1>An Easy To Build Reflectance Transformation Imaging (RTI) System</h1>
+        <span class="badge">42</span><span class="badge">RTI dome硬件</span><span class="badge">本地PDF</span>
+      </div>
+      <object class="pdf-frame" data="42-Easy_To_Build_RTI_System.pdf" type="application/pdf">
+        <div class="source-box">
+          <p>PDF 无法嵌入时，请打开 <a href="42-Easy_To_Build_RTI_System.pdf">本地 PDF</a>。</p>
+        </div>
+      </object>
+      <p class="note">左侧为本地 PDF，右侧按页和段落组解释。</p>
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 逐段中文讲解</div>
+      <h1>42 · 一个容易搭建的 RTI 系统</h1>
+      <p>这篇是很实用的小型 RTI dome 搭建文章。它比大型固定半球更接近入门阶段：Arduino、LED、3D打印半球、自动拍摄序列、RTIBuilder/RTIViewer。</p>
+
+      <div class="para">
+        <p class="where">第1页标题与摘要 · 简单RTI装置</p>
+        <p>文章目标是介绍一个可自行搭建的 RTI 拍摄系统。重点是“低门槛可复现”：用微控制器控制 LED，按固定顺序拍摄多光照照片，再交给 CHI 工具生成 RTI 文件。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页引言 · 单张照片不够</p>
+        <p>引言说明单张照片很难同时呈现对象所有细节。RTI 的策略不是拍一张更亮的照片，而是拍一组不同角度光照的照片，让使用者之后可以交互改变光源方向。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页应用段 · 文物、鉴定、法庭科学</p>
+        <p>作者把 RTI 放在科学摄影、文物保护、艺术品鉴定、弹痕分析、陶片和石器观察这些场景里。对本项目来说，汉画像石、碑刻、墓碑、微痕板都属于同一类“表面细节需要被重读”的对象。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第2页方法开头 · 40到100张图像</p>
+        <p>文中说明 RTI 采集通常需要几十到上百张不同固定光位的照片。这个数字不是越多越好，而是在“覆盖足够光照方向”和“拍摄/处理成本”之间取平衡。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第2页方法 · 固定光源位置</p>
+        <p>固定位置是 dome 的关键。手持 H-RTI 靠反光球估计光位，dome 则直接把灯安装在已知位置。对于光度立体，已知灯位比后期估计更适合做法线和高度相关实验。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第2页工具段 · CHI RTIBuilder / RTIViewer</p>
+        <p>文章沿用 CHI 的软件生态：先用 RTIBuilder 生成 RTI 文件，再用 RTIViewer 查看和增强。项目里已有 CHI 指南、RTIViewer 用户手册和安装教程，这篇把它们连接到“硬件自动采集”。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第3页触发与布线 · Arduino和相机</p>
+        <p>系统需要解决两个动作：点亮某个 LED，触发相机拍照。两者必须按顺序稳定执行，否则照片和灯位会错配。错配比少拍几张更危险，因为它会悄悄污染后续拟合结果。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第3-4页半球结构 · 50个LED与3D打印</p>
+        <p>文章展示了一个约50个 LED 的半球设计，并提到 3D 打印小型 dome 文件。对项目来说，这给出一个低成本路线：先做小型样机，验证灯位、曝光和文件命名，再考虑更大对象。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第5页资源段 · STL与Arduino代码</p>
+        <p>最后列出半球模型文件和 Arduino 程序入口。读这种硬件论文不能只看效果图，必须把材料清单、代码、3D模型、接线图和软件流程一起归档。</p>
+      </div>
+
+      <div class="math">
+        <p><strong>数学补课：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">光照方向向量</a>、<a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积和斜光</a>、<a href="../../../../math-foundations/html/04-matrices-photometric-stereo.html">矩阵与光度立体</a>。</p>
+        <p>每盏灯的坐标都可以转成单位方向向量。后续若用光度立体，就会把这些向量组成矩阵；如果灯位记录错误，数学模型再漂亮也会输出不可靠的法线。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul>
+          <li>最小样机：先用小型 dome 拍硬币、刻痕板、拓片局部。</li>
+          <li>必须保留：灯位表、Arduino代码版本、相机触发方式、曝光参数。</li>
+          <li>和手持 H-RTI 对比：同一对象分别拍，比较阴影细节、法线稳定性和重打光效果。</li>
+        </ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul>
+        <li>在 `docs/02-capture-hardware/09-hardware-purchase-list.md` 增加小型 RTI dome 物料子表。</li>
+        <li>在 `datasets/README.md` 增加 dome 采集的 `lights.csv` 字段示例。</li>
+        <li>做一页“手持 H-RTI vs 固定 dome”的实验记录模板。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

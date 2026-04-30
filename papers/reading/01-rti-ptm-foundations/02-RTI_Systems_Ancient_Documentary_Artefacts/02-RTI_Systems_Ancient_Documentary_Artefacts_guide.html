@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reflectance Transformation Imaging Systems for Ancient Documentary Artefacts 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <a href="../../interactive-reader.html?pdf=01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts.pdf&title=Reflectance%20Transformation%20Imaging%20Systems%20for%20Ancient%20Documentary%20Artefacts&back=01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts_guide.html&data=01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts.json">精确联动阅读</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>Reflectance Transformation Imaging Systems for Ancient Documentary Artefacts</h1>
+        <span class="badge">02</span><span class="badge">RTI基础</span><span class="badge">2011</span>
+      </div>
+      
+      <object class="pdf-frame" data="02-RTI_Systems_Ancient_Documentary_Artefacts.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <div class="source-box">
+          <p>当前浏览器无法内嵌 PDF，请通过下方入口打开原文。</p>
+          <ul><li><a href="02-RTI_Systems_Ancient_Documentary_Artefacts.pdf">PDF</a></li></ul>
+        </div>
+      </object>
+      <p class="note">左侧嵌入本地 PDF；右侧按段落组中文讲解，不复制论文长段原文。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>Reflectance Transformation Imaging Systems for Ancient Documentary Artefacts</h1>
+      <p>这篇把 RTI 当作“文物记录系统”来讨论，而不是只当作一个图像算法，特别适合建立本项目的数据、硬件和工作流观念。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>RTI基础</strong>，核心问题是“古文献、铭文和考古对象需要长期可复核的记录。单个图像增强算法不足以解决采集、处理、展示、归档、研究协作和元数据追踪的问题。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>古文献、铭文和考古对象需要长期可复核的记录。单个图像增强算法不足以解决采集、处理、展示、归档、研究协作和元数据追踪的问题。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>把采集硬件、光照控制、处理软件、文件格式、查看器和研究记录看成一个系统。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>强调多光照图像集合、反射模型和交互查看之间的连接关系。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>关注文物研究场景中的可重复采集、非接触记录、访问传播和长期保存。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · documentary artefacts</p><p>这里指古文献、铭文、泥板、纸本、石刻等以文字或图像信息为核心的对象。RTI 的价值在于帮助记录和阅读。</p></div><div class="para"><p class="where">核心概念 · RTI系统</p><p>由采集、处理、浏览、归档、元数据和研究解释组成。缺少任何一环，技术就很难真正服务文博研究。</p></div><div class="para"><p class="where">核心概念 · 非接触记录</p><p>不触碰文物表面，不像拓片那样产生机械压力，适合脆弱对象。</p></div><div class="para"><p class="where">核心概念 · 交互式检查</p><p>研究者可以移动虚拟光源、切换增强模式、比较局部，而不是被单张照片的光照限制。</p></div><div class="para"><p class="where">核心概念 · 长期归档</p><p>保存原始照片、处理结果、软件版本和元数据，使后来的研究者能重新处理或验证。</p></div><div class="para"><p class="where">核心概念 · 研究协作</p><p>RTI 文件和查看器让不同学者在同一视觉证据上讨论，而不是各自依赖现场记忆。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> · <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积、夹角和斜光</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>为 `docs/03-software-data/13-software-stack-and-architecture.md` 提供系统论支撑。</li><li>提示项目需要从“会拍”升级到“可管理、可引用、可复核”。</li><li>适合用来检查每个实验目录是否有输入、处理、输出、元数据和研究记录。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>建立一个最小 RTI 数据包样例，包含照片、`capture.json`、处理参数和查看说明。</li><li>为每篇实验记录补“可复核性”字段。</li><li>把导读中的系统组件映射到本项目软件架构文档。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

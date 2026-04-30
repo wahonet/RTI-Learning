@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTI数学基础中文课</title>
+  <style>
+:root { --bg:#f6f1e9; --paper:#fffdf8; --ink:#26231f; --muted:#6b645d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f1e7da; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--accent2); text-underline-offset:3px; }
+main { max-width:1060px; margin:0 auto; padding:28px 18px 60px; }
+.hero { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:18px; }
+h1 { font-size:34px; line-height:1.15; margin:0 0 10px; letter-spacing:0; }
+h2 { color:var(--accent2); font-size:22px; margin:26px 0 10px; letter-spacing:0; }
+h3 { color:#4d5f9f; font-size:17px; margin:0 0 5px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.card,.section,.formula { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.badge { display:inline-block; border:1px solid var(--line); border-radius:5px; padding:2px 8px; color:var(--muted); background:var(--soft); font-size:13px; margin-right:6px; }
+.formula { background:#fff6e5; border-color:#e5d4ab; }
+code { background:#f3eadc; padding:1px 4px; border-radius:4px; }
+nav { display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
+nav a { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:7px 10px; text-decoration:none; color:var(--ink); }
+@media (max-width:640px){ main{padding:20px 14px 42px;} nav{flex-direction:column;} }
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <h1>RTI/光度立体/AI线图数学基础中文课</h1>
+      <p>这些页面把英文高数、线代和优化教材中最需要的部分改写成中文小课。你不必先读完整英文 PDF，先按这里的顺序读，遇到论文公式再回查。</p>
+      <p><a href="../README.md">数学资料包说明</a> · <a href="../../papers/reading/index.html">论文逐段精读</a></p>
+    </header>
+    <section class="grid"><article class="card"><h2><a href="01-vectors-light-normals.html">01 向量、光照方向和表面法线</a></h2><p><span class="badge">线性代数入门</span></p><p>RTI 和光度立体里，光照方向、相机方向、表面法线都可以看成空间里的箭头。先会读这些箭头，后面的公式才不吓人。</p></article><article class="card"><h2><a href="02-dot-product-raking-light.html">02 点积、夹角和斜光</a></h2><p><span class="badge">向量几何</span></p><p>点积用来计算两个方向有多接近。斜光为什么能显出刻痕，本质上就是光照方向和表面法线夹角变化被放大了。</p></article><article class="card"><h2><a href="03-least-squares-fitting.html">03 最小二乘和拟合</a></h2><p><span class="badge">高数+线代</span></p><p>PTM、HSH、光度立体、相机标定、神经网络都在做一件事：找一组参数，让预测结果和真实照片之间的误差尽量小。</p></article><article class="card"><h2><a href="04-matrices-photometric-stereo.html">04 矩阵和光度立体</a></h2><p><span class="badge">线性代数</span></p><p>光度立体把多张照片、多盏灯、多像素组织成矩阵。矩阵不是玄学，它只是把很多个方程整齐放在一起。</p></article><article class="card"><h2><a href="05-gradient-normal-height.html">05 梯度、法线和高度图</a></h2><p><span class="badge">多元微积分</span></p><p>高度图可以看成 z=h(x,y)。梯度描述这个表面往 x 和 y 方向怎么倾斜，法线和梯度紧密相关。</p></article><article class="card"><h2><a href="06-loss-optimization-ai.html">06 损失函数、优化和AI模型</a></h2><p><span class="badge">优化+机器学习</span></p><p>YOLO、U-Net、GAN、NeuralRTI、扩散模型都要训练。训练就是定义一个损失函数，再不断调整参数让损失变小。</p></article><article class="card"><h2><a href="07-calculus-roadmap.html">07 微积分怎么为RTI服务</a></h2><p><span class="badge">高数路线</span></p><p>不用把 OpenStax 三本都从头啃完。服务 RTI，最先要懂函数、导数、偏导、梯度、积分和误差变化。</p></article><article class="card"><h2><a href="08-reading-formulas.html">08 读论文公式的四步法</a></h2><p><span class="badge">论文阅读方法</span></p><p>看到公式不要慌。先找输入、未知量、误差、输出。大多数RTI和AI论文公式都能这样拆。</p></article></section>
+  </main>
+</body>
+</html>

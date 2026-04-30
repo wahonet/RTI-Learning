@@ -1,0 +1,294 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CHI RTI Highlight Capture Guide 逐段精读</title>
+  <style>
+    @page { size: A4 landscape; margin: 8mm; }
+    :root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.62; }
+    a { color: var(--accent2); text-underline-offset: 3px; }
+    .toolbar { max-width: 297mm; margin: 14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+    .toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+    .sheet { width: 297mm; height: 210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns: 50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+    .left, .right { padding: 7mm; min-width:0; }
+    .left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+    .right { overflow:auto; }
+    .pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+    h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+    h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+    h3 { margin:12px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+    p { margin:0 0 8px; }
+    ul { margin:0 0 8px; padding-left:20px; }
+    li { margin:3px 0; }
+    .label { color:var(--accent); font-weight:700; font-size:13px; }
+    .badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+    .para { border-top:1px solid var(--line); padding:9px 0; }
+    .para .where { font-weight:700; color:var(--accent); }
+    .math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+    .project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+    .note { color:var(--muted); font-size:12px; }
+    @media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+    @media screen and (max-width: 980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+  
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <a href="../../index.html">逐段精读索引</a> <a href="../../interactive-reader.html?pdf=01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.pdf&title=CHI%20RTI%20Highlight%20Capture%20Guide&back=01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide_guide.html&data=01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.json">精确联动阅读</a>
+    <span> <button onclick="window.print()">打印横版A4</button></span>
+  </nav>
+
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文 PDF</div>
+        <h1>CHI RTI Highlight Capture Guide</h1>
+        <span class="badge">H-RTI采集</span><span class="badge">逐段精读样张</span><span class="badge">26页</span>
+      </div>
+      <object class="pdf-frame" data="01-CHI_RTI_Highlight_Capture_Guide.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <p>当前浏览器无法内嵌 PDF，请打开 <a href="01-CHI_RTI_Highlight_Capture_Guide.pdf">本地 PDF</a> 对照阅读。</p>
+      </object>
+      <p class="note">版权说明：左侧嵌入本地 PDF；右侧为中文讲解，不复制论文长段原文。</p>
+    </section>
+
+    <section class="right">
+      <div class="label">右半页 · 逐段中文讲解</div>
+      <h1>01 CHI RTI Highlight Capture Guide 精读</h1>
+      <p>这篇不是理论论文，而是采集手册。读它的目标是把 H-RTI 采集变成可执行清单：相机不能动、对象不能动、反光球不能动，只有光源移动。</p>
+
+      <h2>读前先知道的核心逻辑</h2>
+      <div class="math">
+        <p><strong>数学直觉：</strong>这篇几乎不用高数，但它背后有向量。每张照片对应一个光照方向向量，反光球负责告诉软件这个向量在哪里。想补基础，先看 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> 与 <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积和斜光</a>。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页 · 标题页</p>
+        <p>这一页告诉你文档类型：它不是“RTI完整理论”，而是“Highlight Image Capture”，也就是高光法 RTI 的拍摄阶段指南。你读的时候要把重点放在采集动作、设备摆放和失败风险上。</p>
+        <div class="project">项目对应：这篇应转化为 `docs/02-capture-hardware/06-capture-sop.md` 的现场操作清单。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第2页 · 版权和署名</p>
+        <p>这一段说明方法来自 Cultural Heritage Imaging 与 Tom Malzbender 等人的合作。对你来说，重要的不是人名，而是知道 H-RTI 是文博领域长期实践出来的方法，不是临时拍照技巧。</p>
+        <p>版权页还提示该指南有 Creative Commons 限制，所以我们做中文精读时只转述和解释，不全文翻译搬运。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第3页第1段 · Overview：RTI采集的目标</p>
+        <p>这一段说：H-RTI 采集得到的是后续生成 RTI 的原始数字图像数据。也就是说，拍摄阶段本身还没有生成最终 RTI，它只是收集多光照照片。</p>
+        <p>它还提到每个像素除了颜色，还会有表面形状相关信息。你可以先粗略理解为：软件从多张不同光照照片中估计这个像素附近的表面朝向。</p>
+        <div class="math">基础：这里涉及“法线”概念。法线就是表面朝向，见 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">数学基础01</a>。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第3页第2段 · 为什么放反光球</p>
+        <p>这一段是整篇最关键的原理段。H-RTI 不需要你精确测量每盏灯的位置，而是在画面里放黑色反光球。每张照片里球上的亮点告诉软件：这一张图的光从哪里来。</p>
+        <p>黑色亮面球的作用可以理解为“光照方向记录器”。没有它，软件只知道照片变亮变暗，却不知道光源方向，后续拟合会失去依据。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第3页 · Physical setup summary</p>
+        <p>这一小节把采集铁律说出来：相机、目标对象、反光球都不能动，只有光源动。RTI 要比较的是同一个像素在不同光照下的变化；如果相机或对象移动，像素位置变了，软件会把位移误当成反射变化。</p>
+        <div class="project">项目对应：`capture.json` 应加入 `cameraLocked`、`objectMoved`、`sphereMoved`、`discardedFrames` 字段或等价记录。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第3-4页 · Camera：相机设置</p>
+        <p>这几段讲相机必须固定在三脚架上，并且要能手动控制曝光、光圈和焦点。手动控制的原因是：如果每张照片自动改变曝光或焦点，亮度变化就不再只来自光源方向。</p>
+        <p>作者提到不同相机都可以，不必迷信某个品牌。真正的硬要求是稳定、手动曝光、手动焦点和能触发拍摄。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第4页 · Light：光源移动和等距</p>
+        <p>这一段说光源要在对象周围的假想半球上移动，而且每张照片光源到对象的距离要尽量一致。距离变化会造成亮度变化，而这种亮度变化不是表面形状造成的，会污染 RTI 模型。</p>
+        <p>文中用绳子量距离，这很朴素但有效。它说明 H-RTI 的核心不是昂贵设备，而是控制变量。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第4页 · Computer：电脑位置和软件</p>
+        <p>电脑负责控制相机、保存文件、查看测试图和运行后续软件。它的位置要既能连接相机，又不能挡住光路或碰到设备。野外场景甚至建议把电脑也固定在三脚架上。</p>
+        <p>这提醒我们：采集现场不是只有相机和灯，线缆、电脑、支架都会变成阴影和碰撞风险。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第5-6页 · Mounting the camera</p>
+        <p>这几段讲相机如何固定：球头、滑轨、三脚架中心柱等。滑轨的意义是微调对焦距离，尤其适合小物体。对于硬币、拓片小局部、刻痕板，滑轨比手动挪三脚架更稳定。</p>
+        <div class="project">项目对应：第一批硬币 H-RTI 实验应记录是否使用滑轨，以及对焦是否在整个序列中保持不变。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第7页 · Choosing a configuration</p>
+        <p>这一节强调相机平面要尽量平行于对象平面。对水平对象，相机从正上方拍；对垂直对象，相机正对墙面或石刻。这样可以减少透视变形，也让每个像素更稳定地对应对象表面。</p>
+        <p>汉画像石局部如果是平面或近似平面，最好先按这种正射思路采集；如果表面起伏大，再考虑多视角或3D配准。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第7-8页 · 水平对象与阴影</p>
+        <p>这些段落讨论水平拍摄时三脚架腿、横杆、支架可能投影到对象上。RTI 最怕“不是文物表面造成的阴影”，因为后续软件可能把设备阴影也拟合进模型。</p>
+        <p>如果某个光照角度会造成设备阴影，宁可不拍那个角度，或后处理中剔除那张图。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第8页 · 垂直对象</p>
+        <p>垂直对象包括岩画、墙面、挂在墙上的画，也对应展厅中的画像石或碑刻。此时相机正对对象，光源围绕前方半空间移动。你要特别注意周围墙面、玻璃柜、展架会不会影响光路。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第9页 · Connecting the computer and lights</p>
+        <p>这里讲连接相机、电脑和灯。远程触发的目的不是方便，而是防止手按快门造成相机位移。对 RTI 来说，一个很小的位移都可能让后续对齐和拟合变差。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第9页 · Stabilizing the camera assembly</p>
+        <p>这一段反复强调稳定：夹紧螺丝、压重沙袋、挂重物。读起来像琐事，但它是 RTI 成败的底层条件。算法再好，也救不了拍摄时相机抖动导致的像素错位。</p>
+        <div class="project">项目对应：实验记录里要有“稳定性评分”，例如 1-5 分记录是否有抖动、模糊、位移。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第10页 · 背景和灰卡</p>
+        <p>中性背景可以避免背景颜色反射到对象上。灰卡用于白平衡，保证颜色处理有参照。RTI 主要看表面形貌，但颜色如果漂移，也会影响材料判断和图像发布。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第10页 · 反光球必须进入画面</p>
+        <p>这一段规定相机视野里必须包含对象和反光球。球的直径在图像中至少要有足够像素，否则高光点定位不准。高光点不准，光照方向就不准，最终 RTI 结果会不稳定。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第11页 · Choosing reflective spheres</p>
+        <p>反光球大小要和对象大小匹配。球太小，高光定位精度低；球太大，占画面、挡对象、减少文物有效像素。黑色球能让高光更清楚，减少球面自身颜色干扰。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第12-13页 · Mounting the spheres</p>
+        <p>这些段落讲球怎么固定：垫圈、小杆、夹具、支架、延长臂。核心原则和相机一样：采集过程中球不能移动。球一动，每张照片的光照方向参照物就变了。</p>
+        <p>球要靠近对象，但不要遮挡对象，也不要在任何关键光照角度下给对象投影。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第14页 · Placing the spheres</p>
+        <p>这一节讲反光球放在哪。它们后处理时会被裁掉，所以要放在角落或边缘；但又要和对象足够近，保证相机景深能同时让对象和球清晰。</p>
+        <p>这里有一个重要实践点：裁剪通常是矩形，所以球的位置不能导致裁剪时损失对象信息。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第15页 · Lighting setup</p>
+        <p>光照采样要覆盖对象上方的假想半球，角度大约从低角度到较高角度。低角度负责显浅刻和纹理，高角度负责提供更均匀的表面信息。</p>
+        <p>每次光源距离要固定，方向要均匀。手持光源不是随便乱照，而是在“近似半球采样”这个思路下手动执行。</p>
+        <div class="math">基础：低角度光为什么显刻痕，见 <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">数学基础02</a>。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第16页 · 连续光与闪光灯</p>
+        <p>连续光容易瞄准，适合室内；闪光灯亮度高、适合户外和大对象，但要同步触发。这里不是让你固定选一种，而是根据对象大小、环境光和供电条件选择。</p>
+        <p>对本项目第一批小样本，连续 LED 更容易入门；对户外碑刻或大幅画像石，闪光或高功率灯可能更实用。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第16-17页 · Lighting equipment</p>
+        <p>这一段列出灯、供电、触发、UV滤镜、可调杆等设备。你可以把它转成采购清单，但不要机械照抄。中国本地采购时，关键是色温稳定、亮度够、可固定距离、可重复定位。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第18页 · Testing the light model for shadows</p>
+        <p>正式拍摄前要拿灯绕对象走一圈，观察哪些角度会造成设备、支架、线缆或反光球阴影。如果阴影落在研究区域，这张图就会污染模型。</p>
+        <div class="project">项目对应：采集前增加“阴影巡检”，记录哪些角度被跳过，以及跳过原因。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第19-20页 · Computer software setup</p>
+        <p>软件分两类：采集时用相机控制、文件命名、RAW处理；后处理时用 RTIBuilder/PTM/RTI Viewer。读这一段时要注意工具可能老旧，本项目可以用 RelightLab 替代部分流程，但“采集-处理-查看”的结构不变。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第21页 · 文件命名和采集会话</p>
+        <p>这一段看似行政，其实很重要。RTI 序列几十张图，文件名必须稳定、可排序、能识别对象和场景。否则后处理、排错、复现实验都会混乱。</p>
+        <div class="project">建议命名：`object_session_lightIndex.raw` 或 `datasetId_objectId_###.dng`，并在 `capture.json` 里记录规则。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">第21-22页 · 焦点、曝光和光圈</p>
+        <p>先自动对焦只是为了找到近似位置，正式拍摄要切到手动。光圈不能一味收小，因为太小会衍射，导致图像变软。曝光要同时照顾最暗的低角度图和最亮的高角度图。</p>
+        <p>直方图检查是为了避免过曝和欠曝。过曝区域没有真实亮度信息，后续无法恢复。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第22-23页 · 光源到对象距离</p>
+        <p>推荐光源距离至少是对象直径的数倍。距离太近时，同一张图里不同位置接受的光强差异会很大，且光线不再近似平行，这会让简单 RTI 模型变差。</p>
+        <p>绳子法看起来土，但它保证每张照片光源距离一致，是低成本采集里最可靠的做法之一。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第24页 · Capture sequence</p>
+        <p>这一节说明拍摄序列：想象一个伞状半球，有 8-12 根“肋骨”，每根肋骨上有若干高度点。你不需要第一次就做到完美角度，但要保证方向覆盖均匀。</p>
+        <p>低角度约 15 度，高角度约 65 度。低角度看微痕，高角度补整体表面信息。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第24页 · 每张照片的动作</p>
+        <p>每次拍摄前确认相机设置、清理灰尘、把灯放到指定方向和距离、移开绳子、远程触发、再移动到下一点。这些动作要机械化执行，减少人为变化。</p>
+        <p>灰尘、头发、纤维等小东西在 RTI 里会变成很明显的假细节，拍前清理非常必要。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第25页 · White balance</p>
+        <p>灰卡用于建立白平衡。即使你的目标主要是几何，也不要忽视颜色，因为材料、污染、墨迹、颜料残留都可能和颜色有关。白平衡不统一，后续比较不同样本会很麻烦。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第25页 · Triggering trade-offs</p>
+        <p>远程触发有两种：电脑控制或遥控器。作者更推荐电脑，因为你能及时看测试图、检查焦点、文件自动命名。遥控器更轻便，但排错能力弱。</p>
+        <p>正式序列前拍一张手或标记物，是为了把测试图和正式图分开。这个小动作可以节省后处理时大量混乱。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第26页 · 后处理提示</p>
+        <p>最后一页说明后处理大致包括：从反光球高光计算灯位、裁掉反光球、把处理图和光位数据放入同一文件夹、生成 PTM 或 RTI 文件。</p>
+        <p>这说明采集结束并不等于工作结束。真正可复现的数据包要包含原始图、光位数据、裁剪参数、处理软件版本和最终 RTI 文件。</p>
+      </div>
+
+      <h2>读完这篇你应该能做什么</h2>
+      <ul>
+        <li>能说清楚 H-RTI 为什么需要反光球。</li>
+        <li>能解释为什么相机、对象和球不能动。</li>
+        <li>能列出采集失败的主要原因：位移、阴影、过曝、光源距离不一致、球太小、焦点变化。</li>
+        <li>能把这篇转成硬币或刻痕板的第一套采集 SOP。</li>
+      </ul>
+
+      <h2>下一步</h2>
+      <ul>
+        <li>把本页内容回写到 `docs/02-capture-hardware/06-capture-sop.md`。</li>
+        <li>建立 `experiments/2026-xx-xx_coin_h-rti/` 实验目录。</li>
+        <li>用 36 张硬币照片跑通第一套 H-RTI。</li>
+        <li>继续细读 Mudge 2006，理解这套采集法如何进入岩画/石刻现场。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
+

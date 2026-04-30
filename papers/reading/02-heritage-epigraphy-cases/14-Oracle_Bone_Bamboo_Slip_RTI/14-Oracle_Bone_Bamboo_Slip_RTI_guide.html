@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2.5D Digitization of Oracle Bone and Bamboo Slip with RTI 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../../03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <a href="../../interactive-reader.html?pdf=02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.pdf&title=2.5D%20Digitization%20of%20Oracle%20Bone%20and%20Bamboo%20Slip%20with%20RTI&back=02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI_guide.html&data=02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.json">精确联动阅读</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../../01-rti-ptm-foundations/15-CHI_RTIViewer_User_Guide/15-CHI_RTIViewer_User_Guide_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>2.5D Digitization of Oracle Bone and Bamboo Slip with RTI</h1>
+        <span class="badge">14</span><span class="badge">2.5D数字化</span><span class="badge">讲义资料</span>
+      </div>
+      
+      <object class="pdf-frame" data="14-Oracle_Bone_Bamboo_Slip_RTI.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <div class="source-box">
+          <p>当前浏览器无法内嵌 PDF，请通过下方入口打开原文。</p>
+          <ul><li><a href="14-Oracle_Bone_Bamboo_Slip_RTI.pdf">PDF</a></li></ul>
+        </div>
+      </object>
+      <p class="note">左侧嵌入本地 PDF；右侧按段落组中文讲解，不复制论文长段原文。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>2.5D Digitization of Oracle Bone and Bamboo Slip with RTI</h1>
+      <p>这份资料把 RTI 用于甲骨、竹简等近似平面浅刻文字对象，可作为碑刻、榜题和汉画像石局部 2.5D 记录的桥梁。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>2.5D数字化</strong>，核心问题是“甲骨、竹简和浅刻文字的主要信息来自细小凹凸、墨迹、裂纹和材质纹理。普通照片不稳定，完整三维扫描又可能成本较高。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>甲骨、竹简和浅刻文字的主要信息来自细小凹凸、墨迹、裂纹和材质纹理。普通照片不稳定，完整三维扫描又可能成本较高。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>使用多光照采集记录表面反射变化。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>通过 2.5D 思路描述近似平面对象：不是完整 3D 雕塑，而是平面上有高度变化的表面。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>结合 RTI 查看、增强和局部分析，提高浅刻文字可读性。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · 2.5D</p><p>介于二维图像和完整三维模型之间。对象整体近似平面，但每个点有局部高度或法线信息。</p></div><div class="para"><p class="where">核心概念 · 甲骨/竹简</p><p>浅刻、细线、裂纹和材料纹理丰富，与碑刻和汉画像石榜题有方法相似性。</p></div><div class="para"><p class="where">核心概念 · 近似平面对象</p><p>整体可看作一个平面，重点是表面微形貌，而不是大尺度三维形状。</p></div><div class="para"><p class="where">核心概念 · RTI观察层</p><p>通过虚拟光照、增强模式和法线图，让文字和划痕在不同光照下可见。</p></div><div class="para"><p class="where">核心概念 · 迁移性</p><p>甲骨/竹简方法可迁移到碑刻榜题、浅刻石经、汉画像石线刻局部。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> · <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积、夹角和斜光</a> · <a href="../../../../math-foundations/html/05-gradient-normal-height.html">梯度、法线和高度图</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>补上本项目从文化遗产 RTI 到中文浅刻文字的过渡。</li><li>为汉画像石榜题和微痕文字提供 2.5D 表达框架。</li><li>有助于解释为什么不一定一开始就做完整 3D。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>在项目术语表加入 2.5D、height map、normal map 的中文解释。</li><li>把汉画像石局部记录拆成整体 3D 与局部 2.5D 两个层级。</li><li>为榜题采集设计一个小型 RTI/光度立体测试。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

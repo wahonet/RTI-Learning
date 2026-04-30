@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Surface Normal Reconstruction Using Polarization-UNet 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../20-Shape_From_Polarization_Heritage/20-Shape_From_Polarization_Heritage_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <a href="../../interactive-reader.html?pdf=05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal.pdf&title=Surface%20Normal%20Reconstruction%20Using%20Polarization-UNet&back=05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal_guide.html&data=05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal.json">精确联动阅读</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../22-Multispectral_RTI_Framework/22-Multispectral_RTI_Framework_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>Surface Normal Reconstruction Using Polarization-UNet</h1>
+        <span class="badge">21</span><span class="badge">偏振成像</span><span class="badge">2024</span>
+      </div>
+      
+      <object class="pdf-frame" data="21-Polarization_UNet_Surface_Normal.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <div class="source-box">
+          <p>当前浏览器无法内嵌 PDF，请通过下方入口打开原文。</p>
+          <ul><li><a href="21-Polarization_UNet_Surface_Normal.pdf">PDF</a></li></ul>
+        </div>
+      </object>
+      <p class="note">左侧嵌入本地 PDF；右侧按段落组中文讲解，不复制论文长段原文。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>Surface Normal Reconstruction Using Polarization-UNet</h1>
+      <p>这篇把深度学习用于偏振法线估计，目标是缓解传统 SfP 的歧义和噪声问题。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>偏振成像</strong>，核心问题是“传统偏振形状恢复受到相位歧义、噪声、材质假设和低频形状缺失影响。深度学习希望从数据中学习更稳健的法线恢复。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>传统偏振形状恢复受到相位歧义、噪声、材质假设和低频形状缺失影响。深度学习希望从数据中学习更稳健的法线恢复。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>使用偏振图像或偏振特征作为输入。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>采用 U-Net 编码器-解码器结构，从多尺度特征中预测表面法线。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>将网络估计与传统重建或深度图融合，提高高分辨率表面细节。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · U-Net</p><p>一种常见图像到图像网络，有下采样编码和上采样解码，适合分割、法线、深度等密集预测。</p></div><div class="para"><p class="where">核心概念 · surface normal</p><p>表面法线，表示每个像素点表面的朝向，是生成斜光图和高度图的基础。</p></div><div class="para"><p class="where">核心概念 · polarization feature</p><p>由不同偏振角图像计算出的特征，如偏振度、偏振角、强度变化。</p></div><div class="para"><p class="where">核心概念 · 深度学习先验</p><p>网络从训练数据中学习表面形状规律，可减少传统模型的歧义，但也可能学到数据偏差。</p></div><div class="para"><p class="where">核心概念 · 泛化风险</p><p>在训练对象上有效，不代表能直接泛化到汉画像石、粗糙石材或拓片。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> · <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积、夹角和斜光</a> · <a href="../../../../math-foundations/html/06-loss-optimization-ai.html">损失函数、优化和AI模型</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>作为前沿储备，不应放在第一阶段主线。</li><li>为未来多模态法线估计提供思路：RTI/光度立体/偏振可以联合。</li><li>提醒 AI 法线结果也需要真值或对照实验。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>暂不复现，先记录为前沿路线。</li><li>收集偏振法线数据集和代码，评估是否可迁移到近似平面石刻。</li><li>未来若采集偏振数据，必须同步采集 RTI/光度立体作为对照。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

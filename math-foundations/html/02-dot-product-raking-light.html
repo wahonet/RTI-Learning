@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 点积、夹角和斜光</title>
+  <style>
+:root { --bg:#f6f1e9; --paper:#fffdf8; --ink:#26231f; --muted:#6b645d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f1e7da; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--accent2); text-underline-offset:3px; }
+main { max-width:1060px; margin:0 auto; padding:28px 18px 60px; }
+.hero { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:18px; }
+h1 { font-size:34px; line-height:1.15; margin:0 0 10px; letter-spacing:0; }
+h2 { color:var(--accent2); font-size:22px; margin:26px 0 10px; letter-spacing:0; }
+h3 { color:#4d5f9f; font-size:17px; margin:0 0 5px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.card,.section,.formula { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.badge { display:inline-block; border:1px solid var(--line); border-radius:5px; padding:2px 8px; color:var(--muted); background:var(--soft); font-size:13px; margin-right:6px; }
+.formula { background:#fff6e5; border-color:#e5d4ab; }
+code { background:#f3eadc; padding:1px 4px; border-radius:4px; }
+nav { display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
+nav a { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:7px 10px; text-decoration:none; color:var(--ink); }
+@media (max-width:640px){ main{padding:20px 14px 42px;} nav{flex-direction:column;} }
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p><span class="badge">向量几何</span><span class="badge">中文数学基础</span></p>
+      <h1>02 点积、夹角和斜光</h1>
+      <p>点积用来计算两个方向有多接近。斜光为什么能显出刻痕，本质上就是光照方向和表面法线夹角变化被放大了。</p>
+      <p><a href="index.html">返回数学课索引</a> · <a href="../README.md">数学资料说明</a></p>
+    </header>
+    <section class="section"><h3>点积是什么</h3><p>两个单位向量 a 和 b 的点积等于它们夹角的余弦。方向越接近，点积越大；方向越垂直，点积越接近 0。</p></section><section class="section"><h3>它为什么和亮度有关</h3><p>漫反射模型里，表面越正对光源越亮，越侧对光源越暗。这个“正对程度”就可以用点积表示。</p></section><section class="section"><h3>斜光为什么有用</h3><p>浅刻边缘会让表面方向突然变化。正面光不容易显出来，低角度斜光会制造明显阴影，所以碑刻和汉画像石常用斜光观察。</p></section><section class="section"><h3>RTI的优势</h3><p>传统斜光照片只有一个角度，RTI 保存很多角度。后期移动虚拟光源，就能反复寻找最能显出细节的方向。</p></section><section class="section"><h3>风险</h3><p>阴影更明显不代表信息更真实。斜光也会放大石材颗粒、污渍、裂纹和算法伪影。</p></section>
+    <section class="formula">
+      <h2>公式怎么读</h2>
+      <p><code>I = ρ (L · n)</code></p>
+      <p>ρ 是表面自身反照率，L·n 是光照方向和表面法线的点积。读成：亮度约等于材质亮度乘以朝光程度。</p>
+    </section>
+    <nav><a href="01-vectors-light-normals.html">上一课</a><a href="index.html">索引</a><a href="03-least-squares-fitting.html">下一课</a></nav>
+  </main>
+</body>
+</html>

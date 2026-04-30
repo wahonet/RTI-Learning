@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 向量、光照方向和表面法线</title>
+  <style>
+:root { --bg:#f6f1e9; --paper:#fffdf8; --ink:#26231f; --muted:#6b645d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f1e7da; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--accent2); text-underline-offset:3px; }
+main { max-width:1060px; margin:0 auto; padding:28px 18px 60px; }
+.hero { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:18px; }
+h1 { font-size:34px; line-height:1.15; margin:0 0 10px; letter-spacing:0; }
+h2 { color:var(--accent2); font-size:22px; margin:26px 0 10px; letter-spacing:0; }
+h3 { color:#4d5f9f; font-size:17px; margin:0 0 5px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.card,.section,.formula { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.badge { display:inline-block; border:1px solid var(--line); border-radius:5px; padding:2px 8px; color:var(--muted); background:var(--soft); font-size:13px; margin-right:6px; }
+.formula { background:#fff6e5; border-color:#e5d4ab; }
+code { background:#f3eadc; padding:1px 4px; border-radius:4px; }
+nav { display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
+nav a { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:7px 10px; text-decoration:none; color:var(--ink); }
+@media (max-width:640px){ main{padding:20px 14px 42px;} nav{flex-direction:column;} }
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p><span class="badge">线性代数入门</span><span class="badge">中文数学基础</span></p>
+      <h1>01 向量、光照方向和表面法线</h1>
+      <p>RTI 和光度立体里，光照方向、相机方向、表面法线都可以看成空间里的箭头。先会读这些箭头，后面的公式才不吓人。</p>
+      <p><a href="index.html">返回数学课索引</a> · <a href="../README.md">数学资料说明</a></p>
+    </header>
+    <section class="section"><h3>向量是什么</h3><p>向量就是带方向的量。二维向量写成 (x, y)，三维向量写成 (x, y, z)。你可以把它想成从一个点指向另一个方向的箭头。</p></section><section class="section"><h3>光照方向为什么是向量</h3><p>一盏灯从左上方照到石刻，我们关心的是光从哪个方向来。这个方向可以写成 L=(lx, ly, lz)。RTI 的每张照片都对应一个光照方向。</p></section><section class="section"><h3>表面法线是什么</h3><p>法线是垂直于表面的方向。平的石面法线大致朝向相机；刻痕边缘会让法线偏转。法线图就是把每个像素的表面方向保存为颜色或数值。</p></section><section class="section"><h3>论文里怎么出现</h3><p>看到 light direction、surface normal、unit vector、normalize，就把它们翻译成方向箭头。不要先纠结公式，先画箭头。</p></section><section class="section"><h3>在项目里怎么用</h3><p>采集时记录每张图的光照方向；处理时输出法线图；解释时用法线变化判断刻痕、边缘和微小起伏。</p></section>
+    <section class="formula">
+      <h2>公式怎么读</h2>
+      <p><code>I = L n</code></p>
+      <p>最粗略地读：亮度 I 由光照方向 L 和表面法线 n 的关系决定。真实论文会更复杂，但直觉从这里开始。</p>
+    </section>
+    <nav><span></span><a href="index.html">索引</a><a href="02-dot-product-raking-light.html">下一课</a></nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTI as a New Documentation and Analysis Method in Epigraphical Studies 逐段译读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --bg:#d8d2c8; --paper:#fffdf8; --ink:#24211d; --muted:#6b645d; --line:#d7cbbd; --accent:#9b3f2c; --green:#246b61; --soft:#f4eadc; --blue:#2f5f8f; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+a { color:var(--green); text-underline-offset:3px; }
+.topbar { position:sticky; top:0; z-index:10; display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; padding:10px 18px; background:rgba(216,210,200,.94); border-bottom:1px solid rgba(0,0,0,.08); backdrop-filter:blur(8px); }
+.topbar a,.topbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.topbar .center { text-align:center; }
+.topbar .right { text-align:right; }
+.reader { width:min(1880px, calc(100vw - 28px)); margin:14px auto 24px; display:grid; grid-template-columns:minmax(680px, 1.45fr) minmax(470px, .9fr); gap:12px; align-items:start; }
+.pane { background:var(--paper); border:1px solid var(--line); border-radius:8px; box-shadow:0 14px 38px rgba(0,0,0,.14); overflow:hidden; }
+.pdf-pane { position:sticky; top:64px; height:calc(100vh - 82px); display:grid; grid-template-rows:auto 1fr auto; }
+.pane-head { padding:14px 18px 12px; border-bottom:1px solid var(--line); background:#fffaf1; }
+.label { color:var(--accent); font-weight:800; font-size:13px; }
+h1 { margin:4px 0 8px; font-size:24px; line-height:1.2; letter-spacing:0; }
+h2 { margin:24px 0 10px; font-size:19px; color:var(--green); letter-spacing:0; }
+h3 { margin:0 0 8px; font-size:17px; color:var(--accent); letter-spacing:0; }
+p { margin:0 0 10px; }
+ul { margin:0 0 10px; padding-left:20px; }
+li { margin:3px 0; }
+.badge { display:inline-flex; min-height:23px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.pdf-frame { width:100%; height:100%; border:0; background:#3a3a3a; }
+.pdf-stage { position:relative; min-height:0; overflow:auto; background:#2f2f2f; display:flex; align-items:flex-start; justify-content:center; padding:18px; }
+.pdf-page-wrap { position:relative; flex:0 0 auto; background:white; box-shadow:0 8px 24px rgba(0,0,0,.32); }
+.pdf-canvas { display:block; width:100%; height:auto; }
+.pdf-fallback { max-width:560px; margin:36px; background:#fffaf1; border:1px solid var(--line); border-radius:8px; padding:16px 18px; color:#342f29; }
+.pdf-overlay { position:absolute; inset:0; pointer-events:none; z-index:3; }
+.pdf-hotspot { position:absolute; border:2px solid transparent; background:rgba(155,63,44,0); border-radius:4px; transition:background .14s ease,border-color .14s ease,box-shadow .14s ease; pointer-events:auto; cursor:pointer; }
+.pdf-hotspot.active, .pdf-hotspot:hover { border-color:rgba(155,63,44,.9); background:rgba(255,213,79,.30); box-shadow:0 0 0 1px rgba(255,255,255,.55) inset; }
+.pdf-tools { display:flex; flex-wrap:wrap; gap:8px; padding:10px 14px; border-top:1px solid var(--line); background:#fffaf1; font-size:14px; }
+.pdf-tools a { border:1px solid var(--line); border-radius:5px; padding:4px 8px; background:white; text-decoration:none; }
+.right-pane { max-height:calc(100vh - 82px); overflow:auto; }
+.content { padding:18px 22px 34px; }
+.lead { font-size:18px; color:#3d3832; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:4px; }
+.segment { border-top:1px solid var(--line); padding:15px 0 16px; }
+.loc { font-weight:800; color:var(--blue); margin-bottom:6px; }
+.keys { font-size:14px; color:var(--muted); background:#f7f0e6; border:1px solid #e2d5c5; border-radius:6px; padding:7px 9px; margin:8px 0; }
+.translation { font-size:17px; }
+.explain { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:9px 11px; margin-top:8px; }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:9px 11px; margin:10px 0; }
+.note { color:var(--muted); font-size:13px; }
+.toc { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.toc a { border:1px solid var(--line); border-radius:5px; padding:3px 7px; background:white; font-size:13px; text-decoration:none; }
+.sync-intro { background:#f9f3e9; border:1px solid #e0d2bd; border-radius:8px; padding:12px 14px; margin:14px 0; }
+.sentence-card { border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin:10px 0; background:#fffaf1; transition:background .14s ease,border-color .14s ease,box-shadow .14s ease; }
+.sentence-card.active, .sentence-card:hover { background:#fff2c8; border-color:#c7833a; box-shadow:0 6px 18px rgba(120,74,28,.12); }
+.sentence-card .tag { font-weight:800; color:var(--blue); margin-bottom:6px; }
+.literal { color:#3b332b; }
+.natural { color:#1f4f47; font-weight:650; }
+.word-note { color:var(--muted); font-size:14px; background:white; border:1px solid #e4d8c7; border-radius:5px; padding:6px 8px; margin-top:7px; }
+@media screen and (max-width:1160px) { .reader{grid-template-columns:1fr;} .pdf-pane{position:relative; top:0; height:76vh;} .right-pane{max-height:none;} .topbar{grid-template-columns:1fr;} .topbar .center,.topbar .right{text-align:left;} }
+@media print { body{background:white;} .topbar,.pdf-pane{display:none;} .reader{display:block;width:100%;margin:0;} .pane{box-shadow:none;border:0;} .right-pane{max-height:none;overflow:visible;} .content{padding:0;} .segment{break-inside:avoid;} }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div><a href="../06-RTI_Gravestone_Detail/06-RTI_Gravestone_Detail_guide.html">上一篇</a></div>
+    <div class="center"><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印译读页</button></div>
+    <div class="right"><a href="../../04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks_guide.html">下一篇</a></div>
+  </nav>
+
+  <main class="reader">
+    <section class="pane pdf-pane">
+      <div class="pane-head">
+        <div class="label">左侧 · 原文大字阅读</div>
+        <h1>RTI as a New Documentation and Analysis Method in Epigraphical Studies</h1>
+        <span class="badge">07</span><span class="badge">碑铭学</span><span class="badge">2016</span><span class="badge">本地PDF</span>
+        <p class="note">这里不再把整本 PDF 缩进半张 A4。默认放大、隐藏缩略图；如果还小，用浏览器缩放或点下面“大屏打开”。</p>
+      </div>
+      <div class="pdf-stage">
+        <div class="pdf-page-wrap" id="pdfPageWrap">
+          <div class="pdf-fallback" id="pdfFallback">
+            <p><strong>精确联动模式需要通过本地 HTTP 打开。</strong></p>
+            <p>如果你现在是用 file:// 打开的页面，浏览器会拦截 PDF.js 模块，左侧不会渲染。请使用本地服务器地址打开本页。</p>
+            <p><a href="http://127.0.0.1:8765/papers/reading/02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies_guide.html">打开精确联动版</a></p>
+          </div>
+          <canvas class="pdf-canvas" id="pdfCanvas"></canvas>
+          <div class="pdf-overlay" id="pdfOverlay" aria-label="原文区域高亮层"></div>
+        </div>
+      </div>
+      <div class="pdf-tools">
+        <a href="07-RTI_Epigraphical_Studies.pdf" target="_blank">大屏打开 PDF</a>
+        <a href="../../interactive-reader.html?pdf=02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.pdf&title=RTI%20as%20a%20New%20Documentation%20and%20Analysis%20Method%20in%20Epigraphical%20Studies&back=02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies_guide.html&data=02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.json">通用逐页版</a>
+        <a href="07-RTI_Epigraphical_Studies.pdf#page=1&zoom=150" target="_blank">第1页</a>
+        <a href="07-RTI_Epigraphical_Studies.pdf#page=4&zoom=150" target="_blank">RTI原理</a>
+        <a href="07-RTI_Epigraphical_Studies.pdf#page=7&zoom=150" target="_blank">H-RTI采集</a>
+        <a href="07-RTI_Epigraphical_Studies.pdf#page=10&zoom=150" target="_blank">滤镜</a>
+        <a href="07-RTI_Epigraphical_Studies.pdf#page=11&zoom=150" target="_blank">讨论</a>
+      </div>
+    </section>
+
+    <section class="pane right-pane">
+      <article class="content">
+        <div class="label">右侧 · 逐段中文意译 + 解释</div>
+        <h1>07 · RTI 在碑铭学中的新记录与分析方法</h1>
+        <p class="lead">这篇正文主要是土耳其语，摘要有英文。下面按论文真实页序和段落逻辑读，不再只是几段概括。每段给你：原文位置、关键词、中文意译、为什么重要。</p>
+        <div class="toc">
+          <a href="#p1">第1页摘要</a><a href="#p2">第2页引言</a><a href="#p3">传统记录</a><a href="#p4">RTI定义</a><a href="#p7">H-RTI采集</a><a href="#p9">显示与滤镜</a><a href="#p11">优缺点</a><a href="#p13">结论</a>
+        </div>
+
+        <div class="sync-intro">
+          <strong>互动说明：</strong>下面“摘要逐句样板”已经改成 PDF.js 坐标驱动。页面会从左侧 PDF 第1页运行时抽取 Abstract 到 Keywords 之间的文字位置，自动生成对应句子的高亮框；鼠标放到右侧句子块，左侧对应句子区域会变黄，反过来也会联动。
+        </div>
+
+        <h2>摘要逐句样板：直译、顺译、词组拆解</h2>
+        <section class="sentence-card" data-target="abs-s1" data-page="1" data-scope="abstract" data-start="1" data-end="1" tabindex="0">
+          <div class="tag">摘要第1句 · 研究背景</div>
+          <p class="literal"><strong>贴近原句的直译：</strong>今天先进技术的发展，加速了数字成像方法的使用，并且为文化遗产研究带来了新的路径。</p>
+          <p class="natural"><strong>更自然的中文：</strong>随着技术进步，数字成像在文化遗产研究中变得更常用，也让研究者获得了新的记录和分析手段。</p>
+          <p class="word-note"><strong>词组拆解：</strong>advanced technology = 先进技术；accelerated the use = 推动/加速使用；digital imaging methods = 数字成像方法；new approaches = 新方法、新路径。</p>
+        </section>
+        <section class="sentence-card" data-target="abs-s2" data-page="1" data-scope="abstract" data-start="2" data-end="2" tabindex="0">
+          <div class="tag">摘要第2句 · 方法进入多学科</div>
+          <p class="literal"><strong>贴近原句的直译：</strong>新的记录和分析方法已经被调整并应用到多个学科中，因此快速而细致的研究成为可能。</p>
+          <p class="natural"><strong>更自然的中文：</strong>这些数字记录和分析方法可以迁移到不同学科，让研究既更快，也能看得更细。</p>
+          <p class="word-note"><strong>词组拆解：</strong>documentation = 记录/文档化，不只是“说明书”；analysis = 分析/释读；adapted to various disciplines = 被不同学科采用并改造。</p>
+        </section>
+        <section class="sentence-card" data-target="abs-s3" data-page="1" data-scope="abstract" data-start="3" data-end="3" tabindex="0">
+          <div class="tag">摘要第3句 · 本文研究对象</div>
+          <p class="literal"><strong>贴近原句的直译：</strong>本文考察 RTI 方法在碑铭学中为铭文记录和分析带来的创新。</p>
+          <p class="natural"><strong>更自然的中文：</strong>这篇文章要说明：RTI 怎样帮助碑铭研究者更可靠地记录铭文，并在此基础上分析难读的文字表面。</p>
+          <p class="word-note"><strong>词组拆解：</strong>inscriptions = 铭文；epigraphy = 碑铭学；innovations = 新贡献，不一定是全新算法，也可能是研究流程的改进。</p>
+        </section>
+        <section class="sentence-card" data-target="abs-s4" data-page="1" data-scope="abstract" data-start="4" data-end="4" tabindex="0">
+          <div class="tag">摘要第4句 · RTI定义</div>
+          <p class="literal"><strong>贴近原句的直译：</strong>RTI 是一种计算摄影方法，它利用从不同角度照亮物体表面所获得的图像数据，合成反射属性，从而记录对象表面的微地形。</p>
+          <p class="natural"><strong>更自然的中文：</strong>简单说，RTI 会对同一个表面从许多光照方向拍照，再根据明暗变化重建“这个表面哪里凸、哪里凹、朝向哪里”的可视信息。</p>
+          <p class="word-note"><strong>词组拆解：</strong>computational photographic method = 计算摄影方法；reflectance properties = 反射属性；micro-topography = 微地形、微小表面起伏。</p>
+        </section>
+        <section class="sentence-card" data-target="abs-s5" data-page="1" data-scope="abstract" data-start="5" data-end="5" tabindex="0">
+          <div class="tag">摘要第5句 · 为什么适合受损铭文</div>
+          <p class="literal"><strong>贴近原句的直译：</strong>该方法尤其有助于记录受损考古器物表面，并提高视觉证据的清晰度，从而帮助判断铭文载体上受损表面的字母特征。</p>
+          <p class="natural"><strong>更自然的中文：</strong>对风化、破损、字口很浅的碑刻来说，RTI 可以让原本不容易看清的刻痕和字形更可见，帮助研究者判断疑字，但最终释读仍要靠专家和证据链。</p>
+          <p class="word-note"><strong>词组拆解：</strong>damaged surface = 受损表面；inscription bearer = 承载铭文的物体，例如石碑、石块、柱础；visual evidence = 视觉证据。</p>
+        </section>
+
+        <h2>第2-16页 · 全篇联动译读初稿</h2>
+        <p class="note">下面这些卡片也绑定了 PDF 页码和句子范围。鼠标悬停时，左侧会自动切到对应页并高亮原文区域。这里先做“页内段落级译读”，后续可继续细分到每一个原文句号。</p>
+        <section class="sentence-card" data-target="p2-g1" data-page="2" data-start="1" data-end="4" tabindex="0"><div class="tag">第2页 · 数字记录技术进入文化遗产研究</div><p class="natural"><strong>译读：</strong>作者把 RTI 放进数字记录技术谱系：三维激光扫描、摄影测量和 RTI 都在帮助研究者获得更细、更可复查的对象信息。</p><p class="word-note"><strong>要点：</strong>RTI 不取代 3D，而是补充“表面微地形”和“多光照观察”。</p></section>
+        <section class="sentence-card" data-target="p2-g2" data-page="2" data-start="5" data-end="9" tabindex="0"><div class="tag">第2页 · 为什么过去不普及</div><p class="natural"><strong>译读：</strong>过去数字记录不普及，是因为设备贵、软件复杂、需要专家服务。现在资料、软件和低成本设备更容易获得，研究者可以自己掌握这些方法。</p><p class="word-note"><strong>项目解释：</strong>这正是本项目先做低成本 H-RTI，再做固定灯阵和光度立体的原因。</p></section>
+        <section class="sentence-card" data-target="p2-g3" data-page="2" data-start="10" data-end="20" tabindex="0"><div class="tag">第2页 · 风化铭文需要新的证据工具</div><p class="natural"><strong>译读：</strong>数字副本可以让研究者在非现场环境中继续观察；而铭文长期受自然和人为因素影响，表面磨损会造成误读甚至无法释读，所以作者引出 RTI 作为新的记录和分析工具。</p><p class="word-note"><strong>项目解释：</strong>汉画像石榜题、浅刻线、风化纹理也面临同样问题。</p></section>
+        <section class="sentence-card" data-target="p3-g1" data-page="3" data-start="1" data-end="8" tabindex="0"><div class="tag">第3页 · 传统记录方法及其接触风险</div><p class="natural"><strong>译读：</strong>作者回顾拓印、乳胶复制、单色照片、微缩胶片和数字摄影等方法。拓片能得到清晰轮廓，但需要清理表面、湿纸贴合和刷压，对脆弱对象存在接触风险。</p><p class="word-note"><strong>要点：</strong>RTI 的非接触性，是它进入文物保护流程的核心理由。</p></section>
+        <section class="sentence-card" data-target="p4-g1" data-page="4" data-start="1" data-end="14" tabindex="0"><div class="tag">第4页 · 单一斜光照片为什么不够</div><p class="natural"><strong>译读：</strong>单一方向斜光能显出某些刻痕，却会让其他区域落入阴影；它只能呈现一个光照条件下的表面信息。因此在传统记录不足时，RTI 作为非接触、非破坏、可多方向分析的方法出现。</p><p class="word-note"><strong>要点：</strong>RTI 的优势是把“观察光源”交给后期交互。</p></section>
+        <section class="sentence-card" data-target="p5-g1" data-page="5" data-start="1" data-end="14" tabindex="0"><div class="tag">第5页 · PTM/RTI、表面法线与早期应用</div><p class="natural"><strong>译读：</strong>PTM/RTI 文件保存像素级表面方向信息，二维图像因此携带微地形线索。作者举苏美尔泥板等早期案例，说明 RTI 能揭示肉眼难辨的文字和表面细节。</p><p class="word-note"><strong>数学补课：</strong>这里涉及 surface normal、polynomial coefficients、fitting。</p></section>
+        <section class="sentence-card" data-target="p6-g1" data-page="6" data-start="1" data-end="15" tabindex="0"><div class="tag">第6页 · Dome稳定，H-RTI灵活</div><p class="natural"><strong>译读：</strong>固定 dome 能精确控制多光源，适合室内小对象；但造价、体积、野外搬运和供电都是限制。CHI 推动的 H-RTI 用手持光源和反光球降低门槛，更适合现场文化遗产。</p><p class="word-note"><strong>项目解释：</strong>先掌握 H-RTI，再升级固定灯阵。</p></section>
+        <section class="sentence-card" data-target="p7-g1" data-page="7" data-start="1" data-end="15" tabindex="0"><div class="tag">第7页 · H-RTI三步流程</div><p class="natural"><strong>译读：</strong>RTI 生成包括拍摄、处理、查看三个步骤。通常需要 24 到 60 张多光照照片，相机和对象固定，光源方向变化并被识别。</p><p class="word-note"><strong>项目解释：</strong>照片序列和灯位信息一旦错配，结果会整体失真。</p></section>
+        <section class="sentence-card" data-target="p8-g1" data-page="8" data-start="1" data-end="16" tabindex="0"><div class="tag">第8页 · 光照距离、固定要求与现场计划</div><p class="natural"><strong>译读：</strong>光源距离通常按对象对角线的三到四倍估计。拍摄期间相机、对象、反光球不能移动，否则像素错位会导致反射计算错误。现场条件复杂，采集前必须规划。</p><p class="word-note"><strong>数学直觉：</strong>模型假设同一像素跨照片对应同一表面点。</p></section>
+        <section class="sentence-card" data-target="p9-g1" data-page="9" data-start="1" data-end="15" tabindex="0"><div class="tag">第9页 · RTI与普通图像增强的区别</div><p class="natural"><strong>译读：</strong>RTI 在光与表面几何互动明显的对象上最有效。普通照片可以调直方图、锐度和对比度，但它只是在固定光照下加工一张图；RTI 是基于多光照数据重新观察表面。</p><p class="word-note"><strong>要点：</strong>RTI 是重建观察条件，不只是后期修图。</p></section>
+        <section class="sentence-card" data-target="p10-g1" data-page="10" data-start="1" data-end="18" tabindex="0"><div class="tag">第10页 · Diffuse Gain 与 Specular Enhancement</div><p class="natural"><strong>译读：</strong>RTI Viewer 能对表面法线和颜色值应用数学滤镜。Diffuse Gain 增强相邻像素对比，让浮雕和刻线更明显；Specular Enhancement 增强类似高光的效果，帮助观察细微凹凸。</p><p class="word-note"><strong>提醒：</strong>增强图用于观察辅助，不能替代原始证据。</p></section>
+        <section class="sentence-card" data-target="p11-g1" data-page="11" data-start="1" data-end="8" tabindex="0"><div class="tag">第11页 · 案例图与优势讨论</div><p class="natural"><strong>译读：</strong>图例显示滤镜如何帮助识别受损字形。作者随后进入讨论：RTI 的主要优势是非接触、非破坏，适合保存状态敏感的铭文。</p><p class="word-note"><strong>要点：</strong>看清只是第一步，证据可复核才是学术价值。</p></section>
+        <section class="sentence-card" data-target="p12-g1" data-page="12" data-start="1" data-end="18" tabindex="0"><div class="tag">第12页 · RTI的限制</div><p class="natural"><strong>译读：</strong>RTI 只记录表面信息，不能像 X 射线那样看内部结构。它成本低、计算要求低、适合细节观察；但如果需要严格三维测量，应使用激光扫描或摄影测量。</p><p class="word-note"><strong>要点：</strong>RTI 用于读表面，3D/SfM 用于量几何。</p></section>
+        <section class="sentence-card" data-target="p13-g1" data-page="13" data-start="1" data-end="18" tabindex="0"><div class="tag">第13页 · 结论：RTI服务释读和证据链</div><p class="natural"><strong>译读：</strong>作者认为 RTI 既适合小型出土物，也适合大型不可移动文物。采集后，研究者可以在办公室继续基于数字数据细读对象；交互光照和增强滤镜能帮助检查字形、刻痕和损伤，让铭文释读拥有更多可复核证据。</p><p class="word-note"><strong>最终要点：</strong>RTI 不替专家判断，而是提高证据质量和复查能力。</p></section>
+        <section class="sentence-card" data-target="p14-g1" data-page="14" data-start="1" data-end="18" tabindex="0"><div class="tag">第14页 · 参考文献：RTI与文物表面分析谱系</div><p class="natural"><strong>译读：</strong>这一页进入参考文献。它把论文放进几个来源传统里：CHI 的 RTIBuilder/RTIViewer 指南、装饰技法与器物表面分析、数字替身、以及大型对象的高质量 PTM/RTI 采集。</p><p class="word-note"><strong>读法：</strong>参考文献不是正文的“废页”。它告诉你作者主要借了哪些技术传统，也能帮你反查后续要读的源头论文。</p></section>
+        <section class="sentence-card" data-target="p15-g1" data-page="15" data-start="1" data-end="18" tabindex="0"><div class="tag">第15页 · 参考文献：PTM、交互重打光与硬币研究</div><p class="natural"><strong>译读：</strong>这一页列出 RTI/PTM 的关键源头：Malzbender 的 Polynomial Texture Maps、实时光度立体与表面增强、安提基特拉机械的交互重打光，以及古希腊罗马硬币的 RTI 研究。</p><p class="word-note"><strong>读法：</strong>如果你要追 RTI 的技术根，先读 PTM；如果你要追文物应用，硬币、玻璃、楔形文字和碑铭是最相关的案例群。</p></section>
+        <section class="sentence-card" data-target="p16-g1" data-page="16" data-start="1" data-end="14" tabindex="0"><div class="tag">第16页 · 参考文献收束：碑铭学与数字化案例</div><p class="natural"><strong>译读：</strong>最后一页继续列出碑铭学、楔形文字数字化、拜占庭玻璃镶嵌等案例。它说明 RTI 在本文中不是孤立技术，而是数字文物记录、古代文字研究和可视化考古之间的交叉工具。</p><p class="word-note"><strong>收束：</strong>读完全文后，回看参考文献可以形成自己的阅读路线：PTM/RTI 原理 -> CHI 工具流程 -> 铭文与硬币案例 -> 汉画像石或碑刻项目迁移。</p></section>
+
+        <h2 id="p1">第1页 · 标题、摘要、关键词</h2>
+        <section class="segment">
+          <div class="loc">第1页 · 标题段</div>
+          <div class="keys">关键词：Epigrafi / Epigraphical Studies / Documentation / Analysis / RTI</div>
+          <p class="translation">中文意译：论文把 RTI 定位为碑铭学的一种新型“记录 + 分析”方法。它不是单纯为了把照片拍得好看，而是为研究者提供可复核的铭文表面证据。</p>
+          <div class="explain">读法：标题里的 documentation 是“记录证据”，analysis 是“基于证据做释读”。这两个词要分开看：没有稳定记录，后面的释读就无法复核。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第1页 · 土耳其语摘要第1段</div>
+          <div class="keys">关键词：数字成像方法、文化遗产、新方法、快速细致研究</div>
+          <p class="translation">中文意译：作者先说，数字成像技术的发展让文化遗产研究获得了新的记录方式。这些新方法能被不同学科采用，让研究更快、更细，也更容易比较细节。</p>
+          <div class="explain">项目提示：这说明 RTI 不是孤立工具，而是文化遗产数字记录的一部分。你后续做汉画像石时，也要把 RTI 放进摄影测量、3D、拓片、线图、标注这一整套证据链里。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第1页 · 土耳其语摘要第2段</div>
+          <div class="keys">关键词：Reflectance Transformation Imaging、铭文、记录流程、分析流程</div>
+          <p class="translation">中文意译：本文研究 RTI 在碑铭学中的作用，尤其是它怎样改进铭文的记录和分析。作者强调 RTI 已经在文化遗产研究中使用，并且适合处理文字载体表面的可见细节。</p>
+          <div class="explain">这里对应你的项目：碑刻、榜题、汉画像石边缘线条都属于“文字/图像刻在表面上”的问题，RTI 的价值正是把表面起伏变成可反复观察的数字证据。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第1页 · RTI定义段</div>
+          <div class="keys">关键词：多角度照明、反射属性、micro-topography、computational photography</div>
+          <p class="translation">中文意译：RTI 是一种计算摄影方法：对同一对象从不同方向打光拍摄，再把这些图像中的反射变化合成为表面微地形信息。它让人看到肉眼或单张照片不容易看出的细节。</p>
+          <div class="math">数学直觉：每张照片对应一个光照方向；同一像素在不同光照下明暗变化，反映了局部表面朝向。先看 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量和法线</a> 与 <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积和斜光</a>。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第1页 · 英文摘要段</div>
+          <div class="keys">关键词：damaged surfaces / inscription bearer / visual evidence / non-destructive</div>
+          <p class="translation">中文意译：作者强调 RTI 特别适合损坏、风化或难以阅读的铭文表面。它能增强视觉证据，让研究者更好地判断残损字母、刻线和表面形态，同时保持非接触、非破坏。</p>
+          <div class="explain">你要抓住“visual evidence”这个词：RTI 不是替专家做最终释读，而是给专家更多可检查证据。</div>
+        </section>
+
+        <h2 id="p2">第2页 · 引言：为什么文化遗产需要数字记录</h2>
+        <section class="segment">
+          <div class="loc">第2页 · 引言第1段</div>
+          <div class="keys">关键词：3D laser scanning / photogrammetry / RTI / micro-topography</div>
+          <p class="translation">中文意译：作者把 RTI 放在一组数字记录技术里比较：三维激光扫描可以获取精细三维数据，摄影测量可以通过图像匹配重建形体，而 RTI 擅长揭示对象表面的微小起伏。</p>
+          <div class="explain">项目迁移：整体形体用 3D/SfM，局部浅刻用 RTI/光度立体。不要指望一种技术解决所有问题。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第2页 · 引言第2段</div>
+          <div class="keys">关键词：设备复杂、高成本、用户友好、低预算</div>
+          <p class="translation">中文意译：过去数字记录方法不普及，主要因为设备和软件复杂、成本高，需要外部专家或服务商。现在资料更容易获得，软件更友好，低成本设备更多，研究者可以自己尝试。</p>
+          <div class="explain">这正是你项目的路线：先用可负担设备建立方法闭环，再逐步提高灯位、标定和验证精度。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第2页 · 引言第3段</div>
+          <div class="keys">关键词：virtual conservation / digital copy / visual perception</div>
+          <p class="translation">中文意译：数字记录可以形成文物的数字替身，用于保存、展示和分析。通过增强视觉感知，研究者可以在办公室继续查看已经记录下来的细节。</p>
+          <div class="explain">注意“数字替身”不是替代原物。它的价值是可访问、可传播、可复查，但仍要保留采集条件和处理参数。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第2页 · 引言第4段</div>
+          <div class="keys">关键词：自然/人为磨损、误读、无法释读</div>
+          <p class="translation">中文意译：铭文表面会因为自然过程和人为因素被磨损，这会让文字释读变得困难。有些铭文会被误读，有些甚至无法读出。论文因此提出：需要一种新的记录和分析工具。</p>
+          <div class="explain">项目提示：汉画像石同样有风化、拓片残缺、线条浅、背景噪声等问题。RTI 的任务是降低“看不见”的风险，而不是自动给出唯一答案。</div>
+        </section>
+
+        <h2 id="p3">第3页 · 传统碑铭记录方法与限制</h2>
+        <section class="segment">
+          <div class="loc">第3页 · 传统记录段</div>
+          <div class="keys">关键词：estampage / latex / photograph / inventory</div>
+          <p class="translation">中文意译：作者回顾了碑铭记录方法：19-20世纪常用拓印、乳胶复制等方式，后来摄影、微缩胶片和数字摄影成为记录和编目的常见手段。</p>
+          <div class="explain">这里不是否定传统方法，而是在说明每种记录方式都有历史用途和局限。RTI 应该作为补充证据，而不是简单替代拓片。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第3页 · 拓片操作段</div>
+          <div class="keys">关键词：清理表面、湿纸、刷压、接触对象</div>
+          <p class="translation">中文意译：拓片需要清理铭文表面，把特制纸张贴合到刻痕里，再通过刷压让纸进入凹槽。这能得到清晰的文字轮廓，但它必须接触文物表面。</p>
+          <div class="explain">项目提示：对脆弱对象，接触式方法有风险。RTI 的一个核心优势就是不接触表面。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第3页 · 摄影限制段</div>
+          <div class="keys">关键词：单一光照、阴影、反光、细节不可见</div>
+          <p class="translation">中文意译：普通照片取决于拍摄时的光照角度。某些刻线会被阴影突出，另一些细节会被阴影或反光遮住。单张照片很难同时展示所有表面信息。</p>
+          <div class="explain">这就是你截图里左边 PDF 看不清的更大版本：普通图像把观察条件固定死了，RTI 把观察光源交还给读者。</div>
+        </section>
+
+        <h2 id="p4">第4-6页 · RTI是什么，以及为什么 H-RTI 变得实用</h2>
+        <section class="segment">
+          <div class="loc">第4页 · 转入RTI段</div>
+          <div class="keys">关键词：alternative method / non-destructive / multi-directional analysis</div>
+          <p class="translation">中文意译：当传统方法不足以记录受损、难读或保存状态敏感的铭文时，RTI 成为一种替代方案。它不接触文物，并允许从多个方向分析表面。</p>
+          <div class="explain">重点：RTI 的“多方向”不只是拍摄时多方向打光，也是阅读时可多方向重打光。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第4-5页 · PTM/RTI技术解释段</div>
+          <div class="keys">关键词：Polynomial Texture Map / surface normals / coefficients</div>
+          <p class="translation">中文意译：论文解释 RTI 与 PTM 的技术背景：对每个像素记录在不同光照下的亮度变化，用数学模型保存这种变化。模型里包含表面法线等信息，因此二维图像可以携带表面形态线索。</p>
+          <div class="math">补课：PTM 会出现 polynomial、coefficients、surface normal。对应 <a href="../../../../math-foundations/html/03-least-squares-fitting.html">最小二乘与拟合</a>。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第5页 · 文化遗产应用史段</div>
+          <div class="keys">关键词：Sumerian tablet / cultural heritage / surface details</div>
+          <p class="translation">中文意译：作者提到 RTI 早期应用在铭文对象上，例如苏美尔泥板，研究者通过 PTM/RTI 看到了肉眼不容易分辨的文字和表面细节。</p>
+          <div class="explain">这说明 RTI 从一开始就和“难读文字”关系密切。汉画像石榜题、碑刻疑字可以沿这条线走。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第6页 · dome系统限制段</div>
+          <div class="keys">关键词：dome / high cost / small objects / indoor use</div>
+          <p class="translation">中文意译：固定半球 dome 可以控制灯位，但造价高、体积受限，不适合野外大型对象。它更适合室内小件，比如硬币、化石等。</p>
+          <div class="explain">这段对硬件路线很重要：固定 dome 稳定，手持 H-RTI 灵活。项目要根据对象大小选择。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第6页 · CHI与H-RTI段</div>
+          <div class="keys">关键词：Cultural Heritage Imaging / highlight method / black reflective spheres</div>
+          <p class="translation">中文意译：为了降低成本并适应现场条件，CHI 等推动了 Highlight RTI：相机固定，手持光源移动，通过画面中的黑色反光球估计每张照片的光照方向。</p>
+          <div class="explain">这是你做现场碑刻和画像石最应先掌握的方法，因为它不要求一开始就有大型灯阵。</div>
+        </section>
+
+        <h2 id="p7">第7-8页 · H-RTI采集流程</h2>
+        <section class="segment">
+          <div class="loc">第7页 · 三个步骤段</div>
+          <div class="keys">关键词：photo capture / processing / viewing mathematical model</div>
+          <p class="translation">中文意译：作者把 RTI 生成分成三步：拍摄对象的一组照片；处理照片生成模型；在查看器中交互查看这个数学模型。</p>
+          <div class="explain">项目记录也要按这三步建目录：capture、processing、viewing/export。不要把原图、结果图和说明混在一起。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第7页 · 24-60张照片段</div>
+          <div class="keys">关键词：24-60 photos / fixed camera / changing known light angles</div>
+          <p class="translation">中文意译：H-RTI 通常对同一对象拍 24 到 60 张照片。相机固定，对象固定，光源方向变化且需要被估计或记录。</p>
+          <div class="explain">实操重点：每张图的文件名和光照顺序要严格保存；少几张可以补，顺序错乱会毁掉后续处理。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第8页 · 光源距离段</div>
+          <div class="keys">关键词：object diagonal / three or four times / light distance</div>
+          <p class="translation">中文意译：论文提到，光源到对象的距离可按对象对角线长度的三到四倍来估计。这样能让光照近似为来自远处的方向光，减少近场误差。</p>
+          <div class="math">数学直觉：如果灯太近，不同像素看到的光照方向差异会变大，简单 RTI 模型会变不稳。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第8页 · 固定相机和反光球段</div>
+          <div class="keys">关键词：camera fixed / spheres fixed / pixel shift / wrong reflectance calculations</div>
+          <p class="translation">中文意译：采集过程中相机和反光球必须保持不动。哪怕很小的像素位移，也会导致错误的反射计算，结果可能变模糊、不真实，无法用于分析。</p>
+          <div class="explain">这段应该直接进入你的采集 SOP：三脚架、防抖、遥控快门、标尺、反光球固定都不是形式主义。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第8页 · 现场计划段</div>
+          <div class="keys">关键词：field conditions / preparation / planning</div>
+          <p class="translation">中文意译：作者强调现场采集前的准备和计划非常重要。野外对象受空间、天气、光线、对象高度、可接近性影响，不能到现场才临时决定怎么拍。</p>
+          <div class="explain">项目提示：每次采集前先填 capture plan：对象尺寸、相机位置、光源半径、反光球位置、预计张数、环境光控制。</div>
+        </section>
+
+        <h2 id="p9">第9-10页 · 交互查看与滤镜</h2>
+        <section class="segment">
+          <div class="loc">第9页 · RTI适用场景段</div>
+          <div class="keys">关键词：light interaction / geometry / reflectance / surface texture</div>
+          <p class="translation">中文意译：RTI 在光与表面几何互动明显的对象上最有效。材料反射性质和表面纹理会给分析提供感知线索。</p>
+          <div class="explain">浅刻、凿痕、风化裂隙适合 RTI；平滑无起伏、颜色信息为主的对象，RTI价值会下降。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第9页 · 普通图像增强限制段</div>
+          <div class="keys">关键词：histogram / sharpness / contrast / ordinary photo editing</div>
+          <p class="translation">中文意译：普通照片也可以调直方图、锐化、增强对比度，但这些操作只是处理固定光照下的一张图，不能像 RTI 那样重新选择光照方向。</p>
+          <div class="explain">这能解释“P图”和“RTI增强”的区别：前者增强现有图，后者利用多光照数据重新观察表面。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第10页 · RTI Viewer滤镜段</div>
+          <div class="keys">关键词：surface normals / color values / mathematical transformation filters</div>
+          <p class="translation">中文意译：RTI Viewer 可以对表面法线和颜色值应用数学变换滤镜，从而突出难以察觉的表面细节。</p>
+          <div class="math">数学直觉：滤镜不是凭空创造信息，而是基于多光照估计出的表面方向和颜色数据重新映射视觉效果。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第10页 · Diffuse Gain段</div>
+          <div class="keys">关键词：diffuse gain / contrast between neighboring pixels / relief / incision</div>
+          <p class="translation">中文意译：Diffuse Gain 通过增强相邻像素之间的对比，让浮雕和刻线更明显。它适合看字口、凹槽、浅刻边缘。</p>
+          <div class="explain">读碑刻时，Diffuse Gain 常常比普通视图更能暴露笔画方向和残损边缘。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第10页 · Specular Enhancement段</div>
+          <div class="keys">关键词：specular enhancement / reflective contribution / surface detail</div>
+          <p class="translation">中文意译：Specular Enhancement 通过增强类似高光的视觉效果，让表面起伏更容易被看出来。它适合观察细微凹凸，但也可能让图像看起来不自然。</p>
+          <div class="explain">项目规则：增强图可用于观察和标注辅助，但不要把它当作原始证据；必须能回到原图和采集参数。</div>
+        </section>
+
+        <h2 id="p11">第11-12页 · 优势与限制</h2>
+        <section class="segment">
+          <div class="loc">第11页 · 优势第1段</div>
+          <div class="keys">关键词：non-destructive / contactless / photographic capture</div>
+          <p class="translation">中文意译：RTI 是非破坏、非接触的记录方法。它通过拍照获得表面细节，避免对脆弱铭文进行拓印或其他接触式操作。</p>
+          <div class="explain">这对馆藏和风化现场对象尤其重要：安全性本身就是方法价值。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第11页 · 优势第2段</div>
+          <div class="keys">关键词：portable equipment / low cost / field use</div>
+          <p class="translation">中文意译：H-RTI 所需设备相对便携且成本较低，适合野外或远距离地点。这让研究者不必依赖大型设备也能做表面记录。</p>
+          <div class="explain">这支持项目第一阶段：先建立手持 H-RTI 能力，再考虑固定灯阵和定量光度立体。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第12页 · 限制第1段</div>
+          <div class="keys">关键词：surface data only / no subsurface / not X-Ray</div>
+          <p class="translation">中文意译：RTI 只能记录表面可见信息，不能像 X 射线那样分析内部或下层结构。如果信息不在表面，RTI无法提供答案。</p>
+          <div class="explain">项目提示：不要把 RTI 说成万能修复。它能增强可见表面证据，不能恢复不存在或被完全覆盖的信息。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第12页 · 限制第2段</div>
+          <div class="keys">关键词：3D laser scanning / high cost / metric data</div>
+          <p class="translation">中文意译：三维激光扫描可以提供精确几何和测量数据，但成本更高。RTI 文件生成和查看不需要很高配置，却不能提供严格三维度量。</p>
+          <div class="explain">结论：如果目标是“看清刻线”，RTI 很合适；如果目标是“精确测量三维尺寸”，要用摄影测量、激光扫描或光度立体等方法补充。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第12页 · 限制第3段</div>
+          <div class="keys">关键词：surface shape / interpretation / verification</div>
+          <p class="translation">中文意译：RTI 可以帮助理解表面形态，但解释仍然需要研究者判断。增强滤镜可能突出细节，也可能放大噪声或误导初学者。</p>
+          <div class="explain">所以你的 HTML 导读需要“解释”和“风险提醒”并列，不应该只给一个结论。</div>
+        </section>
+
+        <h2 id="p13">第13页 · 结论：RTI怎样服务碑铭学</h2>
+        <section class="segment">
+          <div class="loc">第13页 · 结论第1段</div>
+          <div class="keys">关键词：small finds / immovable heritage / correct documentation</div>
+          <p class="translation">中文意译：作者认为，无论是小型出土物还是大型不可移动文物，RTI 都能帮助做更准确、更细致的数字记录。</p>
+          <div class="explain">汉画像石正好处在这里：既可能有馆藏小件，也可能有大型不可移动石刻。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第13页 · 结论第2段</div>
+          <div class="keys">关键词：office analysis / digital data / detailed study</div>
+          <p class="translation">中文意译：采集后的 RTI 数据可以带回办公室继续分析。研究者不必每次都回到现场，也能从不同光照方向反复检查细节。</p>
+          <div class="explain">这就是“可复核材料”的意义：论文、报告、标注、释文都可以回指到同一个 RTI 数据包。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第13页 · 结论第3段</div>
+          <div class="keys">关键词：decipherment / characters / macro and micro detail</div>
+          <p class="translation">中文意译：在释读铭文时，RTI 的交互光照和增强滤镜可以帮助研究者从宏观和微观两个层级查看字形、刻痕和表面损伤。</p>
+          <div class="explain">项目迁移：榜题识读可以设置多层证据：原图、RTI普通视图、Diffuse Gain、Specular Enhancement、人工释读。</div>
+        </section>
+        <section class="segment">
+          <div class="loc">第13页 · 结论第4段</div>
+          <div class="keys">关键词：low cost / non-destructive / epigraphy</div>
+          <p class="translation">中文意译：作者最终强调，RTI 因低成本、便携、非接触和分析能力，适合作为碑铭学研究中的重要数字方法。</p>
+          <div class="explain">一句话收束：这篇论文证明 RTI 对碑铭学的价值不是“图像漂亮”，而是“证据更丰富、解释更可复核”。</div>
+        </section>
+
+        <h2>读完后你要记住的结构</h2>
+        <div class="project">
+          <ul>
+            <li>传统记录：拓片、乳胶、摄影都有价值，但都有局限。</li>
+            <li>RTI机制：多光照照片记录表面反射变化，支持交互重打光。</li>
+            <li>H-RTI优势：便携、低成本、适合现场和不可移动对象。</li>
+            <li>RTI限制：不是真实3D测量，不看内部结构，不替代专家释读。</li>
+            <li>项目落地：RTI结果要进入证据链，而不是只当展示图。</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script type="module">
+import * as pdfjsLib from '../../vendor/pdfjs/pdf.mjs';
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = '../../vendor/pdfjs/pdf.worker.mjs';
+const pdfUrl = '07-RTI_Epigraphical_Studies.pdf';
+let doc = null;
+let currentPage = 1;
+let scale = 1.8;
+let renderQueue = Promise.resolve();
+let activeRenderTask = null;
+
+function setActive(id, shouldScroll = false) {
+  document.querySelectorAll('[data-target]').forEach((el) => el.classList.toggle('active', el.dataset.target === id));
+  if (shouldScroll) {
+    const card = document.querySelector('.sentence-card[data-target="' + id + '"]');
+    if (card) card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+}
+
+async function ensurePageForCard(card) {
+  const page = Number(card.dataset.page || 1);
+  if (page && page !== currentPage) await renderPage(page);
+  setActive(card.dataset.target, false);
+}
+
+function wireSync(root = document) {
+  root.querySelectorAll('[data-target]').forEach((el) => {
+    if (el.dataset.syncReady) return;
+    el.dataset.syncReady = '1';
+    const fromPdf = el.classList.contains('pdf-hotspot');
+    el.addEventListener('mouseenter', () => fromPdf ? setActive(el.dataset.target, true) : ensurePageForCard(el));
+    el.addEventListener('focus', () => fromPdf ? setActive(el.dataset.target, true) : ensurePageForCard(el));
+    el.addEventListener('click', () => fromPdf ? setActive(el.dataset.target, true) : ensurePageForCard(el));
+  });
+}
+
+function sentenceRanges(text) {
+  const ranges = [];
+  const re = /[^.!?\u3002\uff01\uff1f]+[.!?\u3002\uff01\uff1f]/g;
+  let match;
+  while ((match = re.exec(text))) ranges.push({ start: match.index, end: re.lastIndex });
+  return ranges;
+}
+
+function rectsForRange(charBoxes, start, end) {
+  const rects = [];
+  for (const box of charBoxes) {
+    const a = Math.max(start, box.start);
+    const b = Math.min(end, box.end);
+    if (a >= b) continue;
+    const ratioA = (a - box.start) / Math.max(1, box.end - box.start);
+    const ratioB = (b - box.start) / Math.max(1, box.end - box.start);
+    rects.push({ x: box.x + box.w * ratioA, y: box.y - box.h, w: box.w * (ratioB - ratioA), h: box.h * 1.35 });
+  }
+  return rects;
+}
+
+function makeTextModel(boxes, scope) {
+  let selected = boxes;
+  if (scope === 'abstract') {
+    const abstractStart = boxes.findIndex((b) => b.text.startsWith('Abstract'));
+    const keywordIndex = boxes.findIndex((b, idx) => idx > abstractStart && b.text.startsWith('Keywords'));
+    selected = abstractStart >= 0 && keywordIndex > abstractStart ? boxes.slice(abstractStart, keywordIndex) : boxes;
+  }
+  let text = '';
+  const charBoxes = [];
+  for (const box of selected) {
+    const addSpace = text && !/[\s(]$/.test(text) && !/^[,.;:)]/.test(box.text);
+    if (addSpace) text += ' ';
+    const start = text.length;
+    text += box.text;
+    charBoxes.push({ ...box, start, end: text.length });
+  }
+  return { text, charBoxes, ranges: sentenceRanges(text) };
+}
+
+function addHotspots(rects, id, overlay) {
+  const group = document.createElement('div');
+  group.className = 'pdf-hotspot-group';
+  group.dataset.target = id;
+  for (const r of rects) {
+    const el = document.createElement('div');
+    el.className = 'pdf-hotspot';
+    el.dataset.target = id;
+    el.style.left = `${r.x * scale}px`;
+    el.style.top = `${r.y * scale}px`;
+    el.style.width = `${Math.max(8, r.w * scale)}px`;
+    el.style.height = `${Math.max(10, r.h * scale)}px`;
+    group.appendChild(el);
+  }
+  overlay.appendChild(group);
+}
+
+function renderPage(pageNo = 1) {
+  renderQueue = renderQueue.catch(() => {}).then(() => doRenderPage(pageNo));
+  return renderQueue;
+}
+
+async function doRenderPage(pageNo = 1) {
+  currentPage = pageNo;
+  const stage = document.querySelector('.pdf-stage');
+  let canvas = document.getElementById('pdfCanvas');
+  const overlay = document.getElementById('pdfOverlay');
+  const wrap = document.getElementById('pdfPageWrap');
+  const page = await doc.getPage(pageNo);
+  const baseViewport = page.getViewport({ scale: 1 });
+  scale = Math.max(1.35, Math.min(2.15, (stage.clientWidth - 46) / baseViewport.width));
+  const viewport = page.getViewport({ scale });
+  if (activeRenderTask) {
+    try { activeRenderTask.cancel(); } catch {}
+    try { await activeRenderTask.promise; } catch {}
+    activeRenderTask = null;
+  }
+  const freshCanvas = canvas.cloneNode(false);
+  canvas.replaceWith(freshCanvas);
+  canvas = freshCanvas;
+  canvas.width = Math.floor(viewport.width);
+  canvas.height = Math.floor(viewport.height);
+  canvas.style.width = `${Math.floor(viewport.width)}px`;
+  canvas.style.height = `${Math.floor(viewport.height)}px`;
+  wrap.style.width = canvas.style.width;
+  wrap.style.height = canvas.style.height;
+  overlay.style.width = canvas.style.width;
+  overlay.style.height = canvas.style.height;
+  overlay.innerHTML = '';
+  const task = page.render({ canvasContext: canvas.getContext('2d'), viewport });
+  activeRenderTask = task;
+  try {
+    await task.promise;
+  } catch (error) {
+    if (error?.name !== 'RenderingCancelledException') throw error;
+    return;
+  } finally {
+    if (activeRenderTask === task) activeRenderTask = null;
+  }
+  document.getElementById('pdfFallback').style.display = 'none';
+
+  const textContent = await page.getTextContent();
+  const boxes = [];
+  for (const item of textContent.items) {
+    if (!item.str.trim()) continue;
+    const tx = pdfjsLib.Util.transform(baseViewport.transform, item.transform);
+    boxes.push({ text: item.str, x: tx[4], y: tx[5], w: item.width, h: item.height || 10 });
+  }
+  const models = new Map();
+  for (const card of document.querySelectorAll(`.sentence-card[data-page="${pageNo}"]`)) {
+    const scope = card.dataset.scope || 'page';
+    if (!models.has(scope)) models.set(scope, makeTextModel(boxes, scope));
+    const model = models.get(scope);
+    const start = Math.max(1, Number(card.dataset.start || 1));
+    const end = Math.max(start, Number(card.dataset.end || start));
+    const rangeStart = model.ranges[start - 1]?.start ?? 0;
+    const rangeEnd = model.ranges[end - 1]?.end ?? model.text.length;
+    const rects = rectsForRange(model.charBoxes, rangeStart, rangeEnd);
+    addHotspots(rects, card.dataset.target, overlay);
+  }
+  wireSync(overlay);
+}
+
+wireSync();
+pdfjsLib.getDocument(pdfUrl).promise.then(async (loaded) => { doc = loaded; await renderPage(1); }).catch((error) => {
+  document.getElementById('pdfOverlay').innerHTML = `<p style="color:#fff;background:#9b3f2c;padding:10px;">PDF ??????????${error.message}</p>`;
+});
+</script>
+</body>
+</html>

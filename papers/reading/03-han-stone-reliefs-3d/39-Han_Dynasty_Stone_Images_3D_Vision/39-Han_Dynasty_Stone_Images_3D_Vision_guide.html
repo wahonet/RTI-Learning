@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Reconstruction for Han Dynasty Stone Images Based on Three-Dimensional Vision 精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; overflow:auto; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../../01-rti-ptm-foundations/38-Archaeological_Applications_PTM/38-Archaeological_Applications_PTM_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../40-Ming_Stone_Stele_True_Texture_3D/40-Ming_Stone_Stele_True_Texture_3D_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文来源入口</div>
+        <h1>The Reconstruction for Han Dynasty Stone Images Based on Three-Dimensional Vision</h1>
+        <span class="badge">39</span><span class="badge">汉画像石三维视觉</span><span class="badge">2014</span>
+      </div>
+      <div class="source-box">
+        <h2>原文入口 / PDF待补</h2>
+        <p>本条目前只有公开论文页和摘要信息，尚未取得可本地归档的 PDF。这里先做“来源页对照 + 中文概念拆解”，后续拿到全文后可以继续升级为逐页精读。</p>
+        <ul>
+          <li><a href="https://www.scientific.net/AMM.556-562.5009">Scientific.Net 论文页</a></li>
+          <li>主索引条目：P14</li>
+        </ul>
+        <h2>左侧阅读方法</h2>
+        <p>先看标题、摘要、关键词：3D reconstruction、Han Dynasty stone images、SIFT algorithm、epipolar geometry、projective transformation。把它当作“用普通图像序列重建汉画像石几何”的早期路线，而不是 RTI 论文。</p>
+      </div>
+      <p class="note">说明：本页不全文搬运来源页，只做中文学习导读。</p>
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>39 · 汉画像石三维视觉重建</h1>
+      <p>这篇的价值在于：它把汉画像石放进计算机视觉的三维重建问题里。和 RTI 不同，RTI 主要改变光照来读表面；这篇更接近“从多张图像估计空间结构”。</p>
+
+      <div class="para">
+        <p class="where">标题段 · 研究对象和技术路线</p>
+        <p>标题里的 Han Dynasty Stone Images 指汉画像石；Three-Dimensional Vision 指计算机视觉里的三维重建。也就是说，作者关心的不是单张照片增强，而是能否根据图像之间的对应关系恢复对象的三维结构。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第1层 · 多幅汉画像石图像重建</p>
+        <p>公开摘要说明论文研究多幅汉画像石图像的三维重建，并提出基于两张图像的重建算法。读到这里要抓住一个核心：两张图像如果从不同位置拍摄，同一个石刻点在两张图中的位置会发生变化，这种变化就是估计深度的线索。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第2层 · SIFT匹配点</p>
+        <p>SIFT 是一种找“稳定特征点”的方法。它会在图像里找角点、纹理块、局部形状，然后尝试在另一张图里找到同一个点。对汉画像石来说，纹理和刻线复杂，SIFT 可能找到很多点，但风化、低对比、重复图案也会造成误匹配。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第3层 · 极线几何约束</p>
+        <p>极线几何可以粗略理解为：同一个三维点在两张照片中的位置不是随便对应的，它必须落在由相机位置决定的几何关系里。这个约束可以帮助删掉错误匹配点。数学上会涉及相机模型、齐次坐标、基础矩阵和投影关系。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第4层 · 二维平面投影变换</p>
+        <p>投影变换解释的是三维空间投到二维图像平面后的形变。对浅浮雕对象来说，如果整体近似平面，很多图像差异可以用平面单应性解释；但如果想恢复刻痕深度，就必须区分“平面纹理变化”和“真实高度变化”。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">摘要第5层 · 序列图像数学模型</p>
+        <p>论文把序列图像作为三维重建的基础。项目迁移时可以理解为：如果我们只有普通照片而没有多光照 RTI，仍然可以尝试 SfM/MVS 路线；但对于低浮雕细节，SfM 往往恢复整体几何较好，浅刻线和微细起伏不如 RTI/光度立体敏感。</p>
+      </div>
+
+      <div class="math">
+        <p><strong>数学补课：</strong><a href="../../../../math-foundations/html/04-matrices-photometric-stereo.html">矩阵与多照片重建</a>，再补 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量和空间方向</a>。</p>
+        <p>这篇涉及的高数不多，主要是线性代数和几何：点、线、矩阵、投影、坐标变换。读公式时优先看每个矩阵把什么坐标变成什么坐标。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul>
+          <li>它补上了汉画像石“多视图三维重建”路线，可和 RTI/光度立体形成互补。</li>
+          <li>RTI适合读浅刻和表面细节；SfM/MVS适合整体形体、尺度和空间展示。</li>
+          <li>第一阶段可把这篇作为 COLMAP/Meshroom 小样本实验的理论入口。</li>
+        </ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul>
+        <li>找一组同一画像石的多视角照片，用 COLMAP 做稀疏点云。</li>
+        <li>同一区域再做 RTI，比较三维模型和重打光图对刻线的表现。</li>
+        <li>记录哪些图案能被 SIFT 稳定匹配，哪些因风化或重复纹样失效。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>阅读器已迁移</title></head>
+<body><p>阅读器已迁移，正在跳转到新目录。</p>
+<script>
+const pdfMap = {
+  "../01_CHI_RTI_Highlight_Capture_Guide.pdf": "01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.pdf",
+  "../02_Earl_2011_RTI_Systems_Ancient_Documentary_Artefacts.pdf": "01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts.pdf",
+  "../03_Mudge_2006_RTI_Rock_Art_Multiple_Viewpoint.pdf": "01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art.pdf",
+  "../04_Mudge_2005_RTI_Coins_Grand_St_Bernard.pdf": "02-heritage-epigraphy-cases/04-Mudge_2005_RTI_Coins_Grand_St_Bernard/04-Mudge_2005_RTI_Coins_Grand_St_Bernard.pdf",
+  "../05_Palma_2010_Dynamic_Shading_Enhancement_RTI.pdf": "01-rti-ptm-foundations/05-Dynamic_Shading_Enhancement_RTI/05-Dynamic_Shading_Enhancement_RTI.pdf",
+  "../06_RTI_Gravestone_Detail.pdf": "02-heritage-epigraphy-cases/06-RTI_Gravestone_Detail/06-RTI_Gravestone_Detail.pdf",
+  "../07_RTI_in_Epigraphical_Studies.pdf": "02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.pdf",
+  "../09_Photometric_Stereo_3D_Reconstruction_Artworks.pdf": "04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf",
+  "../12_Han_Relief_From_Rubbing_Height_Map.pdf": "03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map.pdf",
+  "../14_2_5D_Digitization_Oracle_Bone_Bamboo_Slip_RTI.pdf": "02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.pdf",
+  "../15_CHI_RTIViewer_User_Guide_v1_1.pdf": "01-rti-ptm-foundations/15-CHI_RTIViewer_User_Guide/15-CHI_RTIViewer_User_Guide.pdf",
+  "../16_CHI_RTI_Glossary_v1.pdf": "01-rti-ptm-foundations/16-CHI_RTI_Glossary/16-CHI_RTI_Glossary.pdf",
+  "../17_Tutorial_Installing_RTIViewer_RTIBuilder.pdf": "01-rti-ptm-foundations/17-Installing_RTIViewer_RTIBuilder/17-Installing_RTIViewer_RTIBuilder.pdf",
+  "../18_DiLiGenT_Pi_Photometric_Stereo_Near_Planar_Rich_Details_ICCV2023.pdf": "04-photometric-stereo/18-DiLiGenT_Pi_Photometric_Stereo/18-DiLiGenT_Pi_Photometric_Stereo.pdf",
+  "../19_BRDF_Monotonicity_Shading_Normals_MLIC_GCH2024.pdf": "05-frontier-reflectance-imaging/19-BRDF_Monotonicity_Shading_Normals/19-BRDF_Monotonicity_Shading_Normals.pdf",
+  "../20_Shape_From_Polarization_Cultural_Heritage_2024.pdf": "05-frontier-reflectance-imaging/20-Shape_From_Polarization_Heritage/20-Shape_From_Polarization_Heritage.pdf",
+  "../21_Polarization_UNet_Surface_Normal_2024.pdf": "05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal.pdf",
+  "../22_Multispectral_RTI_Integrated_Angular_Spectral_Reflectance.pdf": "05-frontier-reflectance-imaging/22-Multispectral_RTI_Framework/22-Multispectral_RTI_Framework.pdf",
+  "../28_RTI_Heritage_Timbers_2025.pdf": "02-heritage-epigraphy-cases/23-RTI_Heritage_Timbers/23-RTI_Heritage_Timbers.pdf",
+  "../42_Easy_To_Build_RTI_System.pdf": "07-hardware-rti-systems/42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System.pdf"
+};
+const dataMap = {
+  "paper-data/01_CHI_RTI_Highlight_Capture_Guide.json": "01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.json",
+  "paper-data/02_Earl_2011_RTI_Systems_Ancient_Documentary_Artefacts.json": "01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts.json",
+  "paper-data/03_Mudge_2006_RTI_Rock_Art.json": "01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art.json",
+  "paper-data/04_Mudge_2005_RTI_Coins_Grand_St_Bernard.json": "02-heritage-epigraphy-cases/04-Mudge_2005_RTI_Coins_Grand_St_Bernard/04-Mudge_2005_RTI_Coins_Grand_St_Bernard.json",
+  "paper-data/05_Palma_2010_Dynamic_Shading_Enhancement_RTI.json": "01-rti-ptm-foundations/05-Dynamic_Shading_Enhancement_RTI/05-Dynamic_Shading_Enhancement_RTI.json",
+  "paper-data/06_RTI_Gravestone_Detail.json": "02-heritage-epigraphy-cases/06-RTI_Gravestone_Detail/06-RTI_Gravestone_Detail.json",
+  "paper-data/07_RTI_in_Epigraphical_Studies.json": "02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.json",
+  "paper-data/09_Photometric_Stereo_3D_Reconstruction_Artworks.json": "04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.json",
+  "paper-data/12_Han_Relief_From_Rubbing_Height_Map.json": "03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map.json",
+  "paper-data/14_2_5D_Digitization_Oracle_Bone_Bamboo_Slip_RTI.json": "02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.json",
+  "paper-data/15_CHI_RTIViewer_User_Guide.json": "01-rti-ptm-foundations/15-CHI_RTIViewer_User_Guide/15-CHI_RTIViewer_User_Guide.json",
+  "paper-data/16_CHI_RTI_Glossary.json": "01-rti-ptm-foundations/16-CHI_RTI_Glossary/16-CHI_RTI_Glossary.json",
+  "paper-data/17_Installing_RTIViewer_and_RTIBuilder.json": "01-rti-ptm-foundations/17-Installing_RTIViewer_RTIBuilder/17-Installing_RTIViewer_RTIBuilder.json",
+  "paper-data/18_DiLiGenT_Pi_Photometric_Stereo_Near_Planar_Rich_Details_ICCV2023.json": "04-photometric-stereo/18-DiLiGenT_Pi_Photometric_Stereo/18-DiLiGenT_Pi_Photometric_Stereo.json",
+  "paper-data/19_BRDF_Monotonicity_Shading_Normals_MLIC_GCH2024.json": "05-frontier-reflectance-imaging/19-BRDF_Monotonicity_Shading_Normals/19-BRDF_Monotonicity_Shading_Normals.json",
+  "paper-data/20_Shape_From_Polarization_Cultural_Heritage_2024.json": "05-frontier-reflectance-imaging/20-Shape_From_Polarization_Heritage/20-Shape_From_Polarization_Heritage.json",
+  "paper-data/21_Polarization_UNet_Surface_Normal_2024.json": "05-frontier-reflectance-imaging/21-Polarization_UNet_Surface_Normal/21-Polarization_UNet_Surface_Normal.json",
+  "paper-data/22_Multispectral_RTI_Integrated_Angular_Spectral_Reflectance.json": "05-frontier-reflectance-imaging/22-Multispectral_RTI_Framework/22-Multispectral_RTI_Framework.json",
+  "paper-data/28_RTI_Heritage_Timbers_2025.json": "02-heritage-epigraphy-cases/23-RTI_Heritage_Timbers/23-RTI_Heritage_Timbers.json",
+  "paper-data/42_Easy_To_Build_RTI_System.json": "07-hardware-rti-systems/42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System.json"
+};
+const params = new URLSearchParams(location.search);
+const pdf = params.get('pdf');
+const data = params.get('data');
+if (pdfMap[pdf]) params.set('pdf', pdfMap[pdf]);
+if (dataMap[data]) params.set('data', dataMap[data]);
+location.replace('../reading/interactive-reader.html' + (params.toString() ? '?' + params.toString() : ''));
+</script></body></html>

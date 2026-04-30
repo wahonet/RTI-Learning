@@ -107,10 +107,10 @@ RTI或光度立体
 ## 7. 本课阅读任务
 
 阅读：
-- `../papers/12_Han_Relief_From_Rubbing_Height_Map.pdf`
-- `../papers/14_2_5D_Digitization_Oracle_Bone_Bamboo_Slip_RTI.pdf`
-- `../05-microtrace-reproduction.md`
-- `../07-software-workflow.md`
+- `../papers/reading/03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map.pdf`
+- `../papers/reading/02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.pdf`
+- `../docs/04-han-stone-ai/05-microtrace-reproduction.md`
+- `../docs/03-software-data/07-software-workflow.md`
 
 写下答案：
 - 数字拓片与传统拓片的差异是什么？

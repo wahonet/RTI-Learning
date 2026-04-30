@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polynomial Texture Map File Format 1.2 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../36-Polynomial_Texture_Maps/36-Polynomial_Texture_Maps_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../38-Archaeological_Applications_PTM/38-Archaeological_Applications_PTM_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>Polynomial Texture Map File Format 1.2</h1>
+        <span class="badge">37</span><span class="badge">经典待补</span><span class="badge">2001</span>
+      </div>
+      
+      <div class="source-box">
+        <h2>原文入口 / PDF待补</h2>
+        <p>这篇目前没有本地 PDF。请先从这些入口阅读原文或已有笔记；补齐 PDF 后可以自动改为左侧嵌入。</p>
+        <ul><li><a href="../../../../docs/00-overview/missing-materials-2026.md">项目记录</a></li><li><a href="https://shiftleft.com/mirrors/www.hpl.hp.com/techreports/2001/HPL-2001-104.pdf">PDF线索</a></li></ul>
+      </div>
+      <p class="note">没有本地 PDF 时，本页仍提供中文逐段组讲解和阅读路线。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>Polynomial Texture Map File Format 1.2</h1>
+      <p>这是理解 `.ptm` 文件结构的格式规范，关系到归档、互操作和长期可读性。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>经典待补</strong>，核心问题是“RTI/PTM 数据不是普通图片。若不了解文件头、系数编码、scale/bias 和颜色格式，后续工具转换、长期保存和质量检查都会出问题。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>RTI/PTM 数据不是普通图片。若不了解文件头、系数编码、scale/bias 和颜色格式，后续工具转换、长期保存和质量检查都会出问题。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>定义 PTM 文件头、格式标识、尺寸、颜色模式和系数存储方式。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>用 scale 和 bias 将浮点系数压缩/恢复到文件表示。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>规定 RGB、LRGB 等不同 PTM 数据组织方式。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · file header</p><p>文件头，记录格式版本、宽高、类型和关键参数。</p></div><div class="para"><p class="where">核心概念 · PTM_FORMAT</p><p>格式标识，告诉软件后续数据怎样解析。</p></div><div class="para"><p class="where">核心概念 · scale/bias</p><p>缩放和偏移，用于把模型系数编码到有限数值范围内，再在读取时还原。</p></div><div class="para"><p class="where">核心概念 · LRGB PTM</p><p>一种 PTM 表示，把亮度多项式与颜色信息分开，常用于提高效率。</p></div><div class="para"><p class="where">核心概念 · interoperability</p><p>互操作性，不同工具能否正确打开和解释同一文件。</p></div><div class="para"><p class="where">核心概念 · 归档风险</p><p>格式老旧、软件停更或参数缺失会导致未来无法读取。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">向量、光照方向和表面法线</a> · <a href="../../../../math-foundations/html/02-dot-product-raking-light.html">点积、夹角和斜光</a> · <a href="../../../../math-foundations/html/03-least-squares-fitting.html">最小二乘和拟合</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>让项目数据治理不只停留在 PDF 和图片，也覆盖 RTI 原生格式。</li><li>为 Relight、OpenLIME、RTIViewer 格式互转提供基础。</li><li>帮助设计长期保存策略：原始照片 + 开放格式 + 元数据。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>补 PDF，并写 `.ptm` 文件结构中文说明。</li><li>测试 RTIViewer、RelightLab、OpenLIME 对同一 PTM 的兼容性。</li><li>决定项目长期归档优先保存哪些格式。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

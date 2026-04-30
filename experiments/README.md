@@ -181,5 +181,5 @@ experiments/
 - [ ] 为实验A-E分别建立目录。
 - [ ] 每个实验至少写一页记录。
 - [ ] 建立实验结果对比表。
-- [ ] 把成功SOP回写到`06-capture-sop.md`。
-- [ ] 把标注问题回写到`10-iiml-knowledge-base.md`。
+- [ ] 把成功SOP回写到`docs/02-capture-hardware/06-capture-sop.md`。
+- [ ] 把标注问题回写到`docs/04-han-stone-ai/10-iiml-knowledge-base.md`。

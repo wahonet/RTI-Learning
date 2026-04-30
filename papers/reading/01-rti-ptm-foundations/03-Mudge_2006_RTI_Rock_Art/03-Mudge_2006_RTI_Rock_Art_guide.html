@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mudge 2006 RTI Rock Art 逐段精读</title>
+  <style>
+    @page { size: A4 landscape; margin: 8mm; }
+    :root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.62; }
+    a { color:var(--accent2); text-underline-offset:3px; }
+    .toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+    .toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+    .sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+    .left,.right { padding:7mm; min-width:0; }
+    .left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+    .right { overflow:auto; }
+    .pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+    h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+    h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+    p { margin:0 0 8px; }
+    ul { margin:0 0 8px; padding-left:20px; }
+    li { margin:3px 0; }
+    .label { color:var(--accent); font-weight:700; font-size:13px; }
+    .badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+    .para { border-top:1px solid var(--line); padding:9px 0; }
+    .where { font-weight:700; color:var(--accent); }
+    .math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+    .project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+    .note { color:var(--muted); font-size:12px; }
+    @media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+    @media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+  
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <a href="../../index.html">逐段精读索引</a> <a href="../../interactive-reader.html?pdf=01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art.pdf&title=New%20Reflection%20Transformation%20Imaging%20Methods%20for%20Rock%20Art%20and%20Multiple-Viewpoint%20Display&back=01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art_guide.html&data=01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art.json">精确联动阅读</a>
+    <span> <button onclick="window.print()">打印横版A4</button></span>
+  </nav>
+
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文 PDF</div>
+        <h1>Mudge 2006 Rock Art and Multiple-Viewpoint RTI</h1>
+        <span class="badge">经典论文</span><span class="badge">H-RTI</span><span class="badge">石刻现场</span>
+      </div>
+      <object class="pdf-frame" data="03-Mudge_2006_RTI_Rock_Art.pdf#page=1&zoom=125&toolbar=1&navpanes=0&scrollbar=1" type="application/pdf">
+        <p>当前浏览器无法内嵌 PDF，请打开 <a href="03-Mudge_2006_RTI_Rock_Art.pdf">本地 PDF</a> 对照阅读。</p>
+      </object>
+      <p class="note">右侧为逐段讲解，不复制论文长段原文。</p>
+    </section>
+
+    <section class="right">
+      <div class="label">右半页 · 逐段中文讲解</div>
+      <h1>03 Mudge 2006 精读：从采集手册进入经典论文</h1>
+      <p>这篇论文可以看成 H-RTI 的“为什么值得做”。前一篇 CHI 指南教你怎么拍，这篇解释这种拍法如何解决岩画、石刻、大型不可移动文物的记录问题。</p>
+
+      <div class="math">
+        <p><strong>数学门槛：</strong>本篇主要是方法论文，公式压力不大。你只需要理解光照方向是向量、反光球高光能估计光源方向。基础见 <a href="../../../../math-foundations/html/01-vectors-light-normals.html">数学基础01</a>。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页 · 标题和作者</p>
+        <p>标题里有两个重点：一个是 rock art，也就是岩画/岩刻这类现场对象；另一个是 multiple-viewpoint display，也就是不只从一个角度看对象。这说明论文不是纯粹讲算法，而是在解决复杂文物对象如何采集和展示。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页摘要第1段 · 两个新方法</p>
+        <p>摘要开头说论文提供两种记录和传播文化遗产信息的方法。第一种是用 RTI 采集大范围尺寸、形状和环境条件不同的岩画；第二种是把多视角 RTI 表示整合起来，便于围绕对象观察。</p>
+        <p>读法：作者不是说“RTI能拍一张好图”，而是说“RTI能成为文物记录和交流方式”。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页摘要第2段 · 不需要已知灯位</p>
+        <p>传统 PTM/RTI 往往要求知道每张图的光源位置。岩画现场很难精确摆灯，所以作者使用手持光源，再通过画面里的黑色反光球恢复光源方向。</p>
+        <p>这是 H-RTI 的核心贡献：把“复杂灯位测量”变成“拍摄时放一个反光球，后处理自动估计”。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">第1页摘要第3段 · 简单、低成本、易学习</p>
+        <p>论文强调方法简单、快速、低成本、容易学习。这一点对本项目很重要：汉画像石和碑刻第一阶段不应被昂贵设备卡住，可以先用 H-RTI 建立数据和观察经验。</p>
+        <div class="project">项目对应：低成本 H-RTI 是第一阶段，固定光源矩阵和光度立体是第二阶段。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">引言段 · 文物记录的痛点</p>
+        <p>引言通常会说明传统记录方法的限制：普通照片受固定光照影响，手绘和拓片带有人为选择或接触风险，岩画现场又受空间、尺寸和环境限制。你读这一部分时要不断问：这些痛点在汉画像石上是否也存在？答案大多是存在。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">相关背景段 · PTM到RTI</p>
+        <p>论文会把 PTM/RTI 放进已有技术谱系。PTM 可以理解为 RTI 的经典表示方式：对每个像素拟合光照变化。H-RTI 不是替代 PTM，而是为 PTM/RTI 提供一种更灵活的采集法。</p>
+        <div class="math">如果后面读到 polynomial、coefficients、fitting，可回到 <a href="../../../../math-foundations/html/03-least-squares-fitting.html">最小二乘与PTM</a>。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">方法段 · 手持光源</p>
+        <p>手持光源的优势是灵活：岩画可能在崖壁、洞穴、斜面、野外，不可能每次搭固定半球灯架。缺点是角度不完全均匀，距离也可能有误差。因此它适合记录和观察，不一定适合高精度测量。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">方法段 · 反光球高光估计</p>
+        <p>黑色反光球的高光点是光源方向的线索。软件知道球的圆形轮廓和高光位置后，可以反推出光从哪边来。你可以把它理解成每张照片自带了一个“光源方向标签”。</p>
+        <p>如果球太小、过曝、被遮挡或移动，光源方向估计就会错。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">采集段 · 现场对象大小和形状</p>
+        <p>论文强调对象可能大小不同、形状不同、环境不同。对汉画像石也是这样：有的是馆藏局部，有的是墓室/祠堂构件，有的是大幅画像石。一个固定流程无法覆盖所有对象，必须分区、分尺度设计采集。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">采集段 · 多张照片不是重复拍摄</p>
+        <p>多光照照片序列每张都提供不同信息。左侧斜光可能显出一组刻痕，右侧斜光显出另一组。RTI 的价值在于把这些互补信息放进一个可交互模型。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">展示段 · 多视角RTI</p>
+        <p>对平面对象，一个视角可能够用；对三维形状明显的岩画或石刻，一个视角会漏掉侧面和曲面信息。论文提出多视角 RTI，是为了让用户围绕对象观察，而不是只看一张正面图。</p>
+        <p>对汉画像石局部，大多数可先用单视角；对石棺、石柱、弧面或大型构件，就需要多视角思路。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">实验/案例段 · 与现场团队合作</p>
+        <p>论文中案例不是实验室摆拍，而是与文博/考古团队合作测试。这说明 H-RTI 的评价标准不仅是算法效果，还包括现场可操作性、培训成本、记录质量和学者能否实际使用。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">结果段 · 交互重打光的价值</p>
+        <p>结果部分通常会展示不同光照下细节变化。你要关注的是：同一对象在不同虚拟光源下出现不同可见信息。这就是为什么单张照片不能替代 RTI。</p>
+        <div class="project">项目对应：实验记录必须至少保存 3 个观察状态：左斜光、右斜光、增强模式。</div>
+      </div>
+
+      <div class="para">
+        <p class="where">讨论段 · 优点</p>
+        <p>优点包括低成本、非接触、可现场执行、适合不可移动对象、可交互传播。对本项目来说，这些优点正好对应碑刻、汉画像石、馆藏不可移动对象和教学展示。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">讨论段 · 局限</p>
+        <p>局限也要认真读：手持光源不如固定灯阵可重复；表面阴影、高光、环境光会影响质量；复杂三维表面需要多视角；增强显示不等同于真实几何测量。</p>
+        <p>这也是为什么项目后续要进入固定光源矩阵、光度立体和定量验证。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">结论段 · 从论文回到项目</p>
+        <p>这篇论文读完后，你应该形成一个判断：H-RTI 是汉画像石项目的第一阶段采集方法，特别适合低成本建立多光照观察资料；但如果目标是微痕高度、数字拓片和定量测量，还需要光度立体和标定。</p>
+      </div>
+
+      <h2>这一篇和上一篇采集指南的关系</h2>
+      <ul>
+        <li>CHI 指南：具体怎么摆相机、球、灯、电脑。</li>
+        <li>Mudge 2006：为什么这种方法能用于现场岩画/石刻，研究价值在哪里。</li>
+        <li>两者合起来就是本项目第一阶段 H-RTI 的理论和操作基础。</li>
+      </ul>
+
+      <h2>下一步</h2>
+      <ul>
+        <li>把本篇内容补进 `docs/01-rti-foundations/02-cultural-heritage-cases.md`。</li>
+        <li>设计“不可移动对象 H-RTI 采集”分区规则。</li>
+        <li>做一次硬币/刻痕板手持光源实验，再做一次墙面或垂直对象实验。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
+

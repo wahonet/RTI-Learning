@@ -42,8 +42,8 @@
 
 先完成：
 - `01-rti-theory-tutorial.md`
-- `../papers/16_CHI_RTI_Glossary_v1.pdf`
-- `../papers/01_CHI_RTI_Highlight_Capture_Guide.pdf`
+- `../papers/reading/01-rti-ptm-foundations/16-CHI_RTI_Glossary/16-CHI_RTI_Glossary.pdf`
+- `../papers/reading/01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.pdf`
 
 然后回答：
 - RTI是什么？

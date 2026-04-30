@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generating Archaeological Line Drawings from Limited Reference Images 逐段精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.pdf-frame { width:100%; height:173mm; border:1px solid var(--line); border-radius:4px; background:white; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+h3 { margin:10px 0 5px; font-size:15px; color:#4d5f9f; letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} .pdf-frame{height:176mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .pdf-frame{height:70vh;} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../../05-frontier-reflectance-imaging/33-RTI_Deep_Learning_Textile_Clustering/33-RTI_Deep_Learning_Textile_Clustering_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../35-ICON_Ontology_Iconology/35-ICON_Ontology_Iconology_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文或来源</div>
+        <h1>Generating Archaeological Line Drawings from Limited Reference Images</h1>
+        <span class="badge">34</span><span class="badge">AI线图</span><span class="badge">2026</span>
+      </div>
+      
+      <div class="source-box">
+        <h2>原文入口 / PDF待补</h2>
+        <p>这篇目前没有本地 PDF。请先从这些入口阅读原文或已有笔记；补齐 PDF 后可以自动改为左侧嵌入。</p>
+        <ul><li><a href="33-Archaeological_Line_Drawings_Limited_References_note.md">笔记</a></li><li><a href="https://www.nature.com/articles/s40494-026-02526-3">论文页</a></li></ul>
+      </div>
+      <p class="note">没有本地 PDF 时，本页仍提供中文逐段组讲解和阅读路线。</p>
+        
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>Generating Archaeological Line Drawings from Limited Reference Images</h1>
+      <p>这篇用扩散模型和 LoRA 处理少样本文物线图生成，正好对上汉画像石人工线图稀缺的问题。</p>
+
+      <div class="para">
+        <p class="where">标题/摘要段落组</p>
+        <p>先用一句话抓住论文位置：它属于 <strong>AI线图</strong>，核心问题是“考古线图需要专业人工，样本少、风格要求高。普通图像转素描容易受病害和纹理干扰，生成线条可能好看但不忠实。”</p>
+        <p>读原文标题和摘要时，不要逐词硬翻。先标出研究对象、方法、输出结果和限制条件。这样后面的段落才不会散。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">问题提出段落组</p>
+        <p>考古线图需要专业人工，样本少、风格要求高。普通图像转素描容易受病害和纹理干扰，生成线条可能好看但不忠实。</p>
+        <p>中文理解：作者通常先说明传统照片、拓片、3D扫描、普通边缘检测或旧模型哪里不够。你要把这些“不够”转成项目风险：采集不稳、光照不全、解释不可复核、数学模型不适配、AI结果不可直接采信。</p>
+      </div>
+
+      <div class="para"><p class="where">方法段落组 1</p><p>以 FLUX.1 Kontext 一类扩散 Transformer 为基础模型。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 2</p><p>用冻结 VAE 编码图像，用文本编码器编码提示词。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 3</p><p>只训练 LoRA 层进行小样本适配，降低训练成本。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div><div class="para"><p class="where">方法段落组 4</p><p>输出二值或风格化考古线图，再由人工审核。</p><p>精读提示：读原文对应部分时，先找它的输入是什么、输出是什么、依赖什么设备或假设，再判断它能不能迁移到汉画像石/碑刻场景。</p></div>
+
+      <h2>核心概念逐个拆</h2>
+      <div class="para"><p class="where">核心概念 · diffusion model</p><p>扩散模型，通过逐步去噪生成图像，适合图像转换和风格迁移。</p></div><div class="para"><p class="where">核心概念 · DiT</p><p>Diffusion Transformer，用 Transformer 结构做扩散生成。</p></div><div class="para"><p class="where">核心概念 · LoRA</p><p>低秩适配，只训练少量附加参数，使大模型适配新任务。</p></div><div class="para"><p class="where">核心概念 · VAE</p><p>变分自编码器，把图像压缩到潜空间再还原，是许多扩散模型的编码组件。</p></div><div class="para"><p class="where">核心概念 · prompt</p><p>文本提示，控制输出任务、对象和线图风格。</p></div><div class="para"><p class="where">核心概念 · 忠实性风险</p><p>扩散模型可能生成“合理但不存在”的线，文物研究必须严格审核。</p></div>
+
+      <div class="math">
+        <p><strong>本篇相关数学基础：</strong><a href="../../../../math-foundations/html/06-loss-optimization-ai.html">损失函数、优化和AI模型</a></p>
+        <p>读公式时先问四件事：输入是什么、未知量是什么、误差怎么定义、结果能不能验证。大多数 RTI/光度立体/AI 论文都能按这四步拆开。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul><li>为汉画像石少样本线图生成提供最新 AI 路线。</li><li>可结合原图、RTI增强图、法线阴影图和拓片做多输入对照。</li><li>强化候选线图、人工修正和最终研究线图的版本管理。</li></ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul><li>建立 20-50 对汉画像石图像与人工线图训练对。</li><li>比较 ControlNet、LoRA、SAM 辅助线图三种路线。</li><li>所有 AI 线图默认标记为 `candidate`。</li></ul>
+
+      <p class="note">说明：本页是“段落组精读”自动整理版。01 和 03 已有更细的手工逐页版；后续可按这个页面继续逐篇升级。</p>
+    </section>
+  </main>
+</body>
+</html>
+

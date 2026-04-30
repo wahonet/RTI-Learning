@@ -4,8 +4,8 @@
 
 总索引见：
 
-- `../research-master-index-2026.csv`
-- `../learning-roadmap.html`
+- `../docs/05-validation-indexes/research-master-index-2026.csv`
+- `../docs/00-overview/learning-roadmap.html`
 
 ## 本地已下载
 
@@ -17,15 +17,15 @@
 
 说明文档：`github/NeuralRTI_NOTE.md`
 
+### `../external/relight`
+
+来源：[cnr-isti-vclab/relight](https://github.com/cnr-isti-vclab/relight)
+
+用途：RelightLab/Relight CLI，当前最重要的现代 RTI/PTM/HSH/RBF 处理工具之一，支持法线图、Web格式、OpenLIME生态。源码因目录体量较大，统一放在 `external/relight/`，说明见 `../external/README.md`。
+
 ## 网络受限，暂未完整下载
 
 以下仓库在本机通过代理下载时出现长时间无响应或中断，先记录复现入口，后续可在网络稳定时补充源码快照。
-
-### `cnr-isti-vclab/relight`
-
-链接：[https://github.com/cnr-isti-vclab/relight](https://github.com/cnr-isti-vclab/relight)
-
-用途：RelightLab/Relight CLI，当前最重要的现代RTI/PTM/HSH/RBF处理工具之一，支持法线图、Web格式、OpenLIME生态。
 
 ### `cnr-isti-vclab/openlime`
 

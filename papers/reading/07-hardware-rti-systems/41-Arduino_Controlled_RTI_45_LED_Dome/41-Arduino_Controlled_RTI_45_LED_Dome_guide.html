@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arduino-controlled RTI 45 LED Dome 精读</title>
+  <style>
+@page { size: A4 landscape; margin: 8mm; }
+:root { --paper:#fffdf8; --ink:#25221f; --muted:#6c655d; --line:#d9cdbd; --accent:#9b3f2c; --accent2:#246b61; --soft:#f2eadf; }
+* { box-sizing: border-box; }
+body { margin:0; background:#d8d2c8; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.64; }
+a { color:var(--accent2); text-underline-offset:3px; }
+.toolbar { max-width:297mm; margin:14px auto 10px; display:flex; justify-content:space-between; gap:10px; font-size:14px; }
+.toolbar a, .toolbar button { border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:7px 10px; color:var(--ink); text-decoration:none; font:inherit; }
+.sheet { width:297mm; height:210mm; margin:0 auto 20px; background:var(--paper); display:grid; grid-template-columns:50% 50%; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.left,.right { padding:7mm; min-width:0; }
+.left { border-right:1px solid var(--line); display:grid; grid-template-rows:auto 1fr auto; gap:8px; }
+.right { overflow:auto; }
+.source-box { border:1px solid var(--line); border-radius:6px; background:white; padding:14px; overflow:auto; }
+h1 { margin:4px 0 8px; font-size:21px; line-height:1.18; letter-spacing:0; }
+h2 { margin:18px 0 8px; font-size:17px; color:var(--accent2); letter-spacing:0; }
+p { margin:0 0 8px; }
+ul { margin:0 0 8px; padding-left:20px; }
+li { margin:3px 0; }
+.label { color:var(--accent); font-weight:700; font-size:13px; }
+.badge { display:inline-flex; min-height:22px; align-items:center; border:1px solid var(--line); border-radius:5px; padding:1px 7px; background:var(--soft); color:var(--muted); font-size:12px; margin:0 4px 4px 0; }
+.para { border-top:1px solid var(--line); padding:9px 0; }
+.where { font-weight:700; color:var(--accent); }
+.math { background:#fff6e5; border:1px solid #e5d4ab; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.project { background:#eef7f3; border:1px solid #bdd8cf; border-radius:6px; padding:8px 10px; margin:8px 0; }
+.note { color:var(--muted); font-size:12px; }
+@media print { body{background:white;} .toolbar{display:none;} .sheet{width:100%; height:100%; margin:0; box-shadow:none;} .left,.right{padding:6mm;} }
+@media screen and (max-width:980px) { .sheet{width:calc(100% - 20px); height:auto; grid-template-columns:1fr;} .left{border-right:0; border-bottom:1px solid var(--line);} .right{overflow:visible;} .toolbar{margin-left:10px;margin-right:10px;} }
+
+
+/* Reader v2 override: make the PDF readable on screen, not squeezed into half an A4 sheet. */
+@media screen {
+  body { background:#d8d2c8; }
+  .toolbar { position:sticky; top:0; z-index:10; max-width:none; width:min(1880px, calc(100vw - 28px)); margin:0 auto; padding:10px 0; background:rgba(216,210,200,.94); backdrop-filter:blur(8px); }
+  .sheet { width:min(1880px, calc(100vw - 28px)); height:auto; min-height:calc(100vh - 78px); margin:14px auto 24px; grid-template-columns:minmax(700px,1.45fr) minmax(470px,.9fr); border-radius:8px; overflow:hidden; }
+  .left { position:sticky; top:64px; height:calc(100vh - 82px); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .right { max-height:calc(100vh - 82px); overflow:auto; padding:20px 24px 36px; }
+  .pdf-frame { flex:1 1 auto; height:auto; min-height:0; }
+  h1 { font-size:24px; }
+  .right h1 { font-size:25px; }
+  .para { padding:13px 0; }
+  .para p { font-size:17px; }
+  .note { font-size:13px; }
+}
+@media screen and (max-width:1160px) {
+  .sheet { grid-template-columns:1fr; width:calc(100% - 20px); }
+  .left { position:relative; top:0; height:76vh; border-right:0; border-bottom:1px solid var(--line); }
+  .right { max-height:none; overflow:visible; }
+  .toolbar { width:calc(100% - 20px); }
+}
+
+</style>
+</head>
+<body>
+  <nav class="toolbar">
+    <span><a href="../../03-han-stone-reliefs-3d/40-Ming_Stone_Stele_True_Texture_3D/40-Ming_Stone_Stele_True_Texture_3D_guide.html">上一篇</a></span>
+    <span><a href="../../index.html">逐段索引</a> <button onclick="window.print()">打印横版A4</button></span>
+    <span><a href="../42-Easy_To_Build_RTI_System/42-Easy_To_Build_RTI_System_guide.html">下一篇</a></span>
+  </nav>
+  <main class="sheet">
+    <section class="left">
+      <div>
+        <div class="label">左半页 · 原文来源入口</div>
+        <h1>Arduino-controlled Reflectance Transformation Imaging to the Study of Cultural Heritage Objects</h1>
+        <span class="badge">41</span><span class="badge">RTI dome硬件</span><span class="badge">2020</span>
+      </div>
+      <div class="source-box">
+        <h2>原文入口 / PDF下载受阻</h2>
+        <p>Springer PDF 直链在本机返回客户端挑战页，RUN 机构库下载也超时。本页先保留来源入口和硬件方案解读。</p>
+        <ul>
+          <li><a href="https://link.springer.com/article/10.1007/s42452-020-03343-4">Springer 论文页</a></li>
+          <li><a href="https://doi.org/10.1007/s42452-020-03343-4">DOI入口</a></li>
+          <li><a href="http://hdl.handle.net/10362/110450">RUN 机构库入口</a></li>
+          <li>主索引条目：H03</li>
+        </ul>
+        <h2>先读什么</h2>
+        <p>先抓硬件参数：45个LED、半球结构、Arduino MEGA控制、固定光位自动拍摄。重点不是照搬尺寸，而是理解“可重复光照采样”怎样替代手持光源的不稳定。</p>
+      </div>
+      <p class="note">说明：后续若 PDF 能稳定下载，应补成本地嵌入版。</p>
+    </section>
+    <section class="right">
+      <div class="label">右半页 · 段落组精读</div>
+      <h1>41 · Arduino 控制的 45 LED RTI dome</h1>
+      <p>这篇硬件论文对本项目很关键：它代表从“手持 H-RTI”升级到“固定灯位、自动触发、可重复采集”的工程路线。</p>
+
+      <div class="para">
+        <p class="where">标题段 · Arduino-controlled</p>
+        <p>Arduino-controlled 说明光源切换由微控制器控制，不再靠人手逐次移动灯。这样每次采集的灯位顺序、曝光节奏和光照方向都更稳定，适合做对比实验和批量采集。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">对象段 · cultural heritage objects</p>
+        <p>文化遗产对象通常不能移动、不能接触、表面材质复杂。固定 dome 的优点是安全、可重复；缺点是尺寸受限，只适合小到中等对象或局部区域。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">硬件段 · 45 LED半球</p>
+        <p>45个LED意味着它不是单个环形灯，而是在半球上分布多个方向。RTI 需要的是不同光照方向下的图像序列，灯越均匀，后续拟合越稳定；但灯越多，布线、控制、供电和校准也越复杂。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">控制段 · Arduino MEGA</p>
+        <p>Arduino MEGA 的价值在于 I/O 引脚多，适合控制大量 LED 通道。项目迁移时要关心三件事：每个LED能否单独点亮、能否触发相机、能否把灯号和照片文件名绑定起来。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">采集段 · 固定灯位自动拍摄</p>
+        <p>固定灯位比手持光源更适合光度立体和定量对比，因为每张图的光照方向可以被预先测量。对汉画像石局部刻线，固定 dome 可以输出更稳定的法线图和增强图。</p>
+      </div>
+
+      <div class="para">
+        <p class="where">验证段 · 不只是能亮灯</p>
+        <p>硬件论文读到最后，一定要问验证问题：灯位是否真的均匀、亮度是否一致、相机是否有振动、曝光是否固定、环境光是否被压制、同一对象重复采集结果是否一致。</p>
+      </div>
+
+      <div class="math">
+        <p><strong>数学补课：</strong><a href="../../../../math-foundations/html/01-vectors-light-normals.html">光照方向向量</a>、<a href="../../../../math-foundations/html/04-matrices-photometric-stereo.html">光照矩阵和法线估计</a>。</p>
+        <p>每个 LED 对应一个光照方向向量；所有灯位合起来就是光照矩阵。矩阵越病态，法线估计越不稳，所以灯位分布不是审美问题，是数学条件问题。</p>
+      </div>
+
+      <h2>项目迁移</h2>
+      <div class="project">
+        <ul>
+          <li>第一版小型 dome 可先做 16 或 32 路，不必一开始追 45 路。</li>
+          <li>必须同步设计 `lights.csv`：灯号、坐标、方向、亮度、照片编号。</li>
+          <li>硬件实验应和 CHI 手持 H-RTI 做对照，看固定灯位是否明显提升稳定性。</li>
+        </ul>
+      </div>
+
+      <h2>读后任务</h2>
+      <ul>
+        <li>画一个 16/32/45 LED 三档方案表，比较成本、布线和可重复性。</li>
+        <li>给 Arduino 程序规定输出日志：灯号、时间、触发状态。</li>
+        <li>做一块标准刻痕板，重复拍 3 次，检查法线图差异。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

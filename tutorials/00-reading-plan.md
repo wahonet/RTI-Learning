@@ -14,9 +14,9 @@
 建议时间：2-3天
 
 阅读顺序：
-1. `../papers/16_CHI_RTI_Glossary_v1.pdf`
-2. `../papers/01_CHI_RTI_Highlight_Capture_Guide.pdf`
-3. `../papers/02_Earl_2011_RTI_Systems_Ancient_Documentary_Artefacts.pdf`
+1. `../papers/reading/01-rti-ptm-foundations/16-CHI_RTI_Glossary/16-CHI_RTI_Glossary.pdf`
+2. `../papers/reading/01-rti-ptm-foundations/01-CHI_RTI_Highlight_Capture_Guide/01-CHI_RTI_Highlight_Capture_Guide.pdf`
+3. `../papers/reading/01-rti-ptm-foundations/02-RTI_Systems_Ancient_Documentary_Artefacts/02-RTI_Systems_Ancient_Documentary_Artefacts.pdf`
 
 学习目标：
 - 解释RTI、PTM、H-RTI、法线图、反光球、光照方向。
@@ -33,9 +33,9 @@
 建议时间：3-4天
 
 阅读顺序：
-1. `../papers/03_Mudge_2006_RTI_Rock_Art_Multiple_Viewpoint.pdf`
-2. `../papers/05_Palma_2010_Dynamic_Shading_Enhancement_RTI.pdf`
-3. `../papers/15_CHI_RTIViewer_User_Guide_v1_1.pdf`
+1. `../papers/reading/01-rti-ptm-foundations/03-Mudge_2006_RTI_Rock_Art/03-Mudge_2006_RTI_Rock_Art.pdf`
+2. `../papers/reading/01-rti-ptm-foundations/05-Dynamic_Shading_Enhancement_RTI/05-Dynamic_Shading_Enhancement_RTI.pdf`
+3. `../papers/reading/01-rti-ptm-foundations/15-CHI_RTIViewer_User_Guide/15-CHI_RTIViewer_User_Guide.pdf`
 
 学习目标：
 - 理解Highlight RTI如何用反光球恢复光照方向。
@@ -52,10 +52,10 @@
 建议时间：4-5天
 
 阅读顺序：
-1. `../papers/06_RTI_Gravestone_Detail.pdf`
-2. `../papers/07_RTI_in_Epigraphical_Studies.pdf`
-3. `../papers/04_Mudge_2005_RTI_Coins_Grand_St_Bernard.pdf`
-4. `../papers/14_2_5D_Digitization_Oracle_Bone_Bamboo_Slip_RTI.pdf`
+1. `../papers/reading/02-heritage-epigraphy-cases/06-RTI_Gravestone_Detail/06-RTI_Gravestone_Detail.pdf`
+2. `../papers/reading/02-heritage-epigraphy-cases/07-RTI_Epigraphical_Studies/07-RTI_Epigraphical_Studies.pdf`
+3. `../papers/reading/02-heritage-epigraphy-cases/04-Mudge_2005_RTI_Coins_Grand_St_Bernard/04-Mudge_2005_RTI_Coins_Grand_St_Bernard.pdf`
+4. `../papers/reading/02-heritage-epigraphy-cases/14-Oracle_Bone_Bamboo_Slip_RTI/14-Oracle_Bone_Bamboo_Slip_RTI.pdf`
 
 学习目标：
 - 理解RTI在墓碑、碑铭、硬币、甲骨和竹简中的作用。
@@ -72,11 +72,11 @@
 建议时间：5-7天
 
 阅读顺序：
-1. `../papers/12_Han_Relief_From_Rubbing_Height_Map.pdf`
-2. `../papers/09_Photometric_Stereo_3D_Reconstruction_Artworks.pdf`
-3. `../05-microtrace-reproduction.md`
-4. `../06-capture-sop.md`
-5. `../07-software-workflow.md`
+1. `../papers/reading/03-han-stone-reliefs-3d/12-Han_Relief_From_Rubbing_Height_Map/12-Han_Relief_From_Rubbing_Height_Map.pdf`
+2. `../papers/reading/04-photometric-stereo/09-Photometric_Stereo_3D_Reconstruction_Artworks/09-Photometric_Stereo_3D_Reconstruction_Artworks.pdf`
+3. `../docs/04-han-stone-ai/05-microtrace-reproduction.md`
+4. `../docs/02-capture-hardware/06-capture-sop.md`
+5. `../docs/03-software-data/07-software-workflow.md`
 
 学习目标：
 - 理解拓片恢复、RTI和光度立体之间的关系。

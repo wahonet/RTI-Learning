@@ -9,6 +9,8 @@ datasets/external/*
 experiments/*/raw/
 experiments/*/processed/
 experiments/*/outputs/
+math-foundations/downloads/*
+!math-foundations/downloads/README.md
 .dvc/cache/
 *.pt
 *.pth
